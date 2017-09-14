@@ -1,0 +1,7 @@
+city_finder:
+    resource: "@CityFinderBundle/Controller/"
+    type:     annotation
+
+auth-tokens:
+    type:     rest
+    resource: CityFinderBundle\Controller\AuthentificationController

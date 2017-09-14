@@ -1,0 +1,7 @@
+services:
+#    city_finder.example:
+#        class: CityFinderBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    CityFinderBundle\Controller\AuthentificationController:
+        arguments: ["@app.cache.products"]
+
