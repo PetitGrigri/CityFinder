@@ -15,14 +15,22 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AuthentificationController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/AuthentificationController.php">
+      <file leaf-file-name="security.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/security.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-              <folding>
-                <element signature="e#46#85#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="225">
+              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/services.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -30,83 +38,21 @@
       <file leaf-file-name="AuthTokens.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/AuthTokens.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state relative-caret-position="1425">
+              <caret line="95" column="33" lean-forward="false" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefaultController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/DefaultController.php">
+      <file leaf-file-name="SearchController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/SearchController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="83" column="39" lean-forward="false" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
+            <state relative-caret-position="117">
+              <caret line="30" column="82" lean-forward="false" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
               <folding>
-                <element signature="e#47#86#0#PHP" expanded="true" />
+                <element signature="e#47#91#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppKernel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2595">
-              <caret line="173" column="35" lean-forward="false" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="35" />
-              <folding>
-                <element signature="e#43#75#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entity.User.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.User.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="50" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
-              <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Credentials.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/Credentials.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="20" lean-forward="false" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CredentialType.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Form/CredentialType.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="24" column="52" lean-forward="false" selection-start-line="24" selection-start-column="52" selection-end-line="24" selection-end-column="52" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -132,10 +78,16 @@
       <find>serialize</find>
       <find>$cacheProduct</find>
       <find>mem</find>
-      <find>seri</find>
       <find>AppBundle</find>
+      <find>seri</find>
       <find>auth-token</find>
       <find>$roles</find>
+      <find>isHit</find>
+      <find>auth_token_user_provider</find>
+      <find>dump</find>
+      <find>BadCredentialsException</find>
+      <find>memCachedManager</find>
+      <find>invalidCredentials</find>
     </findStrings>
     <replaceStrings>
       <replace>$cacheToken</replace>
@@ -151,28 +103,31 @@
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Form/FormType.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Form/LogsRecherchesType.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/LogsRecherches.php" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/DonneesCommunes.php" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Controller/SearchController.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/MemcachedAuthTokenProvider.php" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenProvider.php" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Controller/DefaultController.php" />
-        <option value="$PROJECT_DIR$/app/config/routing.yml" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/doctrine/User.orm.xml" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/Credentials.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Form/LoginType.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Form/CredentialType.php" />
-        <option value="$PROJECT_DIR$/app/config/security.yml" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Ressources/config/serializer/Entity.User.yml" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
-        <option value="$PROJECT_DIR$/app/config/config.yml" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/serializer/Entity.User.yml" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.User.yml" />
         <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/AuthTokens.php" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.AuthTokens.yml" />
+        <option value="$PROJECT_DIR$/app/config/config.yml" />
+        <option value="$PROJECT_DIR$/app/config/routing.yml" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Controller/DefaultController.php" />
+        <option value="$PROJECT_DIR$/app/config/security.yml" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenProvider.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/AuthTokens.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/services.yml" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/User.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenAuthenticator.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Entity/DonneesCommunes.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenUserProvider.php" />
         <option value="$PROJECT_DIR$/src/CityFinderBundle/Controller/AuthentificationController.php" />
+        <option value="$PROJECT_DIR$/src/CityFinderBundle/Controller/SearchController.php" />
       </list>
     </option>
   </component>
@@ -324,6 +279,28 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="Security" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SymfonyApi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SymfonyApi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CityFinderBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -381,6 +358,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="serializer" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SymfonyApi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SymfonyApi" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CityFinderBundle" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Form" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -468,14 +467,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
-    <property name="SearchEverywhereHistoryKey" value="composer&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/composer.json&#10;services.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/config/services.yml&#10;routing&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/routing.yml&#10;User&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Entity/User.php&#10;AppKer&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/AppKernel.php&#10;config&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;security.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;TraceableAdapter&#9;null&#9;null&#10;service&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/config/services.yml&#10;security&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;config.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;security.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;JsonResponse&#9;null&#9;null&#10;onfig&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;parameters.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/parameters.yml&#10;CacheItem&#9;null&#9;null&#10;MemcachedAdapter&#9;null&#9;null&#10;AbstractAdapter&#9;null&#9;null&#10;config.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;parameters.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/parameters.yml&#10;index.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/views/Default/index.html.twig&#10;routing.ym&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/routing.yml&#10;AppKerne&#9;null&#9;null&#10;index.html.twig&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/views/Default/index.html.twig" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="SearchEverywhereHistoryKey" value="services.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/config/services.yml&#10;routing&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/routing.yml&#10;composer&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/composer.json&#10;User&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Entity/User.php&#10;AppKer&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/AppKernel.php&#10;config&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;security.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;TraceableAdapter&#9;null&#9;null&#10;service&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/config/services.yml&#10;security&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;config.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;security.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/security.yml&#10;JsonResponse&#9;null&#9;null&#10;onfig&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;parameters.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/parameters.yml&#10;CacheItem&#9;null&#9;null&#10;MemcachedAdapter&#9;null&#9;null&#10;AbstractAdapter&#9;null&#9;null&#10;config.yml&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/config.yml&#10;parameters.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/parameters.yml&#10;index.&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/views/Default/index.html.twig&#10;routing.ym&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/app/config/routing.yml&#10;AppKerne&#9;null&#9;null&#10;index.html.twig&#9;FILE&#9;file:///Users/fabibi/htdocs/CityFinder/SymfonyApi/src/CityFinderBundle/Resources/views/Default/index.html.twig" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer" />
       <recent name="$PROJECT_DIR$/src/CityFinderBundle/Ressources/config/serializer" />
       <recent name="$PROJECT_DIR$/src/CityFinderBundle/Entity" />
       <recent name="$PROJECT_DIR$/src/CityFinderBundle/Form" />
@@ -551,12 +551,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1504695663761</updated>
-      <workItem from="1504695666049" duration="32422000" />
+      <workItem from="1504695666049" duration="47727000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32422000" />
+    <option name="totallyTimeSpent" value="47727000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="6" />
@@ -564,12 +564,12 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26180258" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32839838" sideWeight="0.5028612" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32839838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32839838" sideWeight="0.49713877" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.49713877" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -731,22 +731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/LogsRecherches.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="97" column="49" lean-forward="false" selection-start-line="97" selection-start-column="49" selection-end-line="97" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/DonneesCommunes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="319" column="4" lean-forward="false" selection-start-line="319" selection-start-column="4" selection-end-line="319" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Cache/Simple/MemcachedCache.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -835,31 +819,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-74">
-          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding>
-            <element signature="e#45#116#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Cache/Adapter/TraceableAdapter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-579">
           <caret line="22" column="6" lean-forward="false" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Form/LogsRecherchesType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="1" lean-forward="false" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
-          <folding>
-            <element signature="e#40#80#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -887,16 +851,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/SearchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="27" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="27" />
-          <folding>
-            <element signature="e#47#91#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Form/CredentialType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -913,69 +867,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="21" lean-forward="false" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="102" column="29" lean-forward="false" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/services.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.User.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="50" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2595">
-          <caret line="173" column="35" lean-forward="false" selection-start-line="173" selection-start-column="29" selection-end-line="173" selection-end-column="35" />
-          <folding>
-            <element signature="e#43#75#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -995,30 +891,158 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/AuthTokens.php">
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.AuthTokens.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="34" lean-forward="false" selection-start-line="0" selection-start-column="34" selection-end-line="0" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="95" column="18" lean-forward="false" selection-start-line="95" selection-start-column="18" selection-end-line="95" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/serializer/Entity.User.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="40" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="43" lean-forward="false" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Security/Core/User/UserProviderInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="33" column="10" lean-forward="false" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Resources/config/services.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="42" lean-forward="false" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="166" column="37" lean-forward="false" selection-start-line="166" selection-start-column="37" selection-end-line="166" selection-end-column="37" />
+          <folding>
+            <element signature="e#43#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/LogsRecherches.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Form/LogsRecherchesType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="50" lean-forward="false" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
+          <folding>
+            <element signature="e#40#80#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/DonneesCommunes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="310" column="30" lean-forward="true" selection-start-line="310" selection-start-column="30" selection-end-line="310" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/DefaultController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="83" column="39" lean-forward="false" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
+        <state relative-caret-position="882">
+          <caret line="67" column="5" lean-forward="false" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Entity/AuthTokens.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="95" column="33" lean-forward="false" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenUserProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="56" column="31" lean-forward="false" selection-start-line="56" selection-start-column="20" selection-end-line="56" selection-end-column="31" />
           <folding>
-            <element signature="e#47#86#0#PHP" expanded="true" />
+            <element signature="e#45#98#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Security/MemcachedAuthTokenAuthenticator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="32" column="20" lean-forward="false" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="44" />
+          <folding>
+            <element signature="e#45#90#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/AuthentificationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state relative-caret-position="855">
+          <caret line="111" column="8" lean-forward="true" selection-start-line="111" selection-start-column="8" selection-end-line="112" selection-end-column="76" />
           <folding>
             <element signature="e#46#85#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CityFinderBundle/Controller/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="30" column="82" lean-forward="false" selection-start-line="30" selection-start-column="82" selection-end-line="30" selection-end-column="82" />
+          <folding>
+            <element signature="e#47#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

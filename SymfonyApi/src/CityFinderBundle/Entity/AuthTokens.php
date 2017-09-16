@@ -11,12 +11,19 @@ class AuthTokens
     private $userId;
 
     /**
+     * @var User
+     */
+    private $user;
+
+    /**
      * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
 
+    /**
+     * @var String
+     */
+    private $value;
 
 
 
@@ -53,6 +60,42 @@ class AuthTokens
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return String
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param String $value
+     * @return AuthTokens
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     * @return AuthTokens
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
         return $this;
     }
 

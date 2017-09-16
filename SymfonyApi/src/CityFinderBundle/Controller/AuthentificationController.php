@@ -6,6 +6,7 @@ use CityFinderBundle\Entity\Credentials;
 use CityFinderBundle\Entity\User;
 use CityFinderBundle\Form\CredentialType;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Cache\Adapter\TraceableAdapter;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,27 +14,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- *
+ * @Route("/authentication")
  *
  */
 class AuthentificationController extends Controller
 {
-
-    private  $cacheManager;
+    /**
+     * @var TraceableAdapter
+     */
+    private  $memCachedManager;
 
 
     public function __construct(TraceableAdapter $products)
     {
-        $this->cacheManager = $products;
+        $this->memCachedManager = $products;
     }
 
     /**
-     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"user"})
-     * @Rest\Post("/login")
+     * @Rest\View(statusCode=Response::HTTP_CREATED, serializerGroups={"auth-token"})
+     * @Rest\Post()
      *
      * @param Request $request
+     * @return mixed
      */
-    public function postLoginAction(Request $request)
+    public function postCreateTokenAction(Request $request)
     {
         //Création du formulaire qui va nous permettre de vérifier les données de l'utilisateur
         $credentials    = new Credentials();
@@ -70,25 +74,46 @@ class AuthentificationController extends Controller
         //création de l'id du token. les caractère pouvant géner memecached (cacheManager) sont supprimés du token Id
         $tokenId = str_replace(["{","}","(",")","/","\\","@",":"],"", base64_encode(random_bytes(50)));
 
+        //Création du token
+        //Ici il y a une astuce
         $authToken = new AuthTokens();
         $authToken
             ->setCreatedAt(new \DateTime('now'))
-            ->setUserId($user->getId());
+            ->setUserId($user->getId())
+            ->setValue($tokenId);
 
 
-
-        //récupération du token existant ayant pour clé le tokenId,
-        $cacheToken     = $this->cacheManager->getItem($tokenId);
+        //récupération (ou création) d'un CacheItem pour notre token et notre utilisateur
+        $memCachedToken     = $this->memCachedManager->getItem($tokenId);
+        $memCachedUser      = $this->memCachedManager->getItem("user_".$user->getId());
 
         //on enregistre notre token
-        $cacheToken->set($authToken);
-        $this->cacheManager->save($cacheToken);
+        $memCachedToken->set($authToken);
+        $this->memCachedManager->save($memCachedToken);
+
+        //on enregistre notre utilisateur
+        $memCachedUser->set($user);
+        $this->memCachedManager->save($memCachedUser);
+
+        return $authToken;
+    }
+
+    /**
+     * Permet de d'afficher des informations sur l'utilisateur connecté
+     *
+     * @Rest\View(serializerGroups={"auth-token"})
+     * @Rest\Get()
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function getLoginInfoAction(Request $request)
+    {
+        //récupération de l'utilisateur lié au token
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
         return $user;
     }
-
-
-
 
     private function invalidCredentials()
     {
