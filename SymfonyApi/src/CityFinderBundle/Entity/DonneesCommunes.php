@@ -43,23 +43,23 @@ class DonneesCommunes
     /**
      * @var string
      *
-     * @ORM\Column(name="com_nom", type="string", length=45, nullable=true)
+     * @ORM\Column(name="localite", type="string", length=45, nullable=true)
      */
-    private $comNom;
+    private $localite;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="long", type="decimal", precision=9, scale=7, nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", precision=8, scale=6, nullable=true)
      */
-    private $long;
+    private $longitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lat", type="decimal", precision=9, scale=7, nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", precision=8, scale=6, nullable=true)
      */
-    private $lat;
+    private $latitude;
 
     /**
      * @var integer
@@ -173,54 +173,54 @@ class DonneesCommunes
     /**
      * @return string
      */
-    public function getComNom()
+    public function getLocalite()
     {
-        return $this->comNom;
+        return $this->localite;
     }
 
     /**
-     * @param string $comNom
+     * @param string $localite
      * @return DonneesCommunes
      */
-    public function setComNom($comNom)
+    public function setLocalite($localite)
     {
-        $this->comNom = $comNom;
+        $this->localite = $localite;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLong()
+    public function getLongitude()
     {
-        return $this->long;
+        return $this->longitude;
     }
 
     /**
-     * @param string $long
+     * @param string $longitude
      * @return DonneesCommunes
      */
-    public function setLong($long)
+    public function setLongitude($longitude)
     {
-        $this->long = $long;
+        $this->longitude = $longitude;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLat()
+    public function getLatitude()
     {
-        return $this->lat;
+        return $this->latitude;
     }
 
     /**
-     * @param string $lat
+     * @param string $latitude
      * @return DonneesCommunes
      */
-    public function setLat($lat)
+    public function setLatitude($latitude)
     {
-        $this->lat = $lat;
+        $this->latitude = $latitude;
         return $this;
     }
 

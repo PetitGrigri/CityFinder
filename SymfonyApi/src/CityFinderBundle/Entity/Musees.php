@@ -57,9 +57,9 @@ class Musees
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=36, nullable=true)
+     * @ORM\Column(name="localite", type="string", length=36, nullable=true)
      */
-    private $ville;
+    private $localite;
 
     /**
      * @var string
@@ -111,6 +111,258 @@ class Musees
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @return string
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     * @return Musees
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDepartement()
+    {
+        return $this->departement;
+    }
+
+    /**
+     * @param string $departement
+     * @return Musees
+     */
+    public function setDepartement($departement)
+    {
+        $this->departement = $departement;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAnnexe()
+    {
+        return $this->annexe;
+    }
+
+    /**
+     * @param string $annexe
+     * @return Musees
+     */
+    public function setAnnexe($annexe)
+    {
+        $this->annexe = $annexe;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMusee()
+    {
+        return $this->musee;
+    }
+
+    /**
+     * @param string $musee
+     * @return Musees
+     */
+    public function setMusee($musee)
+    {
+        $this->musee = $musee;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     * @return Musees
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCp()
+    {
+        return $this->cp;
+    }
+
+    /**
+     * @param string $cp
+     * @return Musees
+     */
+    public function setCp($cp)
+    {
+        $this->cp = $cp;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalite()
+    {
+        return $this->localite;
+    }
+
+    /**
+     * @param string $localite
+     * @return Musees
+     */
+    public function setLocalite($localite)
+    {
+        $this->localite = $localite;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }
+
+    /**
+     * @param string $telephone
+     * @return Musees
+     */
+    public function setTelephone($telephone)
+    {
+        $this->telephone = $telephone;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * @param string $fax
+     * @return Musees
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSiteInternet()
+    {
+        return $this->siteInternet;
+    }
+
+    /**
+     * @param string $siteInternet
+     * @return Musees
+     */
+    public function setSiteInternet($siteInternet)
+    {
+        $this->siteInternet = $siteInternet;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFermetureAnnuelle()
+    {
+        return $this->fermetureAnnuelle;
+    }
+
+    /**
+     * @param string $fermetureAnnuelle
+     * @return Musees
+     */
+    public function setFermetureAnnuelle($fermetureAnnuelle)
+    {
+        $this->fermetureAnnuelle = $fermetureAnnuelle;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriodeOuverture()
+    {
+        return $this->periodeOuverture;
+    }
+
+    /**
+     * @param string $periodeOuverture
+     * @return Musees
+     */
+    public function setPeriodeOuverture($periodeOuverture)
+    {
+        $this->periodeOuverture = $periodeOuverture;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNocturnes()
+    {
+        return $this->nocturnes;
+    }
+
+    /**
+     * @param string $nocturnes
+     * @return Musees
+     */
+    public function setNocturnes($nocturnes)
+    {
+        $this->nocturnes = $nocturnes;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return Musees
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 
 
 }

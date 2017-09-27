@@ -24,6 +24,10 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.2",
+
+        "graphaware/neo4j-php-ogm": "@rc",
+        "neo4j/neo4j-bundle": "^0.3.1",
+
         "incenteev/composer-parameter-handler": "^2.0",
         "jms/serializer-bundle": "^2.1",
         "sensio/distribution-bundle": "^5.0.19",

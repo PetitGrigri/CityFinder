@@ -13,7 +13,7 @@ framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
     cache:
-        default_memcached_provider: "memcached://localhost:11211"
+        default_memcached_provider: "memcached://localhost:11212"
         pools:
             app.cache.products:
                 adapter: cache.adapter.memcached
@@ -101,3 +101,24 @@ fos_rest:
 
     serializer:
         serialize_null:  true
+
+
+# neo4j
+neo4j:
+  profiling:
+    enabled: true
+  connections:
+    default:
+      scheme: bolt # default (must be either "http" or "bolt")
+      host: localhost # default
+      port: 7687 # optional, will be set to the proper driver's default port if not provided
+      username: neo4j # default
+      password: 0123@abcd # default
+  clients:
+    default:
+      connections: [default]
+    foobar: ~ # foobar client will have the "default" connection
+  entity_managers:
+    default:
+      client: default # defaults to "default"
+      cache_dir: "%kernel.cache_dir%/neo4j" # defaults to system cache
