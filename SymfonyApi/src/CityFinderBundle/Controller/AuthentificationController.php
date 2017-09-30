@@ -1,10 +1,10 @@
 <?php
 namespace CityFinderBundle\Controller;
 
-use CityFinderBundle\Entity\AuthTokens;
 use CityFinderBundle\Entity\Credentials;
 use CityFinderBundle\Entity\User;
 use CityFinderBundle\Form\CredentialType;
+use CityFinderBundle\MemCached\AuthTokens;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

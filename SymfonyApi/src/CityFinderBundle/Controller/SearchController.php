@@ -66,6 +66,12 @@ class SearchController extends Controller
         $em=$this->getNeo4jEntityManager();
         //echo get_class($em);
 
+
+
+        $personnes = $em->getRepository(Person::class)->findAll();
+
+
+
         //test de persistance
         /*
         $fabien = new Person();
@@ -76,7 +82,7 @@ class SearchController extends Controller
 
         //recherche de toute les personnes
 
-        /*$personnes = $em->getRepository(Person::class)->findAll();
+        /*
         dump($personnes);
 
         foreach ($personnes as $person) {

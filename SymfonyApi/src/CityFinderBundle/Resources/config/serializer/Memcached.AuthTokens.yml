@@ -1,4 +1,4 @@
-CityFinderBundle\Entity\AuthTokens:
+CityFinderBundle\MemCached\AuthTokens:
     exclusion_policy: none
     accessor_order: custom
     custom_accessor_order: [value, createdAt, userId]

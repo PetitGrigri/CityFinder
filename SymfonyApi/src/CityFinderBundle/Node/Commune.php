@@ -11,6 +11,7 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
  */
 class Commune
 {
+
     /**
      * @var int
      *
@@ -26,18 +27,37 @@ class Commune
     protected $name;
 
     /**
-     * @var float
+     * @var string
      *
-     * @OGM\Property(type="float")
+     * @OGM\Property(type="string")
      */
-    protected $latitude;
+    protected $nomRegion;
 
     /**
-     * @var float
+     * @var string
      *
-     * @OGM\Property(type="float")
+     * @OGM\Property(type="int")
      */
-    protected $longitude;
+    protected $codeRegion;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="int")
+     */
+    protected $codeDepartement;
+
+    /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $nomDepartement;
+
+
+
+
+
 
 
 
@@ -50,6 +70,16 @@ class Commune
     }
 
     /**
+     * @param int $id
+     * @return Commune
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getName()
@@ -59,7 +89,7 @@ class Commune
 
     /**
      * @param string $name
-     * @return Person
+     * @return Commune
      */
     public function setName($name)
     {
@@ -68,41 +98,75 @@ class Commune
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getLatitude()
+    public function getNomRegion()
     {
-        return $this->latitude;
+        return $this->nomRegion;
     }
 
     /**
-     * @param float $latitude
+     * @param string $nomRegion
      * @return Commune
      */
-    public function setLatitude($latitude)
+    public function setNomRegion($nomRegion)
     {
-        $this->latitude = $latitude;
+        $this->nomRegion = $nomRegion;
         return $this;
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getLongitude()
+    public function getCodeRegion()
     {
-        return $this->longitude;
+        return $this->codeRegion;
     }
 
     /**
-     * @param float $longitude
+     * @param string $codeRegion
      * @return Commune
      */
-    public function setLongitude($longitude)
+    public function setCodeRegion($codeRegion)
     {
-        $this->longitude = $longitude;
+        $this->codeRegion = $codeRegion;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getCodeDepartement()
+    {
+        return $this->codeDepartement;
+    }
 
+    /**
+     * @param string $codeDepartement
+     * @return Commune
+     */
+    public function setCodeDepartement($codeDepartement)
+    {
+        $this->codeDepartement = $codeDepartement;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomDepartement()
+    {
+        return $this->nomDepartement;
+    }
+
+    /**
+     * @param string $nomDepartement
+     * @return Commune
+     */
+    public function setNomDepartement($nomDepartement)
+    {
+        $this->nomDepartement = $nomDepartement;
+        return $this;
+    }
 
 }

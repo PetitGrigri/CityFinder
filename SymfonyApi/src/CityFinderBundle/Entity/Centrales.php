@@ -5,45 +5,45 @@ namespace CityFinderBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CentralesNucleaires
+ * Centrales
  *
- * @ORM\Table(name="centrales_nucleaires")
+ * @ORM\Table(name="centrales")
  * @ORM\Entity
  */
-class CentralesNucleaires
+class Centrales
 {
     /**
      * @var string
      *
-     * @ORM\Column(name="nom_reacteur", type="string", length=16, nullable=true)
+     * @ORM\Column(name="nom", type="string", length=11, nullable=true)
      */
-    private $nomReacteur;
+    private $nom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nombre_reacteur", type="integer", nullable=true)
+     */
+    private $nombreReacteur;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="centrale_nucleaire", type="string", length=11, nullable=true)
+     * @ORM\Column(name="commune", type="string", length=33, nullable=true)
      */
-    private $centraleNucleaire;
+    private $commune;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="localite", type="string", length=33, nullable=true)
-     */
-    private $localite;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="latitude", type="decimal", precision=8, scale=6, nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", precision=18, scale=16, nullable=true)
      */
     private $latitude;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="longitude", type="decimal", precision=8, scale=6, nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", precision=18, scale=16, nullable=true)
      */
     private $longitude;
 
@@ -55,37 +55,37 @@ class CentralesNucleaires
     private $departement;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="rg", type="integer", nullable=true)
+     * @ORM\Column(name="rang", type="string", length=3, nullable=true)
      */
-    private $rg;
+    private $rang;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="palier", type="string", length=3, nullable=true)
+     * @ORM\Column(name="Palier", type="string", length=5, nullable=true)
      */
     private $palier;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="puissance_thermique", type="string", length=5, nullable=true)
+     * @ORM\Column(name="puissance_thermique", type="integer", nullable=true)
      */
     private $puissanceThermique;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="puisance_brute", type="string", length=5, nullable=true)
+     * @ORM\Column(name="puissance_brute", type="integer", nullable=true)
      */
-    private $puisanceBrute;
+    private $puissanceBrute;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="puissance_nette", type="string", length=5, nullable=true)
+     * @ORM\Column(name="puissance_nette", type="integer", nullable=true)
      */
     private $puissanceNette;
 
@@ -106,9 +106,9 @@ class CentralesNucleaires
     /**
      * @var integer
      *
-     * @ORM\Column(name="mise_service", type="integer", nullable=true)
+     * @ORM\Column(name="mise_en_service", type="integer", nullable=true)
      */
-    private $miseService;
+    private $miseEnService;
 
     /**
      * @var integer
@@ -122,54 +122,54 @@ class CentralesNucleaires
     /**
      * @return string
      */
-    public function getNomReacteur()
+    public function getNom()
     {
-        return $this->nomReacteur;
+        return $this->nom;
     }
 
     /**
-     * @param string $nomReacteur
-     * @return CentralesNucleaires
+     * @param string $nom
+     * @return Centrales
      */
-    public function setNomReacteur($nomReacteur)
+    public function setNom($nom)
     {
-        $this->nomReacteur = $nomReacteur;
+        $this->nom = $nom;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNombreReacteur()
+    {
+        return $this->nombreReacteur;
+    }
+
+    /**
+     * @param int $nombreReacteur
+     * @return Centrales
+     */
+    public function setNombreReacteur($nombreReacteur)
+    {
+        $this->nombreReacteur = $nombreReacteur;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getCentraleNucleaire()
+    public function getCommune()
     {
-        return $this->centraleNucleaire;
+        return $this->commune;
     }
 
     /**
-     * @param string $centraleNucleaire
-     * @return CentralesNucleaires
+     * @param string $commune
+     * @return Centrales
      */
-    public function setCentraleNucleaire($centraleNucleaire)
+    public function setCommune($commune)
     {
-        $this->centraleNucleaire = $centraleNucleaire;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocalite()
-    {
-        return $this->localite;
-    }
-
-    /**
-     * @param string $localite
-     * @return CentralesNucleaires
-     */
-    public function setLocalite($localite)
-    {
-        $this->localite = $localite;
+        $this->commune = $commune;
         return $this;
     }
 
@@ -183,7 +183,7 @@ class CentralesNucleaires
 
     /**
      * @param string $latitude
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setLatitude($latitude)
     {
@@ -201,7 +201,7 @@ class CentralesNucleaires
 
     /**
      * @param string $longitude
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setLongitude($longitude)
     {
@@ -219,7 +219,7 @@ class CentralesNucleaires
 
     /**
      * @param string $departement
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setDepartement($departement)
     {
@@ -228,20 +228,20 @@ class CentralesNucleaires
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getRg()
+    public function getRang()
     {
-        return $this->rg;
+        return $this->rang;
     }
 
     /**
-     * @param int $rg
-     * @return CentralesNucleaires
+     * @param string $rang
+     * @return Centrales
      */
-    public function setRg($rg)
+    public function setRang($rang)
     {
-        $this->rg = $rg;
+        $this->rang = $rang;
         return $this;
     }
 
@@ -255,7 +255,7 @@ class CentralesNucleaires
 
     /**
      * @param string $palier
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setPalier($palier)
     {
@@ -264,7 +264,7 @@ class CentralesNucleaires
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getPuissanceThermique()
     {
@@ -272,8 +272,8 @@ class CentralesNucleaires
     }
 
     /**
-     * @param string $puissanceThermique
-     * @return CentralesNucleaires
+     * @param int $puissanceThermique
+     * @return Centrales
      */
     public function setPuissanceThermique($puissanceThermique)
     {
@@ -282,25 +282,25 @@ class CentralesNucleaires
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getPuisanceBrute()
+    public function getPuissanceBrute()
     {
-        return $this->puisanceBrute;
+        return $this->puissanceBrute;
     }
 
     /**
-     * @param string $puisanceBrute
-     * @return CentralesNucleaires
+     * @param int $puissanceBrute
+     * @return Centrales
      */
-    public function setPuisanceBrute($puisanceBrute)
+    public function setPuissanceBrute($puissanceBrute)
     {
-        $this->puisanceBrute = $puisanceBrute;
+        $this->puissanceBrute = $puissanceBrute;
         return $this;
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getPuissanceNette()
     {
@@ -308,8 +308,8 @@ class CentralesNucleaires
     }
 
     /**
-     * @param string $puissanceNette
-     * @return CentralesNucleaires
+     * @param int $puissanceNette
+     * @return Centrales
      */
     public function setPuissanceNette($puissanceNette)
     {
@@ -327,7 +327,7 @@ class CentralesNucleaires
 
     /**
      * @param int $debutConstruction
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setDebutConstruction($debutConstruction)
     {
@@ -345,7 +345,7 @@ class CentralesNucleaires
 
     /**
      * @param int $raccordementReseau
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setRaccordementReseau($raccordementReseau)
     {
@@ -356,18 +356,18 @@ class CentralesNucleaires
     /**
      * @return int
      */
-    public function getMiseService()
+    public function getMiseEnService()
     {
-        return $this->miseService;
+        return $this->miseEnService;
     }
 
     /**
-     * @param int $miseService
-     * @return CentralesNucleaires
+     * @param int $miseEnService
+     * @return Centrales
      */
-    public function setMiseService($miseService)
+    public function setMiseEnService($miseEnService)
     {
-        $this->miseService = $miseService;
+        $this->miseEnService = $miseEnService;
         return $this;
     }
 
@@ -381,14 +381,13 @@ class CentralesNucleaires
 
     /**
      * @param int $id
-     * @return CentralesNucleaires
+     * @return Centrales
      */
     public function setId($id)
     {
         $this->id = $id;
         return $this;
     }
-
 
 
 }

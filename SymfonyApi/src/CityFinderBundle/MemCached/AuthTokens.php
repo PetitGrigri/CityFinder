@@ -1,6 +1,6 @@
 <?php
 
-namespace CityFinderBundle\Entity;
+namespace CityFinderBundle\MemCached;
 
 class AuthTokens
 {
@@ -101,4 +101,3 @@ class AuthTokens
 
 
 }
-
