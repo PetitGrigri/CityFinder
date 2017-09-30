@@ -92,7 +92,7 @@ fos_rest:
         view_response_listener: true #permet lors du retour d'une méthode du controller avec un array, de créer une réponse
     format_listener:
         rules:
-            - { path: '^/search-test', priorities: ['html'], fallback_format: 'html' } #paramètres par défaut de l'API
+            - { path: '^/search-commune', priorities: ['html'], fallback_format: 'html' } #paramètres par défaut de l'API
             - { path: '^/', priorities: ['json'], fallback_format: 'json' } #paramètres par défaut de l'API
     # permet de décoder le contenu json transmis dans le body d'une requête
     body_listener:

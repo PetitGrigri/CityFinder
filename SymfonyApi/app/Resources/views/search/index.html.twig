@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ render(controller('CityFinderBundle:WebSearch:getNavigation')) }}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Bienvenue</h1>
+            <p>City finder vous permet de vous renseigner sur les communes qui vous correspondent</p>
+        </div>
+    </div>
+{% endblock %}

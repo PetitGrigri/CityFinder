@@ -14,7 +14,7 @@ security:
             security: false
 
         test_recherche:
-            pattern: ^/search-test
+            pattern: ^/search-commune
             security: false
 
         main:

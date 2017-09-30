@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Communes
  *
  * @ORM\Table(name="communes")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CityFinderBundle\Repository\CommunesRepository")
  */
 class Communes
 {
