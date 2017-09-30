@@ -5,3 +5,4 @@ city_finder:
 auth-tokens:
     type:     rest
     resource: CityFinderBundle\Controller\AuthentificationController
+

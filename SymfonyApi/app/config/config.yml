@@ -43,6 +43,8 @@ framework:
 
 # Twig Configuration
 twig:
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
@@ -62,7 +64,6 @@ doctrine:
         #   2. Uncomment database_path in parameters.yml.dist
         #   3. Uncomment next line:
         #path: '%database_path%'
-
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -91,6 +92,7 @@ fos_rest:
         view_response_listener: true #permet lors du retour d'une méthode du controller avec un array, de créer une réponse
     format_listener:
         rules:
+            - { path: '^/search-test', priorities: ['html'], fallback_format: 'html' } #paramètres par défaut de l'API
             - { path: '^/', priorities: ['json'], fallback_format: 'json' } #paramètres par défaut de l'API
     # permet de décoder le contenu json transmis dans le body d'une requête
     body_listener:

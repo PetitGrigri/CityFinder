@@ -4,6 +4,7 @@ namespace CityFinderBundle\Node;
 
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
+use GraphAware\Neo4j\OGM\Common\Collection;
 
 /**
  *
@@ -18,6 +19,13 @@ class Commune
      * @OGM\GraphId()
      */
     protected $id;
+
+    /**
+     * @var int
+     *
+     * @OGM\Property(type="int")
+     */
+    protected $doctrineId;
 
     /**
      * @var string
@@ -54,8 +62,37 @@ class Commune
      */
     protected $nomDepartement;
 
+    /**
+     * @var Centrale[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_80KM_FROM", direction="OUTGOING", collection=true, mappedBy="communesNear80km", targetEntity="Centrale")
+     */
+    protected $centralesNear80km;
 
 
+    /**
+     * @var Centrale[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_30KM_FROM", direction="OUTGOING", collection=true, mappedBy="communesNear30km", targetEntity="Centrale")
+     */
+    protected $centralesNear30km;
+
+    /**
+     * @var Centrale[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_20KM_FROM", direction="OUTGOING", collection=true, mappedBy="communesNear20km", targetEntity="Centrale")
+     */
+    protected $centralesNear20km;
+
+    /**
+     * Commune constructor.
+     */
+    public function __construct()
+    {
+        $this->centralesNear80km = new Collection();
+        $this->centralesNear30km = new Collection();
+        $this->centralesNear20km = new Collection();
+    }
 
 
 
@@ -169,4 +206,73 @@ class Commune
         return $this;
     }
 
+    /**
+     * @return int
+     */
+    public function getDoctrineId()
+    {
+        return $this->doctrineId;
+    }
+
+    /**
+     * @param int $doctrineId
+     * @return Commune
+     */
+    public function setDoctrineId($doctrineId)
+    {
+        $this->doctrineId = $doctrineId;
+        return $this;
+    }
+
+
+    /**
+     * @return Centrale[]|Collection
+     */
+    public function getCentralesNear80km()
+    {
+        return $this->centralesNear80km;
+    }
+
+    /**
+     * @param Centrale[]|Collection $centralesNear80km
+     */
+    public function setCentralesNear80km($centralesNear80km)
+    {
+        $this->centralesNear80km = $centralesNear80km;
+        return $this;
+    }
+
+    /**
+     * @return Centrale[]|Collection
+     */
+    public function getCentralesNear30km()
+    {
+        return $this->centralesNear30km;
+    }
+
+    /**
+     * @param Centrale[]|Collection $centralesNear30km
+     */
+    public function setCentralesNear30km($centralesNear30km)
+    {
+        $this->centralesNear30km = $centralesNear30km;
+        return $this;
+    }
+
+    /**
+     * @return Centrale[]|Collection
+     */
+    public function getCentralesNear20km()
+    {
+        return $this->centralesNear20km;
+    }
+
+    /**
+     * @param Centrale[]|Collection $centralesNear20km
+     */
+    public function setCentralesNear20km($centralesNear20km)
+    {
+        $this->centralesNear20km = $centralesNear20km;
+        return $this;
+    }
 }

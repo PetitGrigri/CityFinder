@@ -2,9 +2,9 @@
 
 namespace CityFinderBundle\Controller;
 
-use CityFinderBundle\Entity\DonneesCommunes;
-use CityFinderBundle\Node\Person;
+use CityFinderBundle\Node\Commune;
 use FOS\RestBundle\Controller\Annotations\Route;
+use GraphAware\Bolt\Protocol\V1\Response;
 use GraphAware\Neo4j\OGM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -59,67 +59,23 @@ class SearchController extends Controller
     public function neo4jSearchAction(Request $request)
     {
         //$searchTerm = $request->query->get('q');
-        $term = '(?i).*'.'Matrix'.'.*';
-        $query = 'MATCH (m:Movie) WHERE m.title =~ {term} RETURN m';
+        //$term = '(?i).*'.'Matrix'.'.*';
+        //$query = 'MATCH (m:Movie) WHERE m.title =~ {term} RETURN m';
         $result = $this->getNeo4jClient()->run($query, ['term' => $term]);
 
         $em=$this->getNeo4jEntityManager();
         //echo get_class($em);
 
+        $personnes = $em->getRepository(Commune::class)->findAll();
 
-
-        $personnes = $em->getRepository(Person::class)->findAll();
-
-
-
-        //test de persistance
-        /*
-        $fabien = new Person();
-        $fabien->setName("Fabien");
-        $em->persist($fabien);
-        $em->flush();
-        */
-
-        //recherche de toute les personnes
-
-        /*
-        dump($personnes);
-
-        foreach ($personnes as $person) {
-            echo sprintf("- %s\n", $person->getName());
-        }
-        */
-
-        $personnes = $em->getRepository(Person::class)->findBy([
-            'name'  => 'Fabien'
+        $jouy = $em->getRepository(Commune::class)->findOneBy([
+            'name'  => 'Jouy-le-Potier'
         ]);
 
-        //mise à jour
-        /*
-        $fabien = $personnes[0];
-        $fabien->setBorn(1983);
-        $em->flush($fabien);
-        */
-        foreach ($personnes as $person) {
-            echo sprintf("- %s\n", $person->getName());
-        }
-        dump($personnes);
-        //utilisation procédurale
-        /*
-        $movies = [];
+        dump($jouy);
 
-        foreach ($result->records() as $record) {
-            $movieNode = $record->get('m');
-
-            $movie = $movieNode->values();
-            //$movie['url'] = $this->generateUrl('movies_show', ['title' => $movieNode->get('title')]);
-
-            $movies[] = $movie;
-
-            return new JsonResponse($movies);
-        }*/
-
-        return new JsonResponse($personnes);
+        return new Response('test');
+        //return new JsonResponse($personnes);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace CityFinderBundle\Utils;
 
+
 trait ServicesTraits
 {
     /**
@@ -18,5 +19,12 @@ trait ServicesTraits
     protected function getDoctrineClient()
     {
         return $this->getContainer()->get('doctrine');
+    }
+
+    /**
+     * @return \GraphAware\Neo4j\OGM\EntityManager object
+     */
+    private function getNeo4jEntityManager() {
+        return $this->get('neo4j.entity_manager.default');
     }
 }
