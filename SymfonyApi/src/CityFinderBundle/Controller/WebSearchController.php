@@ -43,11 +43,12 @@ class WebSearchController extends Controller
         $form = $this->generateSearchForm();
 
         //récupération de l'entity manager de neo4j
-        $communesRepositry = $this->getDoctrine()->getRepository(Communes::class);
+        $communesRepository = $this->getDoctrine()->getRepository(Communes::class);
 
+        dump($communesRepository);
         return $this->render('search/propositions.html.twig', [
             'commune'           => $commune,
-            'propositions'      => $communesRepositry->findCommuneLike($commune),
+            'propositions'      => $communesRepository->findCommuneLike($commune),
             'form'              => $form->createView(),
         ]);
 

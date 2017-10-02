@@ -39,10 +39,6 @@ class LoadCentralesCommand extends ContainerAwareCommand
             ->createQuery('SELECT COUNT(1) from CityFinderBundle\Entity\Centrales c')
             ->getSingleScalarResult();
 
-        $countCommunes   = $emDoctrine
-            ->createQuery('SELECT COUNT(1) from CityFinderBundle\Entity\Centrales c')
-            ->getSingleScalarResult();
-
         if ($countCentrales > 0) {
             //requête permettant de créer un noeud neo4j pour les centrales
             $queryCreateNodeCentrale  = 'CREATE (c:Centrale {name:{centrale}, nombreReacteur: {reacteur}, doctrineId:{doctrineId}})';

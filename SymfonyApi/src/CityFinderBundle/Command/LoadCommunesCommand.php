@@ -71,7 +71,6 @@ class LoadCommunesCommand extends ContainerAwareCommand
             $iterableResult = $queryCommunes->iterate();
 
             foreach ($iterableResult as $next) {
-
                /**
                 * @var Communes $communeDoctrine
                 */
@@ -87,7 +86,6 @@ class LoadCommunesCommand extends ContainerAwareCommand
                     'nomDepartement'    => $communeDoctrine->getNomDept(),
                     'codeDepartement'    => $communeDoctrine->getCodeDept(),
                 ]);
-
 
                 $emDoctrine->clear();
 
