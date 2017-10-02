@@ -73,7 +73,7 @@ class LoadMuseesCommand extends ContainerAwareCommand
             unset($progress, $queryMusees, $iterableResult);
         }
         else {
-            $output->writeln("Aucune Musees dans doctrine :(");
+            $output->writeln("Aucun Musée");
             return;
         }
 
@@ -85,88 +85,102 @@ class LoadMuseesCommand extends ContainerAwareCommand
          */
         $output->writeln("Ajout des relations entre les musees et les commmunes : ");
 
+        //unset ($countCommune, $countMusees);
 
-        // récupération du nombre de commune
-        $countCommune   = $emDoctrine
-            ->createQuery('SELECT COUNT(1) from CityFinderBundle\Entity\Communes c')
-            ->getSingleScalarResult();
+        //requête permettant de récupérer la commune ou se situe l'musee
 
-        //si on a des communes, on peut commncer le remplissage
-        if ($countCommune > 0) {
-            //création de la barre de progression
-            $progress = new ProgressBar($output, ($countMusees));
+        $requeteMuseeCommuneCount ="
+            SELECT 	count(1) as total_row
+            FROM (	SELECT 	musees.id 		AS musee_id,
+                            musees.musee 	AS musee_nom,
+                            musees.localite AS musee_localite,
+                            correspondance_communes.insee 	AS musee_commune_insee, 
+                            correspondance_communes.nom  	AS commune_nom,
+                            correspondance_communes.insee  	AS insee
+                    FROM musees
+                    JOIN correspondance_communes 
+                        ON musees.postal = correspondance_communes.postal)  mcc
+            JOIN communes AS communes_musees
+                ON communes_musees.insee = mcc.insee";
+
+        $requeteMuseeCommune ="
+            SELECT 	mcc.musee_id,
+                    mcc.musee_nom, 
+                    mcc.musee_commune_insee, 
+                    mcc.musee_localite, 
+                    mcc.musees_postal,
+                    GROUP_CONCAT(communes_musees.id) AS communes_ids,
+                    GROUP_CONCAT(mcc.commune_nom) AS communes,
+                    COUNT(1) AS total_commune_musee
+            FROM (	SELECT 	musees.id 		AS musee_id,
+                            musees.musee 	AS musee_nom,
+                            musees.localite AS musee_localite,
+                            musees.postal AS musees_postal,
+                            correspondance_communes.insee 	AS musee_commune_insee, 
+                            correspondance_communes.nom  	AS commune_nom,
+                            correspondance_communes.insee  	AS insee
+                    FROM musees
+                    JOIN correspondance_communes 
+                        ON musees.postal = correspondance_communes.postal)  mcc
+            JOIN communes AS communes_musees
+                ON communes_musees.insee = mcc.insee
+            GROUP BY mcc.musee_id";
+
+        $queryCreateRelationshipMuseeCommune ='
+            MATCH (c:Commune {doctrineId: {communeDoctrineId}})
+            MATCH (h:Musee {doctrineId: {museeDoctrineId}}) 
+            MERGE (c)<-[:LOCATED_IN]-(h)';
+
+        $queryCreateRelationshipMuseeCommuneNear ='
+            MATCH (c:Commune {doctrineId: {communeDoctrineId}})
+            MATCH (h:Musee {doctrineId: {museeDoctrineId}}) 
+            MERGE (c)<-[:NEAR]-(h)';
+
+
+
+        $stmtCountCommuneMusees = $doctrine->getConnection()->prepare($requeteMuseeCommuneCount);
+        $stmtCountCommuneMusees->execute();
+        $rowCount = $stmtCountCommuneMusees->fetch();
+
+        if ($rowCount) {
+
+            $progress = new ProgressBar($output, $rowCount['total_row']);
             $progress->setFormat('debug');
 
-            unset ($countCommune, $countMusees);
+            unset ($stmtCountCommuneMusees, $rowCount, $rowCount);
 
-            //requête permettant de récupérer la commune ou se situe l'musee
+            $stmtCommuneMusees = $doctrine->getConnection()->prepare($requeteMuseeCommune);
+            $stmtCommuneMusees->execute();
 
-            $requeteMuseeCommune ="
-                SELECT 	musees.id AS musee_id,
-                        communes_musees.id AS commune_id,
-                        musees.musee AS musee_nom,
-                        correspondance_communes.insee AS musee__commune_insee, 
-                        musees.localite AS musee_localite,
-                        correspondance_communes.nom  AS commune_nom
-                FROM musees
-                JOIN correspondance_communes 
-                    ON musees.postal = correspondance_communes.postal
-                JOIN communes AS communes_musees
-                    ON communes_musees.insee = correspondance_communes.insee
-                WHERE musees.id = :museeId";
+            while($row = $stmtCommuneMusees->fetch(PDO::FETCH_NAMED)) {
 
-            $queryCreateRelationshipMuseeCommune ='
-                MATCH (c:Commune {doctrineId: {communeDoctrineId}})
-                MATCH (h:Musee {doctrineId: {museeDoctrineId}}) 
-                MERGE (c)<-[:LOCATED_IN]-(h)';
+                $communesArray      = explode(',',$row['communes']);
+                $communeIdsArray    = explode(',',$row['communes_ids']);
+                $i=0;
 
-            $queryCreateRelationshipMuseeCommuneNear ='
-                MATCH (c:Commune {doctrineId: {communeDoctrineId}})
-                MATCH (h:Musee {doctrineId: {museeDoctrineId}}) 
-                MERGE (c)<-[:NEAR]-(h)';
-
-            //les requêtes communes et musees
-            $queryMusees    = $emDoctrine->createQuery('select c from CityFinderBundle\Entity\Musees c');
-            $iterableMusees = $queryMusees->iterate();
-
-
-            //parsing des musees
-            while (($next = $iterableMusees->next()) !== false) {
-                /**
-                 * @var Musees $musee
-                 */
-                $musee = $next[0];
-
-                $stmtAProximiteCentrale = $doctrine->getConnection()->prepare($requeteMuseeCommune);
-                $stmtAProximiteCentrale->execute([
-                    'museeId'   => $musee->getId(),
-                ]);
-
-                $informations = $stmtAProximiteCentrale->fetchAll(PDO::FETCH_NAMED);
-
-                foreach ($informations as $information) {
-                    if ((count($informations) == 1) || ($information["musee_localite"] == $information["commune_nom"])) {
-                        //création de la relation musee dans la commune
+                foreach ($communesArray as $commune) {
+                    if ((intval($row['total_commune_musee']) == 1 ) || ($commune == $row['musee_localite'])) {
                         $neo4jClient->runWrite($queryCreateRelationshipMuseeCommune, [
-                            'communeDoctrineId' => intval($information['commune_id']),
-                            'museeDoctrineId' => intval($information['musee_id'])
+                            'communeDoctrineId' => intval($communeIdsArray[$i]),
+                            'museeDoctrineId' => intval($row['musee_id'])
                         ]);
                     } else {
-                        //création de la relation musee pret de la commune
                         $neo4jClient->runWrite($queryCreateRelationshipMuseeCommuneNear, [
-                            'communeDoctrineId' => intval($information['commune_id']),
-                            'museeDoctrineId' => intval($information['musee_id'])
+                            'communeDoctrineId' => intval($communeIdsArray[$i]),
+                            'museeDoctrineId' => intval($row['musee_id'])
                         ]);
                     }
+                    $i++;
+                    $progress->advance();
                 }
-
-                unset($informations, $information, $stmtAProximiteCentrale);
-                $emDoctrine->clear();
-                $progress->advance();
             }
+
+            $progress->finish();
+            $output->writeln("");
+            $output->writeln("<info>Terminé</info>");
+        } else {
+            $output->writeln("Aucune relation trouvée :(");
+            return;
         }
-        $progress->finish();
-        $output->writeln("");
-        $output->writeln("<info>Terminé</info>");
     }
 }
