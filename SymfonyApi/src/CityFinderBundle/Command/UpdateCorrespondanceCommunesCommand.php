@@ -3,7 +3,7 @@ namespace CityFinderBundle\Command;
 
 use CityFinderBundle\Entity\Communes;
 use CityFinderBundle\Entity\CorrespondanceCommunes;
-use CityFinderBundle\Utils\ServicesTraits;
+use CityFinderBundle\Utils\ServicesCommandTraits;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateCorrespondanceCommunesCommand extends ContainerAwareCommand
 {
-    use ServicesTraits;
+    use ServicesCommandTraits;
     const TAILLE_CODE_POSTAL = 5;
 
     protected function configure()

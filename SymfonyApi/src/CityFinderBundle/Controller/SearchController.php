@@ -2,12 +2,17 @@
 
 namespace CityFinderBundle\Controller;
 
+use CityFinderBundle\Form\SearchType;
 use CityFinderBundle\Node\Commune;
+use CityFinderBundle\Utils\ServicesCommandTraits;
+use CityFinderBundle\Utils\ServicesControllerTraits;
 use FOS\RestBundle\Controller\Annotations\Route;
 use GraphAware\Bolt\Protocol\V1\Response;
 use GraphAware\Neo4j\OGM\EntityManager;
+use GraphAware\Neo4j\OGM\Query;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,10 +24,12 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class SearchController extends Controller
 {
+
+    use ServicesControllerTraits;
+
     /**
      * @Rest\Post()
      * @Rest\View()
-     *
      * @param Request $request
      * @return mixed
      */
@@ -31,65 +38,86 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         //récupération de l'utilisateur lié au token (pour enregistrer sa requête)
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user   = $this->get('security.token_storage')->getToken()->getUser();
+
+        //récupération des paramètres du formulaire
+        $form   = $this->createForm(SearchType::class, []);
+
+        //remplissage du formulaire via la request
+        $form->submit($request->request->all());
+
+        //si le formulaire est invalide, on le retourne
+        if (!$form->isValid()) {
+            return $form;
+        } else {
+            $emNeo4j    = $this->getNeo4jEntityManager();
+
+            $queryRaw   = $this->queryBuilder($form->getData());
+
+            //dump($queryRaw);
+
+            $query = $emNeo4j->createQuery($queryRaw);
+            $query->addEntityMapping('c', Commune::class);
 
 
-        //$logRecherche   = new LogsRecherches(); //todo implémenter la recherche
+
+            $result =  $query->execute();
+            $retour = [];
+            foreach ($result as $commune) {
+                $retour[]=$commune["communes"]->asArray();
+            }
 
 
-        $commune= $em->getRepository(DonneesCommunes::class)->findOneBy([
-            "comNom"  => "PARIS",
-        ]);
+            return $retour;
+        }
 
-        return new JsonResponse([
-            "ville" =>$commune->getComNom(),
-            "lat"   =>$commune->getLat(),
-            "long"  =>$commune->getLong(),
-        ]);
     }
 
-
-    /**
-     * @Rest\Get()
-     * @Rest\View()
-     *
-     * @param Request $request
-     * @return mixed
-     */
-    public function neo4jSearchAction(Request $request)
+    public function queryBuilder($recherche)
     {
-        //$searchTerm = $request->query->get('q');
-        //$term = '(?i).*'.'Matrix'.'.*';
-        //$query = 'MATCH (m:Movie) WHERE m.title =~ {term} RETURN m';
-        $result = $this->getNeo4jClient()->run($query, ['term' => $term]);
+        $query = '';
+        $queryBegin = 'MATCH (c:Commune) WHERE true ';
+        $queryEnd = 'RETURN c AS communes LIMIT 10 ';
 
-        $em=$this->getNeo4jEntityManager();
-        //echo get_class($em);
+        //gestion des centrales
+        if (isset($recherche['centrales'])) {
+            switch ($recherche['centrales']) {
+                case SearchType::CENTRALES_MORE_THAN_20:
+                    $query.='AND NOT (c)-[:NEAR_20KM_FROM]->(:Centrale) ';
+                    break;
+                case SearchType::CENTRALES_MORE_THAN_30:
+                    $query.='AND NOT (c)-[:NEAR_30KM_FROM]->(:Centrale) ';
+                    break;
+                case SearchType::CENTRALES_MORE_THAN_80:
+                    $query.='AND NOT (c)-[:NEAR_80KM_FROM]->(:Centrale) ';
+                    break;
+            }
+        }
 
-        $personnes = $em->getRepository(Commune::class)->findAll();
+        //gestion des musees
+        if ((isset($recherche['musees'])) && ($recherche['musees'] == SearchType::MUSEES_NEEDED)) {
+            $query .= 'AND (c)<-[:LOCATED_IN]-(:Musee) ';
+        }
 
-        $jouy = $em->getRepository(Commune::class)->findOneBy([
-            'name'  => 'Jouy-le-Potier'
-        ]);
+        //gestion des musees
+        if ((isset($recherche['hotels'])) && ($recherche['hotels'] == SearchType::HOTELS_NEEDED)) {
+            $query .= 'AND (c)<-[:LOCATED_IN]-(:Hotel) ';
+        }
 
-        dump($jouy);
+        //gestion des musees
+        if (isset($recherche['postes'])) {
+            switch ($recherche['postes']) {
+                case SearchType::POSTES_NEEDED:
+                    $query .= 'AND (c)<-[:LOCATED_IN]-(:AgencePostale) ';
+                    break;
+            }
+        }
 
-        return new Response('test');
-        //return new JsonResponse($personnes);
+
+
+
+        return $queryBegin.$query.$queryEnd;
+
     }
 
-    /**
-     * @return \GraphAware\Neo4j\Client\Client
-     */
-    private function getNeo4jClient()
-    {
-        return $this->get('neo4j.client');
-    }
-
-    /**
-     * @return EntityManager object
-     */
-    private function getNeo4jEntityManager() {
-        return $this->get('neo4j.entity_manager.default');
-    }
 }

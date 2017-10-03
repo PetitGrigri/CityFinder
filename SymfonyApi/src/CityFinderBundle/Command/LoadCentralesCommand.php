@@ -3,7 +3,7 @@ namespace CityFinderBundle\Command;
 
 
 use CityFinderBundle\Entity\Communes;
-use CityFinderBundle\Utils\ServicesTraits;
+use CityFinderBundle\Utils\ServicesCommandTraits;
 use PDO;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class LoadCentralesCommand extends ContainerAwareCommand
 {
-    use ServicesTraits;
+    use ServicesCommandTraits;
 
     protected function configure()
     {

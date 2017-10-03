@@ -4,7 +4,8 @@ namespace CityFinderBundle\Controller;
 
 use CityFinderBundle\Entity\Communes;
 use CityFinderBundle\Node\Commune;
-use CityFinderBundle\Utils\ServicesTraits;
+use CityFinderBundle\Utils\ServicesCommandTraits;
+use CityFinderBundle\Utils\ServicesControllerTraits;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class WebSearchController extends Controller
 {
-    use ServicesTraits;
+    use ServicesControllerTraits;
 
     /**
      * @return mixed

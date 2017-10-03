@@ -3,14 +3,14 @@
 namespace CityFinderBundle\Utils;
 
 
-trait ServicesTraits
+trait ServicesControllerTraits
 {
     /**
      * @return \GraphAware\Neo4j\Client\Client
      */
     protected function getNeo4jClient()
     {
-        return $this->getContainer()->get('neo4j.client');
+        return $this->get('neo4j.client');
     }
 
     /**
@@ -18,7 +18,7 @@ trait ServicesTraits
      */
     protected function getDoctrineClient()
     {
-        return $this->getContainer()->get('doctrine');
+        return $this->get('doctrine');
     }
 
     /**
