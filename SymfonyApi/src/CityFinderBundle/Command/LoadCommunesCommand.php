@@ -84,7 +84,7 @@ class LoadCommunesCommand extends ContainerAwareCommand
                     'nomRegion'         => $communeDoctrine->getNomRegion(),
                     'codeRegion'        => $communeDoctrine->getCodeReg(),
                     'nomDepartement'    => $communeDoctrine->getNomDept(),
-                    'codeDepartement'    => $communeDoctrine->getCodeDept(),
+                    'codeDepartement'   => $communeDoctrine->getCodeDept(),
                 ]);
 
                 $emDoctrine->clear();

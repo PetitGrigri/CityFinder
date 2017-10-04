@@ -4,16 +4,10 @@ namespace CityFinderBundle\Controller;
 
 use CityFinderBundle\Form\SearchType;
 use CityFinderBundle\Node\Commune;
-use CityFinderBundle\Utils\ServicesCommandTraits;
 use CityFinderBundle\Utils\ServicesControllerTraits;
 use FOS\RestBundle\Controller\Annotations\Route;
-use GraphAware\Bolt\Protocol\V1\Response;
-use GraphAware\Neo4j\OGM\EntityManager;
-use GraphAware\Neo4j\OGM\Query;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -113,8 +107,15 @@ class SearchController extends Controller
             }
         }
 
+        //gestion des département
+        if (isset($recherche['code_departement'])) {
+            $query .= 'AND c.codeDepartement = "'.$recherche['code_departement'].'" ';
+        }
 
-
+        //gestion des régions
+        if (isset($recherche['code_region'])) {
+            $query .= 'AND c.codeRegion = '.$recherche['code_region'].' ';
+        }
 
         return $queryBegin.$query.$queryEnd;
 

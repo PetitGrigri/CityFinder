@@ -4,7 +4,6 @@ namespace CityFinderBundle\Controller;
 
 use CityFinderBundle\Entity\Communes;
 use CityFinderBundle\Node\Commune;
-use CityFinderBundle\Utils\ServicesCommandTraits;
 use CityFinderBundle\Utils\ServicesControllerTraits;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
