@@ -1,0 +1,66 @@
+CityFinderBundle\Node\Commune:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+        nomRegion:
+            groups: ['commune']
+        codeRegion:
+            groups: ['commune']
+        codeDepartement:
+            groups: ['commune']
+        nomDepartement:
+            groups: ['commune']
+        centralesNear80km:
+            groups: ['commune']
+        centralesNear30km:
+            groups: ['commune']
+        centralesNear20km:
+            groups: ['commune']
+        hotelsNear:
+            groups: ['commune']
+        hotelsLocatedIn:
+            groups: ['commune']
+        museesLocatedIn:
+            groups: ['commune']
+        agencesPostalesLocatedIn:
+            groups: ['commune']
+
+CityFinderBundle\Node\Hotel:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\Musee:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\AgencePostale:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\Centrale:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']

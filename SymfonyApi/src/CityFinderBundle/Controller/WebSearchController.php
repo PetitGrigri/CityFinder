@@ -82,7 +82,7 @@ class WebSearchController extends Controller
         //la recherche
         $search = [ 'name'  => $commune ];
 
-        //configuration de la recherche (certains communes existe plusieurs fois dans ce cas, on utilise aussi le code département)
+        //configuration de la recherche (certains communes existent plusieurs fois dans ce cas, on utilise aussi le code département)
         if ($departement != null)
             $search['codeDepartement'] = $departement;
 

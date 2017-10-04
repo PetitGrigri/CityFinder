@@ -8,9 +8,9 @@ use GraphAware\Neo4j\OGM\Common\Collection;
 
 /**
  *
- * @OGM\Node(label="Hotel")
+ * @OGM\Node(label="AgencePostale")
  */
-class Hotel
+class AgencePostale
 {
     /**
      * @var int
@@ -25,6 +25,7 @@ class Hotel
      ** @OGM\Property(type="int")
      */
     protected $doctrineId;
+
     /**
      * @var string
      *
@@ -33,31 +34,23 @@ class Hotel
     protected $name;
 
     /**
-     * @var int
+     * @var string
      *
      * @OGM\Property(type="string")
      */
-    protected $classement;
+    protected $caracteristiqueSite;
 
 
     /**
-     * @var Hotel[]|Collection
+     * @var Commune[]|Collection
      *
-     * @OGM\Relationship(type="NEAR", direction="OUTGOING", collection=true, mappedBy="hotelsNear", targetEntity="Commune")
-     */
-    protected $communesNear;
-
-    /**
-     * @var Hotel[]|Collection
-     *
-     * @OGM\Relationship(type="LOCATED_IN", direction="OUTGOING", collection=true, mappedBy="hotelsLocatedIn", targetEntity="Commune")
+     * @OGM\Relationship(type="LOCATED_IN", direction="OUTGOING", collection=true, mappedBy="agencesPostalesLocatedIn", targetEntity="Commune")
      */
     protected $communesLocatedIn;
 
 
     public function __construct()
     {
-        $this->communesNear         = new Collection();
         $this->communesLocatedIn    = new Collection();
     }
 
@@ -112,36 +105,23 @@ class Hotel
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getClassement()
+    public function getCaracteristiqueSite()
     {
-        return $this->classement;
+        return $this->caracteristiqueSite;
     }
 
     /**
-     * @param int $classement
+     * @param string $caracteristiqueSite
+     * @return AgencePostale
      */
-    public function setClassement($classement)
+    public function setCaracteristiqueSite($caracteristiqueSite)
     {
-        $this->classement = $classement;
+        $this->caracteristiqueSite = $caracteristiqueSite;
+        return $this;
     }
 
-    /**
-     * @return Hotel[]|Collection
-     */
-    public function getCommunesNear()
-    {
-        return $this->communesNear;
-    }
-
-    /**
-     * @param Hotel[]|Collection $communesNear
-     */
-    public function setCommunesNear($communesNear)
-    {
-        $this->communesNear = $communesNear;
-    }
 
     /**
      * @return Hotel[]|Collection
@@ -158,7 +138,4 @@ class Hotel
     {
         $this->communesLocatedIn = $communesLocatedIn;
     }
-
-
-
 }

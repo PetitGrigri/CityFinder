@@ -8,9 +8,9 @@ use GraphAware\Neo4j\OGM\Common\Collection;
 
 /**
  *
- * @OGM\Node(label="Hotel")
+ * @OGM\Node(label="Musee")
  */
-class Hotel
+class Musee
 {
     /**
      * @var int
@@ -32,32 +32,17 @@ class Hotel
      */
     protected $name;
 
-    /**
-     * @var int
-     *
-     * @OGM\Property(type="string")
-     */
-    protected $classement;
-
 
     /**
-     * @var Hotel[]|Collection
+     * @var Commune[]|Collection
      *
-     * @OGM\Relationship(type="NEAR", direction="OUTGOING", collection=true, mappedBy="hotelsNear", targetEntity="Commune")
-     */
-    protected $communesNear;
-
-    /**
-     * @var Hotel[]|Collection
-     *
-     * @OGM\Relationship(type="LOCATED_IN", direction="OUTGOING", collection=true, mappedBy="hotelsLocatedIn", targetEntity="Commune")
+     * @OGM\Relationship(type="LOCATED_IN", direction="OUTGOING", collection=true, mappedBy="museeLocatedIn", targetEntity="Commune")
      */
     protected $communesLocatedIn;
 
 
     public function __construct()
     {
-        $this->communesNear         = new Collection();
         $this->communesLocatedIn    = new Collection();
     }
 
@@ -112,38 +97,6 @@ class Hotel
     }
 
     /**
-     * @return int
-     */
-    public function getClassement()
-    {
-        return $this->classement;
-    }
-
-    /**
-     * @param int $classement
-     */
-    public function setClassement($classement)
-    {
-        $this->classement = $classement;
-    }
-
-    /**
-     * @return Hotel[]|Collection
-     */
-    public function getCommunesNear()
-    {
-        return $this->communesNear;
-    }
-
-    /**
-     * @param Hotel[]|Collection $communesNear
-     */
-    public function setCommunesNear($communesNear)
-    {
-        $this->communesNear = $communesNear;
-    }
-
-    /**
      * @return Hotel[]|Collection
      */
     public function getCommunesLocatedIn()
@@ -158,7 +111,4 @@ class Hotel
     {
         $this->communesLocatedIn = $communesLocatedIn;
     }
-
-
-
 }

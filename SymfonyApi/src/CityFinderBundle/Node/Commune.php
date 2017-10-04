@@ -84,17 +84,52 @@ class Commune
      */
     protected $centralesNear20km;
 
+
+
+    /**
+     * @var Commune[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR", direction="INCOMING", collection=true, mappedBy="communesNear", targetEntity="Hotel")
+     */
+    protected $hotelsNear;
+
+    /**
+     * @var Commune[]|Collection
+     *
+     * @OGM\Relationship(type="LOCATED_IN", direction="INCOMING", collection=true, mappedBy="communesLocatedIn", targetEntity="Hotel")
+     */
+    protected $hotelsLocatedIn;
+
+
+    /**
+     * @var Musee[]|Collection
+     *
+     * @OGM\Relationship(type="LOCATED_IN", direction="INCOMING", collection=true, mappedBy="communesLocatedIn", targetEntity="Musee")
+     */
+    protected $museesLocatedIn;
+
+
+    /**
+     * @var AgencePostale[]|Collection
+     *
+     * @OGM\Relationship(type="LOCATED_IN", direction="INCOMING", collection=true, mappedBy="communesLocatedIn", targetEntity="AgencePostale")
+     */
+    protected $agencesPostalesLocatedIn;
+
+
     /**
      * Commune constructor.
      */
     public function __construct()
     {
-        $this->centralesNear80km = new Collection();
-        $this->centralesNear30km = new Collection();
-        $this->centralesNear20km = new Collection();
+        $this->centralesNear80km            = new Collection();
+        $this->centralesNear30km            = new Collection();
+        $this->centralesNear20km            = new Collection();
+        $this->hotelsNear                   = new Collection();
+        $this->hotelsLocatedIn              = new Collection();
+        $this->museesLocatedIn              = new Collection();
+        $this->agencesPostalesLocatedIn     = new Collection();
     }
-
-
 
 
 
@@ -275,4 +310,80 @@ class Commune
         $this->centralesNear20km = $centralesNear20km;
         return $this;
     }
+
+    /**
+     * @return Commune[]|Collection
+     */
+    public function getHotelsNear()
+    {
+        return $this->hotelsNear;
+    }
+
+    /**
+     * @param Commune[]|Collection $hotelsNear
+     * @return Commune
+     */
+    public function setHotelsNear($hotelsNear)
+    {
+        $this->hotelsNear = $hotelsNear;
+        return $this;
+    }
+
+    /**
+     * @return Commune[]|Collection
+     */
+    public function getHotelsLocatedIn()
+    {
+        return $this->hotelsLocatedIn;
+    }
+
+    /**
+     * @param Commune[]|Collection $hotelsLocatedIn
+     * @return Commune
+     */
+    public function setHotelsLocatedIn($hotelsLocatedIn)
+    {
+        $this->hotelsLocatedIn = $hotelsLocatedIn;
+        return $this;
+    }
+
+    /**
+     * @return Musee[]|Collection
+     */
+    public function getMuseesLocatedIn()
+    {
+        return $this->museesLocatedIn;
+    }
+
+    /**
+     * @param Musee[]|Collection $museesLocatedIn
+     * @return Commune
+     */
+    public function setMuseesLocatedIn($museesLocatedIn)
+    {
+        $this->museesLocatedIn = $museesLocatedIn;
+        return $this;
+    }
+
+    /**
+     * @return AgencePostale[]|Collection
+     */
+    public function getAgencesPostalesLocatedIn()
+    {
+        return $this->agencesPostalesLocatedIn;
+    }
+
+    /**
+     * @param AgencePostale[]|Collection $agencesPostalesLocatedIn
+     * @return Commune
+     */
+    public function setAgencesPostalesLocatedIn($agencesPostalesLocatedIn)
+    {
+        $this->agencesPostalesLocatedIn = $agencesPostalesLocatedIn;
+        return $this;
+    }
+
+
+
+
 }

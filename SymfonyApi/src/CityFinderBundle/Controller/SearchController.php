@@ -8,7 +8,9 @@ use CityFinderBundle\Utils\ServicesControllerTraits;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+
 
 
 /**
@@ -44,34 +46,68 @@ class SearchController extends Controller
         if (!$form->isValid()) {
             return $form;
         } else {
-            $emNeo4j    = $this->getNeo4jEntityManager();
-
+            //création de la requête à partir de notre recherche
             $queryRaw   = $this->queryBuilder($form->getData());
 
-            //dump($queryRaw);
+            //exécution de notre requête
+            $result = $this->getNeo4jClient()->run($queryRaw, []);
 
-            $query = $emNeo4j->createQuery($queryRaw);
-            $query->addEntityMapping('c', Commune::class);
+            $communes = [];
 
+            foreach ($result->records() as $record) {
+                //récupération du "noeud" commune et de son id
+                $communeNode    = $record->get('c');
 
+                //récupération de ses données et de son id
+                $commune        = $communeNode->values();
+                $commune['id']  = $communeNode->identity();
 
-            $result =  $query->execute();
-            $retour = [];
-            foreach ($result as $commune) {
-                $retour[]=$commune["communes"]->asArray();
+                //ajout de la commune à notre array de commune
+                $communes[] = $commune;
             }
 
+            return $communes;
 
-            return $retour;
         }
+    }
+
+    /**
+     *
+     * Permet d'obtenir des informations sur une ville précise
+     *
+     * @Rest\Get("/detail/{id}")
+     * @Rest\View(serializerGroups={"commune"})
+     * @param Request $request
+     * @return mixed
+     */
+    public function detailAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        //récupération de l'utilisateur lié au token (pour enregistrer sa requête)
+        $user   = $this->get('security.token_storage')->getToken()->getUser();
+
+        //récupération des paramètres du formulaire
+        $form   = $this->createForm(SearchType::class, []);
+
+        $emNeo4j    = $this->getNeo4jEntityManager();
+
+        $commune = $emNeo4j->getRepository(Commune::class)->find($id);
+
+        return $commune;
 
     }
 
+
+    /**
+     * @param $recherche
+     * @return string
+     */
     public function queryBuilder($recherche)
     {
         $query = '';
         $queryBegin = 'MATCH (c:Commune) WHERE true ';
-        $queryEnd = 'RETURN c AS communes LIMIT 10 ';
+        $queryEnd = 'RETURN c LIMIT 10 ';
 
         //gestion des centrales
         if (isset($recherche['centrales'])) {

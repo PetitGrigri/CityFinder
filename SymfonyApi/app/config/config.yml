@@ -26,7 +26,7 @@ framework:
     csrf_protection: ~
     validation: { enable_annotations: true }
     serializer:
-        enabled: false
+        enabled: true
     templating:
         engines: ['twig']
     default_locale: '%locale%'
@@ -77,12 +77,7 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
-# JMS Serializer
-jms_serializer:
-    handlers:
-        datetime:
-            default_format: "Y-m-d\\TH:i:sP"
-            default_timezone: "UTC"
+
 
 # FOS REST
 fos_rest:

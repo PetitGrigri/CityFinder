@@ -27,4 +27,11 @@ trait ServicesCommandTraits
     private function getNeo4jEntityManager() {
         return $this->getContainer()->get('neo4j.entity_manager.default');
     }
+
+    /**
+     * @return \Symfony\Component\Cache\Adapter\TraceableAdapter
+     */
+    private function getMemCachedAdapter() {
+        return $this->getContainer()->get('app.cache.products');
+    }
 }

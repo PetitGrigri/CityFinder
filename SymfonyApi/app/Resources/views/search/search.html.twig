@@ -13,55 +13,128 @@
     </div>
 
     <div class="container">
+
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">
-                <div class="panel panel-primary">
+                <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h3 class="panel-title">Centrales à moins de 20 km<span class="badge pull-right">{{ commune.centralesNear20km|length }}</span>
                     </div>
 
                     <ul class="list-group">
                         {% for centrale in commune.centralesNear20km %}
-                            <li class="list-group-item">{{ commune.name }}</li>
+                            <a class="list-group-item">{{ commune.name }}</a>
                         {% else %}
                             <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
                         {% endfor %}
                     </ul>
-
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
+
+                <div class="panel panel-warning">
                     <div class="panel-heading">
                         <h3 class="panel-title">Centrales à moins de 30 km<span class="badge pull-right">{{ commune.centralesNear30km|length }}</span>
                     </div>
                     <ul class="list-group">
                         {% for centrale in commune.centralesNear30km %}
-                            <li class="list-group-item">{{ centrale.name }}</li>
+                            <a class="list-group-item">{{ centrale.name }}</a>
                         {% else %}
                             <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
                         {% endfor %}
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-primary">
+
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h3 class="panel-title">Centrales à moins de 80 km<span class="badge pull-right">{{ commune.centralesNear80km|length }}</span>
                     </div>
 
                     <ul class="list-group">
                         {% for centrale in commune.centralesNear80km %}
-                            <li class="list-group-item">{{ centrale.name }}</li>
+                            <a class="list-group-item">{{ centrale.name }}</a>
                         {% else %}
                             <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
                         {% endfor %}
                     </ul>
+                </div>
 
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Musées<span class="badge pull-right">{{ commune.museesLocatedIn|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for musee in commune.museesLocatedIn %}
+                            <a class="list-group-item">{{ musee.name }}</a>
+                        {% else %}
+                            <li class="list-group-item">Aucun musée situé dans cette commune</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Agences Postales<span class="badge pull-right">{{ commune.agencesPostalesLocatedIn|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for agencePostale in commune.agencesPostalesLocatedIn %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ agencePostale.name }}</h5>
+                                <p class="list-group-item-text">{{ agencePostale.caracteristiqueSite }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune agence postale située dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hotels<span class="badge pull-right">{{ commune.hotelsLocatedIn|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for hotel in commune.hotelsLocatedIn %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ hotel.name }}</h5>
+                                <p class="list-group-item-text">{{ hotel.classement }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucun hotel situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hotels Limitrophes<span class="badge pull-right">{{ commune.hotelsNear|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for hotel in commune.hotelsNear %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ hotel.name }}</h5>
+                                <p class="list-group-item-text">{{ hotel.classement }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucun hotel situé dans cette commune</a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
         </div>
 
         <hr>
