@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 /**
@@ -59,8 +59,9 @@ class SearchController extends Controller
                 $communeNode    = $record->get('c');
 
                 //récupération de ses données et de son id
-                $commune        = $communeNode->values();
-                $commune['id']  = $communeNode->identity();
+                $commune            = $communeNode->values();
+                $commune['id']      = $communeNode->identity();
+                $commune['href']    = $this->generateUrl('detail_commune',  ['id'=>$commune['id']], UrlGeneratorInterface::ABSOLUTE_URL);
 
                 //ajout de la commune à notre array de commune
                 $communes[] = $commune;
@@ -75,7 +76,7 @@ class SearchController extends Controller
      *
      * Permet d'obtenir des informations sur une ville précise
      *
-     * @Rest\Get("/detail/{id}")
+     * @Rest\Get("/detail/{id}", name="detail_commune")
      * @Rest\View(serializerGroups={"commune"})
      * @param Request $request
      * @return mixed
