@@ -6,7 +6,7 @@
     <string name="Password">Mot de passe</string>
     <string name="guest">Visiteur ?</string>
     <string name="go">Connexion</string>
-    <string name="repeat_password">Repeat Password</string>
-    <string name="next">NEXT</string>
-    <string name="register">REGISTER</string>
+    <string name="repeat_password">Mot de passe à nouveau</string>
+    <string name="next">Suivant</string>
+    <string name="register">Créer un compte</string>
 </resources>

@@ -47,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptions options =
                             ActivityOptions.makeSceneTransitionAnimation(this, fab, fab.getTransitionName());
-                    //startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+                    startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
                 } else {
-                    //startActivity(new Intent(this, RegisterActivity.class));
+                    startActivity(new Intent(this, RegisterActivity.class));
                 }
                 break;
             case R.id.bt_go:
