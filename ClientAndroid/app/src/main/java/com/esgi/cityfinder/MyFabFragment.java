@@ -27,6 +27,10 @@ import java.util.Map;
 
 public class MyFabFragment extends AAH_FabulousFragment {
 
+    private final static String CENTRALES = "Centrales";
+    private final static String MUSEES = "Musées";
+    private final static String HOTELS = "Hotels";
+    private final static String POSTES = "Postes";
 
     ArrayMap<String, List<String>> applied_filters = new ArrayMap<>();
     List<TextView> textviews = new ArrayList<>();
@@ -119,13 +123,16 @@ public class MyFabFragment extends AAH_FabulousFragment {
 //            ll_scroll.setLayoutParams(lp);
             switch (position) {
                 case 0:
-                    inflateLayoutWithFilters("Centrales", fbl);
+                    inflateLayoutWithFilters(CENTRALES, fbl);
                     break;
                 case 1:
-                    inflateLayoutWithFilters("Musees", fbl);
+                    inflateLayoutWithFilters(MUSEES, fbl);
                     break;
                 case 2:
-                    inflateLayoutWithFilters("Hotels", fbl);
+                    inflateLayoutWithFilters(HOTELS, fbl);
+                    break;
+                case 3:
+                    inflateLayoutWithFilters(POSTES, fbl);
                     break;
             }
             collection.addView(layout);
@@ -147,11 +154,13 @@ public class MyFabFragment extends AAH_FabulousFragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Centrales";
+                    return CENTRALES;
                 case 1:
-                    return "Musees";
+                    return MUSEES;
                 case 2:
-                    return "Hotels";
+                    return HOTELS;
+                case 3:
+                    return POSTES;
             }
             return "";
         }
@@ -170,15 +179,18 @@ public class MyFabFragment extends AAH_FabulousFragment {
 
         switch (filter_category) {
 
-            case "Centrales":
-                keys.add("< 20 km");
-                keys.add("< 30 km");
-                keys.add("< 80 km");
+            case CENTRALES:
+                keys.add("> 20 km");
+                keys.add("> 30 km");
+                keys.add("> 80 km");
                 break;
-            case "Musees":
+            case MUSEES:
                 keys.add("Essentiel");
                 break;
-            case "Hotels":
+            case HOTELS:
+                keys.add("Essentiel");
+                break;
+            case POSTES:
                 keys.add("Essentiel");
                 break;
         }
