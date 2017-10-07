@@ -1,6 +1,7 @@
 package com.esgi.cityfinder.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.esgi.cityfinder.DetailActivity;
 import com.esgi.cityfinder.Model.City;
 import com.esgi.cityfinder.R;
 import com.squareup.picasso.Picasso;
@@ -86,6 +88,10 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
                 public void onClick(View view) {
                     City mCity = dataList.get(getAdapterPosition());
                     Log.i("CustomRecyclerView","City : "+mCity.getName());
+
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("cityObject",mCity);
+                    context.startActivity(intent);
                 }
             });
         }
