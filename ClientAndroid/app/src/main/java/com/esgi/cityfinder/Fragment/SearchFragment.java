@@ -1,4 +1,4 @@
-package com.esgi.cityfinder;
+package com.esgi.cityfinder.Fragment;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -19,13 +19,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.esgi.cityfinder.R;
+import com.esgi.cityfinder.SearchActivity;
 import com.google.android.flexbox.FlexboxLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class MyFabFragment extends AAH_FabulousFragment {
+public class SearchFragment extends AAH_FabulousFragment {
 
     private final static String CENTRALES = "Centrales";
     private final static String MUSEES = "Musées";
@@ -42,8 +44,8 @@ public class MyFabFragment extends AAH_FabulousFragment {
     private DisplayMetrics metrics;
 
 
-    public static MyFabFragment newInstance() {
-        MyFabFragment mff = new MyFabFragment();
+    public static SearchFragment newInstance() {
+        SearchFragment mff = new SearchFragment();
         return mff;
     }
 
@@ -175,7 +177,7 @@ public class MyFabFragment extends AAH_FabulousFragment {
     private void inflateLayoutWithFilters(final String filter_category, FlexboxLayout fbl) {
         List<String> keys = new ArrayList<>();
 
-        Log.i("MyFab","Cat : "+filter_category);
+        Log.i("MyFab", "Cat : " + filter_category);
 
         switch (filter_category) {
 

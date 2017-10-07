@@ -45,6 +45,7 @@ public class CustomAdapter extends FeatureRecyclerViewAdapter<CustomAdapter.Cust
         Picasso.with(context)
                 .load(mCity.getPhotoId()).into(holder.ivBackground);
         holder.tvHeading.setText(mCity.getName());
+        //holder.tvDetail.setText(mCity.getDetail());
     }
 
     @Override
@@ -55,23 +56,26 @@ public class CustomAdapter extends FeatureRecyclerViewAdapter<CustomAdapter.Cust
     @Override
     public void onSmallItemResize(CustomRecyclerViewHolder holder, int position, float offset) {
         holder.tvHeading.setAlpha(offset / 100f);
+       // holder.tvDetail.setAlpha(offset / 100f);
     }
 
     @Override
     public void onBigItemResize(CustomRecyclerViewHolder holder, int position, float offset) {
         holder.tvHeading.setAlpha(offset / 100f);
+       // holder.tvDetail.setAlpha(offset / 100f);
     }
 
     public static class CustomRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivBackground;
-        TextView tvHeading;
+        TextView tvHeading, tvDetail;
 
         public CustomRecyclerViewHolder(View itemView) {
             super(itemView);
 
             ivBackground = (ImageView) itemView.findViewById(R.id.iv_background);
             tvHeading = (TextView) itemView.findViewById(R.id.tv_heading);
+            //tvDetail = (TextView) itemView.findViewById(R.id.tv_detail);
         }
     }
 
