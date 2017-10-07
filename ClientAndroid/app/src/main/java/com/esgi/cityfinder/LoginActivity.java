@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.inject(this);
     }
 
-    @OnClick({R.id.bt_go, R.id.fab})
+    @OnClick({R.id.bt_go, R.id.fab, R.id.tv_guest})
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.fab:
@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
                 /*Intent i2 = new Intent(this,LoginSuccessActivity.class);
                 startActivity(i2, oc2.toBundle());*/
                 break;
+            
+            case R.id.tv_guest:
+
+                // TODO: 07/10/2017
+                
+                break;
+            
         }
     }
 }
