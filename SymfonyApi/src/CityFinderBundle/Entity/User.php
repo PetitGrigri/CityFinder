@@ -42,13 +42,6 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="photo_name", type="string", length=255, nullable=true)
-     */
-    private $photoName;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
@@ -67,6 +60,8 @@ class User implements UserInterface
      */
     private $roles;
 
+
+    private $plainPassword;
 
 
     /**
@@ -105,23 +100,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhotoName()
-    {
-        return $this->photoName;
-    }
-
-    /**
-     * @param string $photoName
-     * @return User
-     */
-    public function setPhotoName($photoName)
-    {
-        $this->photoName = $photoName;
-        return $this;
-    }
 
     /**
      * @return string
@@ -159,23 +137,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRoles()
-    {
-        return unserialize($this->roles);
-    }
-
-    /**
-     * @param string $roles
-     * @return User
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-        return $this;
-    }
 
     /**
      * @return int
@@ -184,6 +145,52 @@ class User implements UserInterface
     {
         return $this->id;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        return unserialize($this->roles);
+    }
+
+    /**
+     * @param string $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
 
     /**
      * Returns the salt that was originally used to encode the password.
@@ -194,7 +201,6 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        //TODO
         return null;
     }
 
@@ -216,7 +222,8 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        //TODO
+        $this->plainPassword = null;
     }
+
 }
 

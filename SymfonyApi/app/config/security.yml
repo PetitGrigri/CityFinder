@@ -13,8 +13,13 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        test_recherche:
+        recherche_web:
             pattern: ^/search-commune
+            security: false
+
+        creation_utilisateur:
+            pattern: ^/user
+            methods: [POST]
             security: false
 
         main:

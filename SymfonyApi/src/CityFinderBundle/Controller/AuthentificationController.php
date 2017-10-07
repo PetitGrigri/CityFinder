@@ -75,7 +75,6 @@ class AuthentificationController extends Controller
         $tokenId = str_replace(["{","}","(",")","/","\\","@",":"],"", base64_encode(random_bytes(50)));
 
         //Création du token
-        //Ici il y a une astuce
         $authToken = new AuthTokens();
         $authToken
             ->setCreatedAt(new \DateTime('now'))
@@ -84,6 +83,7 @@ class AuthentificationController extends Controller
 
 
         //récupération (ou création) d'un CacheItem pour notre token et notre utilisateur
+        // si mise à jour de l'utilisateur, on pourra actualiser ainsi l'utilisateur)
         $memCachedToken     = $this->memCachedManager->getItem($tokenId);
         $memCachedUser      = $this->memCachedManager->getItem("user_".$user->getId());
 
@@ -105,7 +105,7 @@ class AuthentificationController extends Controller
      * @Rest\Get()
      *
      * @param Request $request
-     * @return mixed
+     * @return JsonResponse
      */
     public function getLoginInfoAction(Request $request)
     {

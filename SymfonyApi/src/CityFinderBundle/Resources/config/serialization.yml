@@ -1,3 +1,23 @@
+CityFinderBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['user', 'auth-token']
+        firstName:
+            groups: ['user', 'auth-token']
+        lastName:
+            groups: ['user', 'auth-token']
+        email:
+            groups: ['user', 'auth-token']
+
+CityFinderBundle\MemCached\AuthTokens:
+    attributes:
+        userId:
+            groups: ['user', 'auth-token']
+        value:
+            groups: ['user', 'auth-token']
+        createdAt:
+            groups: ['user', 'auth-token']
+
 CityFinderBundle\Node\Commune:
     attributes:
         id:
