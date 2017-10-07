@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
-import com.esgi.cityfinder.Adapter.CustomAdapter;
+import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.City;
 
@@ -27,7 +27,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
 
     FeaturedRecyclerView featuredRecyclerView;
     List<City> cityList;
-    CustomAdapter customAdapter;
+    CustomCityListAdapter customCityListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,8 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         featuredRecyclerView = (FeaturedRecyclerView) findViewById(R.id.featured_recycler_view);
         FeatureLinearLayoutManager layoutManager = new FeatureLinearLayoutManager(this);
         featuredRecyclerView.setLayoutManager(layoutManager);
-        customAdapter = new CustomAdapter(this, cityList);
-        featuredRecyclerView.setAdapter(customAdapter);
+        customCityListAdapter = new CustomCityListAdapter(this, cityList);
+        featuredRecyclerView.setAdapter(customCityListAdapter);
 
         searchButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 
@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
 
             cityList.clear();
             cityList.addAll(getEditedCityList());
-            customAdapter.notifyDataSetChanged();
+            customCityListAdapter.notifyDataSetChanged();
 
         }
 

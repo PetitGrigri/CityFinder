@@ -2,10 +2,12 @@ package com.esgi.cityfinder.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.esgi.cityfinder.Model.City;
@@ -20,12 +22,12 @@ import shivam.developer.featuredrecyclerview.FeatureRecyclerViewAdapter;
  * Created by Asifadam93 on 07/10/2017.
  */
 
-public class CustomAdapter extends FeatureRecyclerViewAdapter<CustomAdapter.CustomRecyclerViewHolder> {
+public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCityListAdapter.CustomRecyclerViewHolder> {
 
     private List<City> dataList;
     private Context context;
 
-    public CustomAdapter(Context context, List<City> list) {
+    public CustomCityListAdapter(Context context, List<City> list) {
         this.dataList = list;
         this.context = context;
     }
@@ -65,18 +67,27 @@ public class CustomAdapter extends FeatureRecyclerViewAdapter<CustomAdapter.Cust
        // holder.tvDetail.setAlpha(offset / 100f);
     }
 
-    public static class CustomRecyclerViewHolder extends RecyclerView.ViewHolder {
+    class CustomRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivBackground;
         TextView tvHeading, tvDetail;
+        RelativeLayout relativeLayout;
 
-        public CustomRecyclerViewHolder(View itemView) {
+        CustomRecyclerViewHolder(View itemView) {
             super(itemView);
 
-            ivBackground = (ImageView) itemView.findViewById(R.id.iv_background);
-            tvHeading = (TextView) itemView.findViewById(R.id.tv_heading);
+            ivBackground = itemView.findViewById(R.id.iv_background);
+            tvHeading = itemView.findViewById(R.id.tv_heading);
             //tvDetail = (TextView) itemView.findViewById(R.id.tv_detail);
+            relativeLayout = itemView.findViewById(R.id.rl_content);
+
+            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    City mCity = dataList.get(getAdapterPosition());
+                    Log.i("CustomRecyclerView","City : "+mCity.getName());
+                }
+            });
         }
     }
-
 }
