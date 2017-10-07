@@ -39,7 +39,7 @@ public class MainActivity extends TutorialActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 Toast.makeText(getBaseContext(),"Finished",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                //startActivity(new Intent(MainActivity.this,SearchActivity.class));
             }
         });
 
