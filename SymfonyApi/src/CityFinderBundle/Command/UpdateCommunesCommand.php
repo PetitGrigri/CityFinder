@@ -26,12 +26,12 @@ class UpdateCommunesCommand extends ContainerAwareCommand
     {
         $doctrine           = $this->getDoctrineClient();
         $emDoctrine         = $doctrine->getManager();
-        //$memcached           = $this->getMemCachedAdapter();
+        $neo4jClient        = $this->getNeo4jClient();
 
         /**
          * Création des communes
          */
-        $output->writeln("Chargement des communes dans memecached : ");
+        $output->writeln("Chargement des communes en mémoire : ");
 
         // Requête de récupération du nombre de commune
         $countCommune   = $emDoctrine
@@ -67,9 +67,9 @@ class UpdateCommunesCommand extends ContainerAwareCommand
                 $communeDoctrine = $next[0];
 
                 $donneesCommunes[++$i] = [
-                    "lat" => $communeDoctrine->getLatitude(),
-                    "long" => $communeDoctrine->getLongitude(),
-                    "id" => $communeDoctrine->getId(),
+                    'lat'   => $communeDoctrine->getLatitude(),
+                    'long'  => $communeDoctrine->getLongitude(),
+                    'id'    => $communeDoctrine->getId(),
                 ];
 
 
@@ -92,12 +92,38 @@ class UpdateCommunesCommand extends ContainerAwareCommand
             $progress->setFormat('debug');
 
 
-
+            $query2km   = 'MATCH (c1:Commune) MATCH (c2:Commune) WHERE c1.doctrineId ={idC1} AND c2.doctrineId ={idC2} MERGE (c1)<-[:NEAR_2KM_FROM]-(c2) MERGE (c1)-[:NEAR_2KM_FROM]->(c2)';
+            $query5km   = 'MATCH (c1:Commune) MATCH (c2:Commune) WHERE c1.doctrineId ={idC1} AND c2.doctrineId ={idC2} MERGE (c1)<-[:NEAR_5KM_FROM]-(c2) MERGE (c1)-[:NEAR_5KM_FROM]->(c2)';
+            $query10km  = 'MATCH (c1:Commune) MATCH (c2:Commune) WHERE c1.doctrineId ={idC1} AND c2.doctrineId ={idC2} MERGE (c1)<-[:NEAR_10KM_FROM]-(c2) MERGE (c1)-[:NEAR_10KM_FROM]->(c2)';
 
             for ($a = 1; $a < $nbCommunes; $a++) {
                 for ($b = ($a + 1); $b< $nbCommunes; $b++) {
                     $progress->advance();
+                    $distance = intval($this->calculDistance($donneesCommunes[$a]['lat'], $donneesCommunes[$a]['long'],
+                        $donneesCommunes[$b]['lat'], $donneesCommunes[$b]['long']));
+
+
+                    if ($distance <= 2) {
+                        $neo4jClient->runWrite($query2km, [
+                            'idC1' => $donneesCommunes[$a]['id'],
+                            'idC2' => $donneesCommunes[$b]['id'],
+                        ]);
+                    }
+                    else if ($distance <= 5) {
+                        $neo4jClient->runWrite($query5km, [
+                            'idC1' => $donneesCommunes[$a]['id'],
+                            'idC2' => $donneesCommunes[$b]['id'],
+                        ]);
+                    }
+                    else if ($distance <= 10) {
+                        $neo4jClient->runWrite($query10km, [
+                            'idC1' => $donneesCommunes[$a]['id'],
+                            'idC2' => $donneesCommunes[$b]['id'],
+                        ]);
+                    }
                 }
+                $output->writeln($a);
+
             }
 
             $progress->finish();
@@ -109,4 +135,23 @@ class UpdateCommunesCommand extends ContainerAwareCommand
             $output->writeln("<error>Aucune Commune dans doctrine</error>");
         }
     }
+
+
+    private function calculDistance($latitudeA, $longitudeA, $latitudeB, $longitudeB) {
+        $degreeLatitudeA    = $this->calculToRadian($latitudeA);
+        $degreeLongitudeA   = $this->calculToRadian($longitudeA);
+        $degreeLatitudeB    = $this->calculToRadian($latitudeB);
+        $degreeLongitudeB   = $this->calculToRadian($longitudeB);
+
+        return 6371 * acos(
+                sin($degreeLatitudeA) * sin($degreeLatitudeB) +
+                cos($degreeLatitudeA) * cos($degreeLatitudeB) * cos ($degreeLongitudeB - $degreeLongitudeA)
+            );
+
+    }
+
+    private function calculToRadian($degree) {
+        return (($degree * pi()) / 180);
+    }
+
 }
