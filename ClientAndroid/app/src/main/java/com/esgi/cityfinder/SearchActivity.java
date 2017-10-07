@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.esgi.cityfinder.Adapter.CustomAdapter;
 import com.esgi.cityfinder.Model.City;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import shivam.developer.featuredrecyclerview.FeatureLinearLayoutManager;
 import shivam.developer.featuredrecyclerview.FeaturedRecyclerView;
 
 public class SearchActivity extends AppCompatActivity implements AAH_FabulousFragment.Callbacks, AAH_FabulousFragment.AnimationListener {
@@ -30,7 +32,10 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         setContentView(R.layout.activity_search);
 
         featuredRecyclerView = (FeaturedRecyclerView) findViewById(R.id.featured_recycler_view);
-
+        FeatureLinearLayoutManager layoutManager = new FeatureLinearLayoutManager(this);
+        featuredRecyclerView.setLayoutManager(layoutManager);
+        CustomAdapter customAdapter = new CustomAdapter(this,getDefaultCityList());
+        featuredRecyclerView.setAdapter(customAdapter);
 
         searchButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
 

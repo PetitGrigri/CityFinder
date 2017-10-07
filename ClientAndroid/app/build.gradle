@@ -36,4 +36,5 @@ dependencies {
         exclude group: 'com.android.support'
     }
     compile 'com.github.developer-shivam:FeaturedRecyclerView:1.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
