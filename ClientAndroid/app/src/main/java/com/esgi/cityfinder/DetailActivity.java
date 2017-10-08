@@ -31,7 +31,5 @@ public class DetailActivity extends AppCompatActivity {
             tvCityDetail.setText(mCity.getDetail());
         }
 
-
-
     }
 }

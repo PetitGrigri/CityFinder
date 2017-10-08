@@ -4,6 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,14 @@ import android.transition.Explode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.esgi.cityfinder.Model.Auth;
+import com.esgi.cityfinder.Network.IServiceResultListener;
+import com.esgi.cityfinder.Network.RetrofitAuthService;
+import com.esgi.cityfinder.Network.ServiceResult;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -29,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
     CardView cv;
     @InjectView(R.id.fab)
     FloatingActionButton fab;
+
+    private RetrofitAuthService authService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,14 +64,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.bt_go:
-                Explode explode = new Explode();
-                explode.setDuration(500);
 
-                getWindow().setExitTransition(explode);
-                getWindow().setEnterTransition(explode);
-                ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-                Intent i2 = new Intent(this,SearchActivity.class);
-                startActivity(i2, oc2.toBundle());
+                checkAuth();
+
                 break;
             
             case R.id.tv_guest:
@@ -70,5 +76,58 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             
         }
+    }
+
+    private void checkAuth(){
+
+        String email = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+
+        if(email.isEmpty()){
+            etUsername.setError("Champ vide");
+            return;
+        }
+
+        if(password.isEmpty()){
+            etPassword.setError("Champ vide");
+            return;
+        }
+
+        HashMap<String,String> userMap = new HashMap<>();
+        userMap.put("email",email);
+        userMap.put("password",password);
+
+        getAuthService().authentication(userMap, new IServiceResultListener<Auth>() {
+            @Override
+            public void onResult(ServiceResult<Auth> result) {
+
+                Auth auth = result.getData();
+
+                if(auth != null){
+                    Toast.makeText(getBaseContext(),"Connexion réussi",Toast.LENGTH_SHORT).show();
+                    showSearchActivity();
+                } else {
+                    Toast.makeText(getBaseContext(),result.getErrorMsg(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void showSearchActivity(){
+        Explode explode = new Explode();
+        explode.setDuration(500);
+
+        getWindow().setExitTransition(explode);
+        getWindow().setEnterTransition(explode);
+        ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        Intent i2 = new Intent(this,SearchActivity.class);
+        startActivity(i2, oc2.toBundle());
+    }
+
+    private RetrofitAuthService getAuthService(){
+        if(authService == null){
+            authService = new RetrofitAuthService();
+        }
+        return authService;
     }
 }

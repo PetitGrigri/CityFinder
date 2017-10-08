@@ -39,4 +39,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.github.florent37:arclayout:1.0.2'
     compile 'com.flaviofaria:kenburnsview:1.0.7'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 }
