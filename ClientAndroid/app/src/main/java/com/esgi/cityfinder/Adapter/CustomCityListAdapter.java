@@ -46,8 +46,10 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
 
         City mCity = dataList.get(position);
 
-        Picasso.with(context)
-                .load(mCity.getPhotoId()).into(holder.ivBackground);
+        if (mCity.getPhotoId() != -1) {
+            Picasso.with(context)
+                    .load(mCity.getPhotoId()).into(holder.ivBackground);
+        }
         holder.tvHeading.setText(mCity.getName());
         //holder.tvDetail.setText(mCity.getDetail());
     }
@@ -60,13 +62,13 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
     @Override
     public void onSmallItemResize(CustomRecyclerViewHolder holder, int position, float offset) {
         holder.tvHeading.setAlpha(offset / 100f);
-       // holder.tvDetail.setAlpha(offset / 100f);
+        // holder.tvDetail.setAlpha(offset / 100f);
     }
 
     @Override
     public void onBigItemResize(CustomRecyclerViewHolder holder, int position, float offset) {
         holder.tvHeading.setAlpha(offset / 100f);
-       // holder.tvDetail.setAlpha(offset / 100f);
+        // holder.tvDetail.setAlpha(offset / 100f);
     }
 
     class CustomRecyclerViewHolder extends RecyclerView.ViewHolder {
@@ -87,10 +89,10 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
                 @Override
                 public void onClick(View view) {
                     City mCity = dataList.get(getAdapterPosition());
-                    Log.i("CustomRecyclerView","City : "+mCity.getName());
+                    Log.i("CustomRecyclerView", "City : " + mCity.getName());
 
                     Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("cityObject",mCity);
+                    intent.putExtra("cityObject", mCity);
                     context.startActivity(intent);
                 }
             });

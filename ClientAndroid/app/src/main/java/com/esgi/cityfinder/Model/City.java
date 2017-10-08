@@ -19,6 +19,16 @@ public class City implements Parcelable {
         this.detail = detail;
     }
 
+    public City(String name) {
+        this.name = name;
+        this.photoId = -1;
+    }
+
+    public City(String name, int photoId) {
+        this.name = name;
+        this.photoId = photoId;
+    }
+
     protected City(Parcel in) {
         name = in.readString();
         detail = in.readString();

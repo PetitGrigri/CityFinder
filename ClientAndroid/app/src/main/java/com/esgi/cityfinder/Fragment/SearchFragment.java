@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
+import com.esgi.cityfinder.Const;
 import com.esgi.cityfinder.R;
 import com.esgi.cityfinder.SearchActivity;
 import com.google.android.flexbox.FlexboxLayout;
@@ -29,10 +30,6 @@ import java.util.Map;
 
 public class SearchFragment extends AAH_FabulousFragment {
 
-    private final static String CENTRALES = "Centrales";
-    private final static String MUSEES = "Musées";
-    private final static String HOTELS = "Hotels";
-    private final static String POSTES = "Postes";
 
     ArrayMap<String, List<String>> applied_filters = new ArrayMap<>();
     List<TextView> textviews = new ArrayList<>();
@@ -125,16 +122,16 @@ public class SearchFragment extends AAH_FabulousFragment {
 //            ll_scroll.setLayoutParams(lp);
             switch (position) {
                 case 0:
-                    inflateLayoutWithFilters(CENTRALES, fbl);
+                    inflateLayoutWithFilters(Const.CENTRALES, fbl);
                     break;
                 case 1:
-                    inflateLayoutWithFilters(MUSEES, fbl);
+                    inflateLayoutWithFilters(Const.MUSEES, fbl);
                     break;
                 case 2:
-                    inflateLayoutWithFilters(HOTELS, fbl);
+                    inflateLayoutWithFilters(Const.HOTELS, fbl);
                     break;
                 case 3:
-                    inflateLayoutWithFilters(POSTES, fbl);
+                    inflateLayoutWithFilters(Const.POSTES, fbl);
                     break;
             }
             collection.addView(layout);
@@ -156,13 +153,13 @@ public class SearchFragment extends AAH_FabulousFragment {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return CENTRALES;
+                    return Const.CENTRALES;
                 case 1:
-                    return MUSEES;
+                    return Const.MUSEES;
                 case 2:
-                    return HOTELS;
+                    return Const.HOTELS;
                 case 3:
-                    return POSTES;
+                    return Const.POSTES;
             }
             return "";
         }
@@ -181,19 +178,19 @@ public class SearchFragment extends AAH_FabulousFragment {
 
         switch (filter_category) {
 
-            case CENTRALES:
-                keys.add("> 20 km");
-                keys.add("> 30 km");
-                keys.add("> 80 km");
+            case Const.CENTRALES:
+                keys.add(Const.MORE_THAN_20);
+                keys.add(Const.MORE_THAN_30);
+                keys.add(Const.MORE_THAN_80);
                 break;
-            case MUSEES:
-                keys.add("Essentiel");
+            case Const.MUSEES:
+                keys.add(Const.ESSENTIEL);
                 break;
-            case HOTELS:
-                keys.add("Essentiel");
+            case Const.HOTELS:
+                keys.add(Const.ESSENTIEL);
                 break;
-            case POSTES:
-                keys.add("Essentiel");
+            case Const.POSTES:
+                keys.add(Const.ESSENTIEL);
                 break;
         }
 

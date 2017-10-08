@@ -13,8 +13,13 @@ import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
 import com.esgi.cityfinder.Model.City;
+import com.esgi.cityfinder.Model.SearchResult;
+import com.esgi.cityfinder.Network.IServiceResultListener;
+import com.esgi.cityfinder.Network.RetrofitSearchService;
+import com.esgi.cityfinder.Network.ServiceResult;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +37,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     CustomCityListAdapter customCityListAdapter;
 
     private Auth auth;
+    private RetrofitSearchService searchService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +45,9 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         setContentView(R.layout.activity_search);
 
         Intent intent = getIntent();
-        if(intent != null){
+        if (intent != null) {
             auth = intent.getParcelableExtra("auth");
-            Log.i("SearchActivity","Token : "+auth.getToken());
+            Log.i("SearchActivity", "Token : " + auth.getToken());
         }
 
         cityList = getDefaultCityList();
@@ -59,7 +65,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("SearchActivity", "Search button clicked");
+                Log.i("SearchActivity", "SearchResult button clicked");
                 searchFragment.show(getSupportFragmentManager(), searchFragment.getTag());
             }
         });
@@ -107,21 +113,125 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     @Override
     public void onResult(Object result) {
 
+        /**
+         * Centrale :
+         * > 20 km = 1
+         * > 30 km = 2
+         * > 80 km = 3
+         * Null    = 0
+         */
+
         if (result != null) {
 
             ArrayMap<String, List<String>> applied_filters = (ArrayMap<String, List<String>>) result;
-            Log.i("SearchActivity", "Result : " + applied_filters.size());
 
-            for (Map.Entry<String, List<String>> entry : applied_filters.entrySet()) {
-                Log.i("SearchActivity", "Entry : " + entry.getValue());
+            if (applied_filters.size() > 0) {
+
+                getCityListSearchMap(getSearchBody(applied_filters));
             }
 
-            cityList.clear();
+            //Log.i("SearchActivity", "Map : "+searchMap);
+
+           /* cityList.clear();
             cityList.addAll(getEditedCityList());
-            customCityListAdapter.notifyDataSetChanged();
+            customCityListAdapter.notifyDataSetChanged();*/
 
         }
 
+    }
+
+    private void getCityListSearchMap(HashMap<String, Integer> searchMap) {
+
+        String token;
+
+        if ((token = auth.getToken()) != null) {
+            getSearchService().search(token, searchMap, new IServiceResultListener<List<SearchResult>>() {
+                @Override
+                public void onResult(ServiceResult<List<SearchResult>> result) {
+
+                    List<SearchResult> results = result.getData();
+                    List<City> filteredCityList = new ArrayList<>();
+
+                    for (SearchResult searchResult : results) {
+                        Log.i("SearchActivityCustom", "Map : " + searchResult.toString());
+                        filteredCityList.add(new City(searchResult.getCityName(), R.drawable.default_image));
+                    }
+
+                    cityList.clear();
+                    cityList.addAll(filteredCityList);
+                    customCityListAdapter.notifyDataSetChanged();
+
+                    /*} else {
+                        Toast.makeText(getBaseContext(),result.getErrorMsg(),Toast.LENGTH_SHORT).show();
+                    }*/
+
+                }
+            });
+        }
+    }
+
+
+    private HashMap<String, Integer> getSearchBody(ArrayMap<String, List<String>> applied_filters) {
+
+        HashMap<String, Integer> searchMap = new HashMap<>();
+
+        for (Map.Entry<String, List<String>> entry : applied_filters.entrySet()) {
+            Log.i("SearchActivity", "Entry : " + entry.getKey());
+            Log.i("SearchActivity", "Entry : " + entry.getValue());
+
+            switch (entry.getKey()) {
+
+                case Const.CENTRALES:
+
+                    List<String> centraleValues = entry.getValue();
+                    if (centraleValues.contains(Const.MORE_THAN_80)) {
+                        searchMap.put(Const.API_CENTRALES, 3);
+                    } else if (centraleValues.contains(Const.MORE_THAN_30)) {
+                        searchMap.put(Const.API_CENTRALES, 2);
+                    } else if (centraleValues.contains(Const.MORE_THAN_20)) {
+                        searchMap.put(Const.API_CENTRALES, 1);
+                    } else {
+                        searchMap.put(Const.API_CENTRALES, 0);
+                    }
+
+                    break;
+
+                case Const.MUSEES:
+
+                    List<String> musseesValues = entry.getValue();
+                    if (musseesValues.contains(Const.ESSENTIEL)) {
+                        searchMap.put(Const.API_MUSSEES, 1);
+                    } else {
+                        searchMap.put(Const.API_MUSSEES, 0);
+                    }
+
+                    break;
+
+                case Const.HOTELS:
+
+                    List<String> hotelsValues = entry.getValue();
+                    if (hotelsValues.contains(Const.ESSENTIEL)) {
+                        searchMap.put(Const.API_HOTELS, 1);
+                    } else {
+                        searchMap.put(Const.API_HOTELS, 0);
+                    }
+
+                    break;
+
+                case Const.POSTES:
+
+                    List<String> postesValues = entry.getValue();
+                    if (postesValues.contains(Const.ESSENTIEL)) {
+                        searchMap.put(Const.API_POSTES, 1);
+                    } else {
+                        searchMap.put(Const.API_POSTES, 0);
+                    }
+
+                    break;
+            }
+        }
+
+        return searchMap;
     }
 
     @Override
@@ -147,4 +257,14 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     public ArrayMap<String, List<String>> getApplied_filters() {
         return applied_filters;
     }
+
+    public RetrofitSearchService getSearchService() {
+
+        if (searchService == null) {
+            searchService = new RetrofitSearchService();
+        }
+
+        return searchService;
+    }
 }
+

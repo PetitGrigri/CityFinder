@@ -1,7 +1,8 @@
 package com.esgi.cityfinder.Network.Services;
 
-import com.esgi.cityfinder.Model.Search;
+import com.esgi.cityfinder.Model.SearchResult;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -17,15 +18,15 @@ import retrofit2.http.Path;
 
 public interface IRetrofitSearchService {
 
-    @POST("/search")
-    Call<Search> search(
+    @POST("/CityFinder/SymfonyApi/web/app_dev.php/search")
+    Call<List<SearchResult>> search(
             @Header("X-Auth-Token") String userToken,
-            @Body Map<String, String> searchMap
+            @Body Map<String, Integer> searchMap
     );
 
 
     @GET("/search/detail/{search_id}")
-    Call<Search> detailSearch(
+    Call<SearchResult> detailSearch(
             @Header("X-Auth-Token") String userToken,
             @Path("search_id") int searchId
     );

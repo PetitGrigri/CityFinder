@@ -11,7 +11,7 @@ public class ServiceResult<T> {
 
     public ServiceResult() {
         data = null;
-        errorMsg = "";
+        errorMsg = "Error";
     }
 
     public ServiceResult(String errorMsg) {
