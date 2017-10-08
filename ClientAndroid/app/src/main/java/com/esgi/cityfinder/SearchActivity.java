@@ -1,5 +1,6 @@
 package com.esgi.cityfinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.ArrayMap;
@@ -10,6 +11,7 @@ import android.view.View;
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
+import com.esgi.cityfinder.Model.Auth;
 import com.esgi.cityfinder.Model.City;
 
 import java.util.ArrayList;
@@ -29,10 +31,18 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     List<City> cityList;
     CustomCityListAdapter customCityListAdapter;
 
+    private Auth auth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        Intent intent = getIntent();
+        if(intent != null){
+            auth = intent.getParcelableExtra("auth");
+            Log.i("SearchActivity","Token : "+auth.getToken());
+        }
 
         cityList = getDefaultCityList();
 

@@ -64,9 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.bt_go:
-
                 checkAuth();
-
                 break;
             
             case R.id.tv_guest:
@@ -105,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(auth != null){
                     Toast.makeText(getBaseContext(),"Connexion réussi",Toast.LENGTH_SHORT).show();
-                    showSearchActivity();
+                    showSearchActivity(auth);
                 } else {
                     Toast.makeText(getBaseContext(),result.getErrorMsg(),Toast.LENGTH_SHORT).show();
                 }
@@ -113,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showSearchActivity(){
+    private void showSearchActivity(Auth auth){
         Explode explode = new Explode();
         explode.setDuration(500);
 
@@ -121,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setEnterTransition(explode);
         ActivityOptionsCompat oc2 = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         Intent i2 = new Intent(this,SearchActivity.class);
+        i2.putExtra("auth",auth);
         startActivity(i2, oc2.toBundle());
     }
 

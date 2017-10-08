@@ -13,6 +13,17 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.esgi.cityfinder.Model.Auth;
+import com.esgi.cityfinder.Model.User;
+import com.esgi.cityfinder.Network.IServiceResultListener;
+import com.esgi.cityfinder.Network.RetrofitUserService;
+import com.esgi.cityfinder.Network.ServiceResult;
+
+import java.util.HashMap;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -26,6 +37,14 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonNext;
     @InjectView(R.id.cv_add)
     CardView cvAdd;
+    @InjectView(R.id.et_username)
+    EditText etEmail;
+    @InjectView(R.id.et_password)
+    EditText etPassword;
+    @InjectView(R.id.et_repeatpassword)
+    EditText etPasswordRepete;
+
+    private RetrofitUserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +66,57 @@ public class RegisterActivity extends AppCompatActivity {
                 break;
 
             case R.id.bt_go:
-
+                checkRegister();
                 break;
         }
+    }
+
+    private void checkRegister(){
+
+        String email = etEmail.getText().toString();
+        String password = etPassword.getText().toString();
+        String passwordRepete = etPasswordRepete.getText().toString();
+
+        if(email.isEmpty()){
+            etEmail.setError("Champ vide");
+            return;
+        }
+
+        if(password.isEmpty()){
+            etPassword.setError("Champ vide");
+            return;
+        }
+
+        if(passwordRepete.isEmpty()){
+            etPasswordRepete.setError("Champ vide");
+            return;
+        }
+
+        if(!password.equalsIgnoreCase(passwordRepete)){
+            etPassword.setError("Erreur mot de passe");
+            return;
+        }
+
+        HashMap<String,String> userMap = new HashMap<>();
+        userMap.put("firstName","null");
+        userMap.put("lastName","null");
+        userMap.put("email",email);
+        userMap.put("plainPassword",password);
+
+        getUserService().register(userMap, new IServiceResultListener<User>() {
+            @Override
+            public void onResult(ServiceResult<User> result) {
+
+                User user = result.getData();
+
+                if(user != null){
+                    Toast.makeText(getBaseContext(),"Création de compte réussi",Toast.LENGTH_SHORT).show();
+                    RegisterActivity.super.onBackPressed();
+                } else {
+                    Toast.makeText(getBaseContext(),result.getErrorMsg(),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
@@ -131,5 +198,14 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         animateRevealClose();
+    }
+
+    public RetrofitUserService getUserService() {
+
+        if(userService == null){
+            userService = new RetrofitUserService();
+        }
+
+        return userService;
     }
 }

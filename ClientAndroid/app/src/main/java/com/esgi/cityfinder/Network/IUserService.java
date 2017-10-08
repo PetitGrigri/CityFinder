@@ -1,5 +1,7 @@
 package com.esgi.cityfinder.Network;
 
+import com.esgi.cityfinder.Model.User;
+
 import java.util.Map;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Map;
 
 public interface IUserService {
 
-    void register(Map<String,String> registerUserMap);
+    void register(Map<String,String> registerUserMap, IServiceResultListener<User> iServiceResultListener);
 
 
 }

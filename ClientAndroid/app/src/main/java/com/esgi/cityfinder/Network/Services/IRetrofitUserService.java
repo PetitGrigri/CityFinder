@@ -18,7 +18,7 @@ import retrofit2.http.Path;
 
 public interface IRetrofitUserService {
 
-    @POST("user")
+    @POST("/CityFinder/SymfonyApi/web/app_dev.php/user")
     Call<User> registerUser(@Body Map<String,String> user);
 
     @PATCH("user/{id}")

@@ -7,5 +7,6 @@ package com.esgi.cityfinder;
 public class Const {
 
     public static String URL = "http://192.168.0.10/";
+    public static String URL_PREFIX = "/CityFinder/SymfonyApi/web/app_dev.php/";
 
 }
