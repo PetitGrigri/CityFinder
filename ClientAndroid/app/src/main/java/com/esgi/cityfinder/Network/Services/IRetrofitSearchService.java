@@ -1,5 +1,6 @@
 package com.esgi.cityfinder.Network.Services;
 
+import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * Created by Asifadam93 on 08/10/2017.
@@ -30,5 +32,8 @@ public interface IRetrofitSearchService {
             @Header("X-Auth-Token") String userToken,
             @Path("search_id") int searchId
     );
+
+    @GET
+    Call<List<ImageResult>> getImageUrl(@Url String url);
 
 }

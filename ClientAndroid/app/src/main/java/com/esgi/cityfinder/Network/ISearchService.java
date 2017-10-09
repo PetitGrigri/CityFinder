@@ -1,8 +1,7 @@
 package com.esgi.cityfinder.Network;
 
-import com.esgi.cityfinder.Model.Auth;
+import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
-import com.esgi.cityfinder.SearchActivity;
 
 import java.util.List;
 import java.util.Map;
@@ -14,5 +13,7 @@ import java.util.Map;
 public interface ISearchService {
 
     void search(String userToken, Map<String, Integer> searchMap, IServiceResultListener<List<SearchResult>> iServiceResultListener);
+
+    void getImageUrl(String url, IServiceResultListener<List<ImageResult>> iServiceResultListener);
 
 }

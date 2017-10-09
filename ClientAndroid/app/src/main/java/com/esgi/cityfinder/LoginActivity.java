@@ -69,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
             
             case R.id.tv_guest:
 
-                // TODO: 07/10/2017
+                // TODO: 07/10/2017 remove this
+                showSearchActivity(null);
                 
                 break;
             

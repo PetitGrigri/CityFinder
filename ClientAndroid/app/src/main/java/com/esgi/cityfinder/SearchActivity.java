@@ -13,6 +13,7 @@ import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
 import com.esgi.cityfinder.Model.City;
+import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.Network.IServiceResultListener;
 import com.esgi.cityfinder.Network.RetrofitSearchService;
@@ -47,7 +48,6 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         Intent intent = getIntent();
         if (intent != null) {
             auth = intent.getParcelableExtra("auth");
-            Log.i("SearchActivity", "Token : " + auth.getToken());
         }
 
         cityList = getDefaultCityList();
@@ -66,7 +66,18 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
             @Override
             public void onClick(View view) {
                 Log.i("SearchActivity", "SearchResult button clicked");
-                searchFragment.show(getSupportFragmentManager(), searchFragment.getTag());
+                //searchFragment.show(getSupportFragmentManager(), searchFragment.getTag());
+
+                // TODO: 09/10/2017 testtttttttt
+                String query = "Paris+France";
+                String url = "https://www.googleapis.com/customsearch/v1?q="+query+"&key="+Const.GOOGLE_SEARCH_API_KEY+"&cx="+Const.GOOGLE_SEARCH_CX_KEY+"&alt=json";
+                getSearchService().getImageUrl(url, new IServiceResultListener<List<ImageResult>>() {
+                    @Override
+                    public void onResult(ServiceResult<List<ImageResult>> result) {
+
+                    }
+                });
+
             }
         });
 

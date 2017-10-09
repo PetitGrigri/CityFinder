@@ -1,8 +1,10 @@
 package com.esgi.cityfinder.Network;
 
-import com.esgi.cityfinder.Model.Auth;
+import android.util.Log;
+
+import com.esgi.cityfinder.Model.Image.ImageResult;
+import com.esgi.cityfinder.Model.Image.Items;
 import com.esgi.cityfinder.Model.SearchResult;
-import com.esgi.cityfinder.Network.Services.IRetrofitAuthService;
 import com.esgi.cityfinder.Network.Services.IRetrofitSearchService;
 
 import java.util.List;
@@ -54,6 +56,38 @@ public class RetrofitSearchService implements ISearchService {
                 if(iServiceResultListener != null){
                     iServiceResultListener.onResult(new ServiceResult<List<SearchResult>>(t.getMessage()));
                 }
+            }
+        });
+
+    }
+
+    @Override
+    public void getImageUrl(String url, IServiceResultListener<List<ImageResult>> iServiceResultListener) {
+
+        getRetrofitSearchService().getImageUrl(url).enqueue(new Callback<List<ImageResult>>() {
+            @Override
+            public void onResponse(Call<List<ImageResult>> call, Response<List<ImageResult>> response) {
+
+                if(response.isSuccessful()){
+
+                    List<ImageResult> result = response.body();
+                    Log.i("getImageUrl","Response : "+result.get(0).getKind());
+/*
+                    if (result != null) {
+                        for (Items i : result.getItemsList()){
+                            Log.i("getImageUrl","Response : "+i.getTitle());
+                        }
+                    }*/
+
+
+                }
+
+                // Log.i("getImageUrl","Response : "+response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<ImageResult>> call, Throwable t) {
+                Log.i("getImageUrl","Response : "+t.getMessage());
             }
         });
 

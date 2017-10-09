@@ -25,4 +25,6 @@ public class Const {
     public final static String API_HOTELS = "hotels";
     public final static String API_POSTES = "postes";
 
+    public final static String GOOGLE_SEARCH_API_KEY = "AIzaSyCYN8G6WaUtMhI7bL6kn-Fw9xik0IBIfW4";
+    public final static String GOOGLE_SEARCH_CX_KEY = "002343173169029073996:pt9npy2u3nk";
 }
