@@ -50,6 +50,13 @@ CityFinderBundle\Node\Commune:
             groups: ['commune']
         agencesPostalesLocatedIn:
             groups: ['commune']
+        communesNear2km:
+            groups: ['commune']
+        communesNear5km:
+            groups: ['commune']
+        communesNear10km:
+            groups: ['commune']
+
 
 
 CityFinderBundle\Node\Hotel:

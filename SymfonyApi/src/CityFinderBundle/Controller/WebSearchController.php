@@ -164,19 +164,21 @@ class WebSearchController extends Controller
 
         //la requête CURL
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles='.$commune);
+
+        //curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&pithumbsize=500&titles='.$commune);
+        curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&titles='.$commune.'&pithumbsize=500');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
 
         //décodage des données
         $data = json_decode($response);
-        dump($commune);
-        dump($data);
 
-        if (isset($data) && isset($data->query)&& isset($data->query->pages)) {
-
+        if (    isset($data) && isset($data->query)&& isset($data->query->pages)) {
             $infoImage = reset($data->query->pages);
-            return $infoImage->original->source;
+            if (isset($infoImage->thumbnail) && isset($infoImage->thumbnail->source))
+                return $infoImage->thumbnail->source;
+            else
+                return null;
         }
         return null;
     }

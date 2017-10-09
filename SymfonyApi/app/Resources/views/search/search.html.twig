@@ -5,7 +5,7 @@
 {% endblock jumbotron_title %}
 
 {% block jumbotron_description %}
-    <p>Voici les différentes informations relatives à cette commune/ville. </p>
+    <p xmlns="http://www.w3.org/1999/html">Voici les différentes informations relatives à cette commune/ville. </p>
     <a href="{{ constant('CityFinderBundle\\Controller\\WebSearchController::URL_WIKIPEDIA') }}{{ commune.frWikipedia }}"><i class="glyphicon glyphicon-link"></i> Voir sur wikipedia</a>
 {% endblock jumbotron_description %}
 
@@ -18,10 +18,10 @@
 {% endblock jumbotron_image %}
 
 {% block body %}
-    <div class="container">
+    <div class="container-fluid">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-danger">
                     <div class="panel-heading">
                         <h3 class="panel-title">Centrales à moins de 20 km<span class="badge pull-right">{{ commune.centralesNear20km|length }}</span>
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Agences Postales<span class="badge pull-right">{{ commune.agencesPostalesLocatedIn|length }}</span>
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">Hotels<span class="badge pull-right">{{ commune.hotelsLocatedIn|length }}</span>
@@ -130,6 +130,73 @@
                             <a class="list-group-item">Aucun hotel situé dans cette commune</a>
                         {% endfor %}
                     </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 2km<span class="badge pull-right">{{ commune.communesNear2km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear2km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 5km<span class="badge pull-right">{{ commune.communesNear5km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear5km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 10km<span class="badge pull-right">{{ commune.communesNear2km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear10km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

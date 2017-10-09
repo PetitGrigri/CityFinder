@@ -63,6 +63,13 @@ class Commune
     protected $nomDepartement;
 
     /**
+     * @var string
+     *
+     * @OGM\Property(type="string")
+     */
+    protected $frWikipedia;
+
+    /**
      * @var Centrale[]|Collection
      *
      * @OGM\Relationship(type="NEAR_80KM_FROM", direction="OUTGOING", collection=true, mappedBy="communesNear80km", targetEntity="Centrale")
@@ -116,6 +123,26 @@ class Commune
      */
     protected $agencesPostalesLocatedIn;
 
+    /**
+     * @var Commune[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_2KM_FROM", direction="OUTGOING", collection=true,  targetEntity="Commune")
+     */
+    protected $communesNear2km;
+
+    /**
+     * @var Commune[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_5KM_FROM", direction="OUTGOING", collection=true,  targetEntity="Commune")
+     */
+    protected $communesNear5km;
+
+    /**
+     * @var Commune[]|Collection
+     *
+     * @OGM\Relationship(type="NEAR_10KM_FROM", direction="OUTGOING", collection=true,  targetEntity="Commune")
+     */
+    protected $communesNear10km;
 
     /**
      * Commune constructor.
@@ -129,8 +156,10 @@ class Commune
         $this->hotelsLocatedIn              = new Collection();
         $this->museesLocatedIn              = new Collection();
         $this->agencesPostalesLocatedIn     = new Collection();
+        $this->communesNear10km             = new Collection();
+        $this->communesNear5km              = new Collection();
+        $this->communesNear2km              = new Collection();
     }
-
 
     /**
      * @return int
@@ -382,7 +411,86 @@ class Commune
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getFrWikipedia()
+    {
+        return $this->frWikipedia;
+    }
 
+    /**
+     * @param string $frWikipedia
+     * @return Commune
+     */
+    public function setFrWikipedia($frWikipedia)
+    {
+        $this->frWikipedia = $frWikipedia;
+        return $this;
+    }
+
+    /**
+     * @return Commune[]|Collection
+     */
+    public function getCommunesNear2km()
+    {
+        foreach ($this->communesNear2km as $commune) {
+            $commune->setCommunesNear2km([])->setCommunesNear5km([])->setCommunesNear10km([]);
+        }
+        return $this->communesNear2km;
+    }
+
+    /**
+     * @param Commune[]|Collection $communesNear2km
+     * @return Commune
+     */
+    public function setCommunesNear2km($communesNear2km)
+    {
+        $this->communesNear2km = $communesNear2km;
+        return $this;
+    }
+
+    /**
+     * @return Commune[]|Collection
+     */
+    public function getCommunesNear5km()
+    {
+        foreach ($this->communesNear5km as $commune) {
+            $commune->setCommunesNear2km([])->setCommunesNear5km([])->setCommunesNear10km([]);
+        }
+        return $this->communesNear5km;
+    }
+
+    /**
+     * @param Commune[]|Collection $communesNear5km
+     * @return Commune
+     */
+    public function setCommunesNear5km($communesNear5km)
+    {
+        $this->communesNear5km = $communesNear5km;
+        return $this;
+    }
+
+    /**
+     * @return Commune[]|Collection
+     */
+    public function getCommunesNear10km()
+    {
+        foreach ($this->communesNear10km as $commune) {
+            $commune->setCommunesNear2km([])->setCommunesNear5km([])->setCommunesNear10km([]);
+        }
+        return $this->communesNear10km;
+    }
+
+    /**
+     * @param Commune[]|Collection $communesNear10km
+     * @return Commune
+     */
+    public function setCommunesNear10km($communesNear10km)
+    {
+        $this->communesNear10km = $communesNear10km;
+        return $this;
+    }
 
 
 }
