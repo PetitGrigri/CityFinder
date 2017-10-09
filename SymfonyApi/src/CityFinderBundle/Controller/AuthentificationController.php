@@ -26,7 +26,7 @@ class AuthentificationController extends Controller
     private  $memCachedManager;
 
 
-    public function __construct(MemcachedAdapter $products)
+    public function __construct($products)
     {
         $this->memCachedManager = $products;
     }
