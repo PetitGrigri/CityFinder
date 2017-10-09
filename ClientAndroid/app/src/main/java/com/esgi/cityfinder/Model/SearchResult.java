@@ -1,12 +1,15 @@
 package com.esgi.cityfinder.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Asifadam93 on 08/10/2017.
  */
 
-public class SearchResult {
+public class SearchResult implements Parcelable {
 
     private Integer id;
 
@@ -29,10 +32,40 @@ public class SearchResult {
 
     private String imageUrl;
 
+    private int imageId = -1;
+
+    public SearchResult(String cityName, int imageId) {
+        this.cityName = cityName;
+        this.imageId = imageId;
+    }
+
     public SearchResult(String cityName, String imageUrl) {
         this.cityName = cityName;
         this.imageUrl = imageUrl;
+        this.imageId = -1;
     }
+
+    protected SearchResult(Parcel in) {
+        departementName = in.readString();
+        regionName = in.readString();
+        cityName = in.readString();
+        departementCode = in.readString();
+        href = in.readString();
+        imageUrl = in.readString();
+        imageId = in.readInt();
+    }
+
+    public static final Creator<SearchResult> CREATOR = new Creator<SearchResult>() {
+        @Override
+        public SearchResult createFromParcel(Parcel in) {
+            return new SearchResult(in);
+        }
+
+        @Override
+        public SearchResult[] newArray(int size) {
+            return new SearchResult[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -66,6 +99,10 @@ public class SearchResult {
         return imageUrl;
     }
 
+    public int getImageId() {
+        return imageId;
+    }
+
     @Override
     public String toString() {
         return "SearchResult{" +
@@ -77,6 +114,23 @@ public class SearchResult {
                 ", departementCode='" + departementCode + '\'' +
                 ", href='" + href + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", imageId='" + imageId + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(departementName);
+        parcel.writeString(regionName);
+        parcel.writeString(cityName);
+        parcel.writeString(departementCode);
+        parcel.writeString(href);
+        parcel.writeString(imageUrl);
+        parcel.writeInt(imageId);
     }
 }

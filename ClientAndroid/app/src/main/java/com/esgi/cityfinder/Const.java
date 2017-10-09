@@ -6,8 +6,7 @@ package com.esgi.cityfinder;
 
 public class Const {
 
-    public static String URL = "http://localhost.192.168.43.168.xip.io";
-    public static String URL_PREFIX = "/CityFinder/SymfonyApi/web/app_dev.php/";
+    public static String URL = "http://localhost.192.168.43.168.xip.io/";
 
     public final static String CENTRALES = "Centrales";
     public final static String MUSEES = "Musées";

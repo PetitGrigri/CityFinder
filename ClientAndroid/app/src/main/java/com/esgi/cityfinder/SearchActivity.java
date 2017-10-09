@@ -15,7 +15,6 @@ import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
-import com.esgi.cityfinder.Model.City;
 import com.esgi.cityfinder.Model.Flickr.FlickrImage;
 import com.esgi.cityfinder.Model.Flickr.Photo;
 import com.esgi.cityfinder.Model.Flickr.Photos;
@@ -44,7 +43,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     private ArrayMap<String, List<String>> applied_filters = new ArrayMap<>();
 
     FeaturedRecyclerView featuredRecyclerView;
-    List<City> cityList;
+    List<SearchResult> searchResults;
     CustomCityListAdapter customCityListAdapter;
 
     public static Auth auth;
@@ -60,12 +59,12 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
             auth = intent.getParcelableExtra("auth");
         }
 
-        cityList = getDefaultCityList();
+        searchResults = getDefaultSearchList();
 
         featuredRecyclerView = (FeaturedRecyclerView) findViewById(R.id.featured_recycler_view);
         FeatureLinearLayoutManager layoutManager = new FeatureLinearLayoutManager(this);
         featuredRecyclerView.setLayoutManager(layoutManager);
-        customCityListAdapter = new CustomCityListAdapter(this, cityList);
+        customCityListAdapter = new CustomCityListAdapter(this, searchResults);
         featuredRecyclerView.setAdapter(customCityListAdapter);
 
         searchButton = (FloatingActionButton) findViewById(R.id.floatingActionButton);
@@ -81,23 +80,23 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         });
     }
 
-    private List<City> getDefaultCityList() {
+    private List<SearchResult> getDefaultSearchList() {
 
         //source : https://www.abritel.fr/info/guide/idees/vacances-theme/city-break-en-france
 
-        List<City> cityList = new ArrayList<>();
-        cityList.add(new City("Marseille", R.drawable.marseille));
-        cityList.add(new City("Bordeaux", R.drawable.bordeaux));
-        cityList.add(new City("Lyon", R.drawable.lyon));
-        cityList.add(new City("Toulouse", R.drawable.toulouse));
-        cityList.add(new City("Montpellier", R.drawable.montpellier));
-        cityList.add(new City("Biarritz", R.drawable.biarritz));
-        cityList.add(new City("Nice", R.drawable.nice));
-        cityList.add(new City("Saint Malo", R.drawable.saint_malo));
-        cityList.add(new City("Annecy", R.drawable.annecy));
-        cityList.add(new City("Paris", R.drawable.paris));
+        List<SearchResult> resultList = new ArrayList<>();
+        resultList.add(new SearchResult("Marseille", R.drawable.marseille));
+        resultList.add(new SearchResult("Bordeaux", R.drawable.bordeaux));
+        resultList.add(new SearchResult("Lyon", R.drawable.lyon));
+        resultList.add(new SearchResult("Toulouse", R.drawable.toulouse));
+        resultList.add(new SearchResult("Montpellier", R.drawable.montpellier));
+        resultList.add(new SearchResult("Biarritz", R.drawable.biarritz));
+        resultList.add(new SearchResult("Nice", R.drawable.nice));
+        resultList.add(new SearchResult("Saint Malo", R.drawable.saint_malo));
+        resultList.add(new SearchResult("Annecy", R.drawable.annecy));
+        resultList.add(new SearchResult("Paris", R.drawable.paris));
 
-        return cityList;
+        return resultList;
     }
 
     @Override
@@ -122,7 +121,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         }
     }
 
-    private void getCityListSearchMap(HashMap<String, Integer> searchMap) {
+    private void getCityListSearchMap(final HashMap<String, Integer> searchMap) {
 
         String token;
 
@@ -132,21 +131,19 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
                 public void onResult(ServiceResult<List<SearchResult>> result) {
 
                     List<SearchResult> results = result.getData();
-                    List<City> filteredCityList = new ArrayList<>();
+                    List<SearchResult> filteredCityList = new ArrayList<>();
 
                     for (SearchResult searchResult : results) {
                         Log.i("SearchActivityCustom", "Map : " + searchResult.toString());
-                        filteredCityList.add(new City(searchResult.getCityName(), R.drawable.default_image));
+                        filteredCityList.add(new SearchResult(searchResult.getCityName(), R.drawable.default_image));
                     }
-
-                    cityList.clear();
-                    cityList.addAll(filteredCityList);
+                    searchResults.clear();
+                    searchResults.addAll(filteredCityList);
                     customCityListAdapter.notifyDataSetChanged();
                 }
             });
         }
     }
-
 
     private HashMap<String, Integer> getSearchBody(ArrayMap<String, List<String>> applied_filters) {
 

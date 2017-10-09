@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.esgi.cityfinder.DetailActivity;
-import com.esgi.cityfinder.Model.City;
+import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,10 +26,10 @@ import shivam.developer.featuredrecyclerview.FeatureRecyclerViewAdapter;
 
 public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCityListAdapter.CustomRecyclerViewHolder> {
 
-    private List<City> dataList;
+    private List<SearchResult> dataList;
     private Context context;
 
-    public CustomCityListAdapter(Context context, List<City> list) {
+    public CustomCityListAdapter(Context context, List<SearchResult> list) {
         this.dataList = list;
         this.context = context;
     }
@@ -44,13 +44,13 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
     @Override
     public void onBindFeaturedViewHolder(CustomRecyclerViewHolder holder, int position) {
 
-        City mCity = dataList.get(position);
+        SearchResult searchResult = dataList.get(position);
 
-        if (mCity.getPhotoId() != -1) {
+        if (searchResult.getImageId() != -1) {
             Picasso.with(context)
-                    .load(mCity.getPhotoId()).into(holder.ivBackground);
+                    .load(searchResult.getImageId()).into(holder.ivBackground);
         }
-        holder.tvHeading.setText(mCity.getName());
+        holder.tvHeading.setText(searchResult.getCityName());
         //holder.tvDetail.setText(mCity.getDetail());
     }
 
@@ -88,11 +88,11 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
             relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    City mCity = dataList.get(getAdapterPosition());
-                    Log.i("CustomRecyclerView", "City : " + mCity.getName());
+                    SearchResult searchResult = dataList.get(getAdapterPosition());
+                    Log.i("CustomRecyclerView", "City : " + searchResult.getImageId());
 
                     Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra("cityObject", mCity);
+                    intent.putExtra("cityObject", searchResult);
                     context.startActivity(intent);
                 }
             });
