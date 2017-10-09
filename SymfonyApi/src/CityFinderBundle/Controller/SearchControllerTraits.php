@@ -15,7 +15,7 @@ trait SearchControllerTraits
     {
         $query = '';
         $queryBegin = 'MATCH (c:Commune) WHERE true ';
-        $queryEnd = 'RETURN c  '; //LIMIT 20
+        $queryEnd = 'RETURN c LIMIT 501'; //
 
         //gestion des centrales
         if (isset($recherche['centrales'])) {

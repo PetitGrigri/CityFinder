@@ -1,18 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block jumbotron_title %}Bienvenue{% endblock jumbotron_title %}
+{% block jumbotron_description %}City finder vous permet de vous renseigner sur les communes/villes qui vous correspondent{% endblock jumbotron_description %}
+
 {% block body %}
-
-    {{ render(controller('CityFinderBundle:WebSearch:getNavigation')) }}
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Bienvenue</h1>
-            <p>City finder vous permet de vous renseigner sur les communes qui vous correspondent</p>
-        </div>
-    </div>
     <div class="container">
-
         <div class="row">
             {{ form_start(formulaire_recherche) }}
 
@@ -21,7 +13,6 @@
             </div>
 
             <div class="col-md-4">
-
                 {{ form_row(formulaire_recherche.musees) }}
                 {{ form_row(formulaire_recherche.hotels) }}
                 {{ form_row(formulaire_recherche.postes) }}
@@ -32,8 +23,9 @@
                 {{ form_row(formulaire_recherche.code_region) }}
             </div>
         </div>
-        <div class="row">
-            <button type="submit" class="btn btn-primary">Rechercher</button>
+
+        <div class="row text-center" style="margin-top:30px; margin-bottom: 30px;">
+            <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-search"></i> Rechercher</button>
         </div>
         {{ form_end(formulaire_recherche) }}
     </div>

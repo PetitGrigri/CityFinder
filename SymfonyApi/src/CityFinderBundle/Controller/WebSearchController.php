@@ -40,13 +40,11 @@ class WebSearchController extends Controller
         //remplissage du formulaire via la request
         $form->handleRequest($request);
 
-
-
         //si le formulaire est invalide, on le retourne
         if ($form->isValid() && ($form->isSubmitted())) {
             //création de la requête à partir de notre recherche
             $queryRaw   = $this->queryBuilder($form->getData());
-dump($queryRaw);
+
             //exécution de notre requête
             $result = $this->getNeo4jClient()->run($queryRaw, []);
 
@@ -82,10 +80,9 @@ dump($queryRaw);
     {
         $form = $this->generateSearchForm();
 
-        //récupération de l'entity manager de neo4j
+        //réalisation d'une recherche en "like" via doctrine
         $communesRepository = $this->getDoctrine()->getRepository(Communes::class);
 
-        dump($communesRepository);
         return $this->render('search/propositions.html.twig', [
             'commune'           => $commune,
             'propositions'      => $communesRepository->findCommuneLike($commune),
@@ -109,7 +106,7 @@ dump($queryRaw);
         //réception de la requête
         $form->handleRequest($request);
 
-        //si la requête du formulaire est correcte : on redirige
+        //si la requête du formulaire est correcte : on redirige (vers ce controller en mode GET)
         if ($form->isSubmitted() && $form->isValid()) {
             return new RedirectResponse($this->generateUrl('web_commune_search', [
                 "commune" => $form->getData()->recherche,
@@ -126,7 +123,8 @@ dump($queryRaw);
         if ($departement != null)
             $search['codeDepartement'] = $departement;
 
-        $communeEntity = $em->getRepository(Commune::class)->findBy($search);
+        //récupération des 501 communes
+        $communeEntity = $em->getRepository(Commune::class)->findBy($search, null, 501);
 
         if (count($communeEntity) != 1) {
             return new RedirectResponse($this->generateUrl('web_commune_proposition', [

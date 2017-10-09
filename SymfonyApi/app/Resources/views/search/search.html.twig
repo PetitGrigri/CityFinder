@@ -1,19 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block jumbotron_title %}
+    {{ commune.name }}
+{% endblock jumbotron_title %}
+
+{% block jumbotron_description %}
+    Voici les différentes informations relatives à cette commune/ville
+{% endblock jumbotron_description %}
+
 {% block body %}
-
-    {{ render(controller('CityFinderBundle:WebSearch:getNavigation')) }}
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <div class="container">
-            <h1>{{ commune.name }}</h1>
-            <p>Voici les différentes informations relatives à cette communes</p>
-        </div>
-    </div>
-
     <div class="container">
-
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-4">

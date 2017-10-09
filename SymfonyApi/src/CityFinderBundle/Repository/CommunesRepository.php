@@ -14,6 +14,7 @@ class CommunesRepository extends EntityRepository
             ->from(Communes::class, 'c')
             ->where( $qb->expr()->like('c.nom', ':commune'))
             ->setParameter('commune','%'.str_replace(" ",'%',$commune).'%')
+            ->setMaxResults(501)
             ->getQuery()
             ->getResult();
     }
