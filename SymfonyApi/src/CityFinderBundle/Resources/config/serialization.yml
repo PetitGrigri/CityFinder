@@ -34,6 +34,8 @@ CityFinderBundle\Node\Commune:
             groups: ['commune']
         nomDepartement:
             groups: ['commune']
+        frWikipedia:
+            groups: ['commune']
         centralesNear80km:
             groups: ['commune']
         centralesNear30km:

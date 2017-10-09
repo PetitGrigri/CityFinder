@@ -21,6 +21,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class WebSearchController extends Controller
 {
+    const URL_WIKIPEDIA = "https://fr.wikipedia.org/wiki/";
+
     use ServicesControllerTraits;
     use SearchControllerTraits;
 
@@ -132,9 +134,12 @@ class WebSearchController extends Controller
             ]));
         }
 
+
+        $image = $this->getWikipediaImage($communeEntity[0]->getFrWikipedia());
+
         return $this->render('search/search.html.twig', [
             'commune'   => $communeEntity[0],
-
+            'image_url'     => $image,
         ]);
 
     }
@@ -151,5 +156,28 @@ class WebSearchController extends Controller
         return $this->createFormBuilder(new class { public $recherche; })
             ->add('recherche', TextType::class)
             ->getForm();
+    }
+
+    private  function getWikipediaImage ($commune) {
+
+        $commune = str_replace(" ","_", $commune);
+
+        //la requête CURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles='.$commune);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+
+        //décodage des données
+        $data = json_decode($response);
+        dump($commune);
+        dump($data);
+
+        if (isset($data) && isset($data->query)&& isset($data->query->pages)) {
+
+            $infoImage = reset($data->query->pages);
+            return $infoImage->original->source;
+        }
+        return null;
     }
 }

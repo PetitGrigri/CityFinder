@@ -47,6 +47,7 @@ class LoadCommunesCommand extends ContainerAwareCommand
                                                         nomRegion:{nomRegion}, 
                                                         codeDepartement:{codeDepartement},
                                                         nomDepartement:{nomDepartement},
+                                                        c.frWikipedia = {frWikipedia},
                                                         doctrineId:{doctrineId}})';
             } else {
                 // Requête de création en prennant en compte leur existance
@@ -55,6 +56,7 @@ class LoadCommunesCommand extends ContainerAwareCommand
                                                     c.codeRegion = {codeRegion},
                                                     c.nomRegion = {nomRegion},
                                                     c.codeDepartement = {codeDepartement},
+                                                    c.frWikipedia = {frWikipedia},
                                                     c.nomDepartement = {nomDepartement}';
             }
 
@@ -85,6 +87,7 @@ class LoadCommunesCommand extends ContainerAwareCommand
                     'codeRegion'        => $communeDoctrine->getCodeReg(),
                     'nomDepartement'    => $communeDoctrine->getNomDept(),
                     'codeDepartement'   => $communeDoctrine->getCodeDept(),
+                    'frWikipedia'       => str_replace("fr:", "",$communeDoctrine->getWikipedia()),
                 ]);
 
                 $emDoctrine->clear();

@@ -5,8 +5,17 @@
 {% endblock jumbotron_title %}
 
 {% block jumbotron_description %}
-    Voici les différentes informations relatives à cette commune/ville
+    <p>Voici les différentes informations relatives à cette commune/ville. </p>
+    <a href="{{ constant('CityFinderBundle\\Controller\\WebSearchController::URL_WIKIPEDIA') }}{{ commune.frWikipedia }}"><i class="glyphicon glyphicon-link"></i> Voir sur wikipedia</a>
 {% endblock jumbotron_description %}
+
+{% block jumbotron_image %}
+    {% if image_url %}
+        <img src="{{ image_url }}" class="img-thumbnail img-responsive center-block" style="vertical-align: middle; margin-top: 30px;"/>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock jumbotron_image %}
 
 {% block body %}
     <div class="container">
@@ -86,13 +95,9 @@
                         {% endfor %}
                     </div>
                 </div>
-
-
-
             </div>
 
             <div class="col-md-4">
-
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <h3 class="panel-title">Hotels<span class="badge pull-right">{{ commune.hotelsLocatedIn|length }}</span>
@@ -126,10 +131,6 @@
                         {% endfor %}
                     </ul>
                 </div>
-            </div>
-
-            <div class="col-md-4">
-
             </div>
         </div>
 
