@@ -1,11 +1,17 @@
 package com.esgi.cityfinder.Network.Services;
 
+import android.graphics.Bitmap;
+
+import com.esgi.cityfinder.Model.DetailSearch;
+import com.esgi.cityfinder.Model.Flickr.FlickrImage;
+import com.esgi.cityfinder.Model.Flickr.Photos;
 import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
 
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -28,12 +34,14 @@ public interface IRetrofitSearchService {
 
 
     @GET("/search/detail/{search_id}")
-    Call<SearchResult> detailSearch(
+    Call<DetailSearch> detailSearch(
             @Header("X-Auth-Token") String userToken,
             @Path("search_id") int searchId
     );
 
     @GET
-    Call<List<ImageResult>> getImageUrl(@Url String url);
+    Call<FlickrImage> getImageUrl(@Url String url);
 
+    @GET
+    Call<ResponseBody> getBitmapImage(@Url String url);
 }

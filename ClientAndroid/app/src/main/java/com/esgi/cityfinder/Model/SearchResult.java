@@ -27,6 +27,13 @@ public class SearchResult {
 
     private String href;
 
+    private String imageUrl;
+
+    public SearchResult(String cityName, String imageUrl) {
+        this.cityName = cityName;
+        this.imageUrl = imageUrl;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -55,6 +62,10 @@ public class SearchResult {
         return href;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
     @Override
     public String toString() {
         return "SearchResult{" +
@@ -65,6 +76,7 @@ public class SearchResult {
                 ", regionCode=" + regionCode +
                 ", departementCode='" + departementCode + '\'' +
                 ", href='" + href + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }

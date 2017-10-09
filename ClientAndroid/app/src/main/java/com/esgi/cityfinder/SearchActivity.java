@@ -1,29 +1,39 @@
 package com.esgi.cityfinder;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
 import com.esgi.cityfinder.Model.City;
+import com.esgi.cityfinder.Model.Flickr.FlickrImage;
+import com.esgi.cityfinder.Model.Flickr.Photo;
+import com.esgi.cityfinder.Model.Flickr.Photos;
 import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.Network.IServiceResultListener;
 import com.esgi.cityfinder.Network.RetrofitSearchService;
+import com.esgi.cityfinder.Network.RetrofitSession;
 import com.esgi.cityfinder.Network.ServiceResult;
+import com.esgi.cityfinder.Network.Services.IRetrofitSearchService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
 import shivam.developer.featuredrecyclerview.FeatureLinearLayoutManager;
 import shivam.developer.featuredrecyclerview.FeaturedRecyclerView;
 
@@ -37,7 +47,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
     List<City> cityList;
     CustomCityListAdapter customCityListAdapter;
 
-    private Auth auth;
+    public static Auth auth;
     private RetrofitSearchService searchService;
 
     @Override
@@ -66,21 +76,9 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
             @Override
             public void onClick(View view) {
                 Log.i("SearchActivity", "SearchResult button clicked");
-                //searchFragment.show(getSupportFragmentManager(), searchFragment.getTag());
-
-                // TODO: 09/10/2017 testtttttttt
-                String query = "Paris+France";
-                String url = "https://www.googleapis.com/customsearch/v1?q="+query+"&key="+Const.GOOGLE_SEARCH_API_KEY+"&cx="+Const.GOOGLE_SEARCH_CX_KEY+"&alt=json";
-                getSearchService().getImageUrl(url, new IServiceResultListener<List<ImageResult>>() {
-                    @Override
-                    public void onResult(ServiceResult<List<ImageResult>> result) {
-
-                    }
-                });
-
+                searchFragment.show(getSupportFragmentManager(), searchFragment.getTag());
             }
         });
-
     }
 
     private List<City> getDefaultCityList() {
@@ -88,35 +86,16 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         //source : https://www.abritel.fr/info/guide/idees/vacances-theme/city-break-en-france
 
         List<City> cityList = new ArrayList<>();
-        cityList.add(new City("Marseille", "La cosmopolite", R.drawable.marseille));
-        cityList.add(new City("Bordeaux", "Grand cru français", R.drawable.bordeaux));
-        cityList.add(new City("Lyon", "Ville Lumière", R.drawable.lyon));
-        cityList.add(new City("Toulouse", "Cap sur la gastronomie", R.drawable.toulouse));
-        cityList.add(new City("Montpellier", "Le trésor du Languedoc", R.drawable.montpellier));
-        cityList.add(new City("Biarritz", "Le caractère basque", R.drawable.biarritz));
-        cityList.add(new City("Nice", "La petite perle de la côte d'azur", R.drawable.nice));
-        cityList.add(new City("Saint Malo", "La belle bretonne", R.drawable.saint_malo));
-        cityList.add(new City("Annecy", "L'air pur des montagnes", R.drawable.annecy));
-        cityList.add(new City("Paris", "La romantique", R.drawable.paris));
-
-        return cityList;
-    }
-
-    private List<City> getEditedCityList() {
-
-        //source : https://www.abritel.fr/info/guide/idees/vacances-theme/city-break-en-france
-
-        List<City> cityList = new ArrayList<>();
-        cityList.add(new City("Paris", "La romantique", R.drawable.paris));
-        cityList.add(new City("Biarritz", "Le caractère basque", R.drawable.biarritz));
-        cityList.add(new City("Lyon", "Ville Lumière", R.drawable.lyon));
-        cityList.add(new City("Toulouse", "Cap sur la gastronomie", R.drawable.toulouse));
-        cityList.add(new City("Montpellier", "Le trésor du Languedoc", R.drawable.montpellier));
-        cityList.add(new City("Biarritz", "Le caractère basque", R.drawable.biarritz));
-        cityList.add(new City("Nice", "La petite perle de la côte d'azur", R.drawable.nice));
-        cityList.add(new City("Saint Malo", "La belle bretonne", R.drawable.saint_malo));
-        cityList.add(new City("Bordeaux", "Grand cru français", R.drawable.bordeaux));
-        cityList.add(new City("Marseille", "La cosmopolite", R.drawable.marseille));
+        cityList.add(new City("Marseille", R.drawable.marseille));
+        cityList.add(new City("Bordeaux", R.drawable.bordeaux));
+        cityList.add(new City("Lyon", R.drawable.lyon));
+        cityList.add(new City("Toulouse", R.drawable.toulouse));
+        cityList.add(new City("Montpellier", R.drawable.montpellier));
+        cityList.add(new City("Biarritz", R.drawable.biarritz));
+        cityList.add(new City("Nice", R.drawable.nice));
+        cityList.add(new City("Saint Malo", R.drawable.saint_malo));
+        cityList.add(new City("Annecy", R.drawable.annecy));
+        cityList.add(new City("Paris", R.drawable.paris));
 
         return cityList;
     }
@@ -140,15 +119,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
 
                 getCityListSearchMap(getSearchBody(applied_filters));
             }
-
-            //Log.i("SearchActivity", "Map : "+searchMap);
-
-           /* cityList.clear();
-            cityList.addAll(getEditedCityList());
-            customCityListAdapter.notifyDataSetChanged();*/
-
         }
-
     }
 
     private void getCityListSearchMap(HashMap<String, Integer> searchMap) {
@@ -171,11 +142,6 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
                     cityList.clear();
                     cityList.addAll(filteredCityList);
                     customCityListAdapter.notifyDataSetChanged();
-
-                    /*} else {
-                        Toast.makeText(getBaseContext(),result.getErrorMsg(),Toast.LENGTH_SHORT).show();
-                    }*/
-
                 }
             });
         }

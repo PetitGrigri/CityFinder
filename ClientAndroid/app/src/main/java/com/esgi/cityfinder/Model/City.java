@@ -1,5 +1,6 @@
 package com.esgi.cityfinder.Model;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,21 +13,24 @@ public class City implements Parcelable {
     private String name;
     private String detail;
     private int photoId;
+    private Bitmap bitmapImage;
+    private String imageUrl;
 
-    public City(String name, String detail ,int photoId) {
-        this.name = name;
-        this.photoId = photoId;
-        this.detail = detail;
-    }
-
-    public City(String name) {
+    public City(String name, Bitmap bitmapImage) {
         this.name = name;
         this.photoId = -1;
+        this.bitmapImage = bitmapImage;
     }
 
     public City(String name, int photoId) {
         this.name = name;
         this.photoId = photoId;
+        this.bitmapImage = null;
+    }
+
+    public City(String name, String imageUrl) {
+        this.name = name;
+        this.imageUrl = imageUrl;
     }
 
     protected City(Parcel in) {
@@ -57,6 +61,14 @@ public class City implements Parcelable {
 
     public int getPhotoId() {
         return photoId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
