@@ -8,6 +8,7 @@ use CityFinderBundle\MemCached\AuthTokens;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\Cache\Adapter\TraceableAdapter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,12 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthentificationController extends Controller
 {
     /**
-     * @var TraceableAdapter
+     * @var MemcachedAdapter
      */
     private  $memCachedManager;
 
 
-    public function __construct(TraceableAdapter $products)
+    public function __construct(MemcachedAdapter $products)
     {
         $this->memCachedManager = $products;
     }

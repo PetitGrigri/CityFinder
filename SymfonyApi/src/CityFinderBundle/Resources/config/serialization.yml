@@ -49,6 +49,7 @@ CityFinderBundle\Node\Commune:
         agencesPostalesLocatedIn:
             groups: ['commune']
 
+
 CityFinderBundle\Node\Hotel:
     attributes:
         id:

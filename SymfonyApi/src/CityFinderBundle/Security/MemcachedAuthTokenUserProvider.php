@@ -2,7 +2,8 @@
 
 namespace CityFinderBundle\Security;
 
-use Symfony\Component\Cache\Adapter\TraceableAdapter;
+
+use Symfony\Component\Cache\Adapter\MemcachedAdapter;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -12,12 +13,12 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class MemcachedAuthTokenUserProvider implements UserProviderInterface {
 
     /**
-     * @var TraceableAdapter
+     * @var MemcachedAdapter
      */
     private  $memCachedManager;
 
 
-    public function __construct(TraceableAdapter $products)
+    public function __construct($products)
     {
         $this->memCachedManager = $products;
     }

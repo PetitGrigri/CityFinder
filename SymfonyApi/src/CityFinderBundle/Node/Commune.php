@@ -132,7 +132,6 @@ class Commune
     }
 
 
-
     /**
      * @return int
      */
