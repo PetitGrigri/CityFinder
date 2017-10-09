@@ -46,10 +46,11 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
 
         SearchResult searchResult = dataList.get(position);
 
-        if (searchResult.getImageId() != -1) {
-            Picasso.with(context)
-                    .load(searchResult.getImageId()).into(holder.ivBackground);
-        }
+        Log.i("CustomApapter", "Res : " + searchResult.getImageId());
+
+        Picasso.with(context)
+                .load(searchResult.getImageId()).into(holder.ivBackground);
+
         holder.tvHeading.setText(searchResult.getCityName());
         //holder.tvDetail.setText(mCity.getDetail());
     }

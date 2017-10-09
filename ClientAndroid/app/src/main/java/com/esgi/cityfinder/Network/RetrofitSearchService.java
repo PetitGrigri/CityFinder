@@ -71,9 +71,9 @@ public class RetrofitSearchService implements ISearchService {
     }
 
     @Override
-    public void detailSearch(String userToken, Integer id, final IServiceResultListener<DetailSearch> iServiceResultListener) {
+    public void detailSearch(String userToken, Integer idCity, final IServiceResultListener<DetailSearch> iServiceResultListener) {
 
-        getRetrofitSearchService().detailSearch(userToken, id).enqueue(new Callback<DetailSearch>() {
+        getRetrofitSearchService().detailSearch(userToken, idCity).enqueue(new Callback<DetailSearch>() {
             @Override
             public void onResponse(Call<DetailSearch> call, Response<DetailSearch> response) {
 

@@ -20,7 +20,7 @@ public interface ISearchService {
 
     void search(String userToken, Map<String, Integer> searchMap, IServiceResultListener<List<SearchResult>> iServiceResultListener);
 
-    void detailSearch(String userToken, Integer id, IServiceResultListener<DetailSearch> iServiceResultListener);
+    void detailSearch(String userToken, Integer idCity, IServiceResultListener<DetailSearch> iServiceResultListener);
 
     void getImageUrl(String url, IServiceResultListener<Photo> iServiceResultListener);
 

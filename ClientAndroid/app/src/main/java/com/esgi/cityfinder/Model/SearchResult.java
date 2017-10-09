@@ -3,6 +3,7 @@ package com.esgi.cityfinder.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.esgi.cityfinder.R;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -32,7 +33,11 @@ public class SearchResult implements Parcelable {
 
     private String imageUrl;
 
-    private int imageId = -1;
+    private int imageId;
+
+    public SearchResult(){
+        imageId = R.drawable.default_image;
+    }
 
     public SearchResult(String cityName, int imageId) {
         this.cityName = cityName;

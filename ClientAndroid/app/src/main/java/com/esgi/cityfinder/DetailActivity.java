@@ -32,13 +32,23 @@ public class DetailActivity extends AppCompatActivity {
         if ((intent = getIntent()) != null) {
             searchResult = intent.getParcelableExtra("cityObject");
             kenBurnsView.setImageResource(searchResult.getImageId());
-            /*tvCityName.setText(mCity.getName());
-            tvCityDetail.setText(mCity.getDetail());*/
+            tvCityName.setText(searchResult.getCityName());
+            getCityDeatail();
         }
 
     }
 
-    //private void getDetail
+    private void getCityDeatail(){
+
+        String token = SearchActivity.auth.getToken();
+
+        Log.i("DetailActivity","Id : "+searchResult.getId());
+
+        if(token != null) {
+            //getRetrofitSearchService().detailSearch(token,);
+        }
+
+    }
 
     public RetrofitSearchService getRetrofitSearchService() {
 

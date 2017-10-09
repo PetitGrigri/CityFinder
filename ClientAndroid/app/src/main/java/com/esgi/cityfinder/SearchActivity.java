@@ -9,30 +9,21 @@ import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
-import com.esgi.cityfinder.Model.Flickr.FlickrImage;
-import com.esgi.cityfinder.Model.Flickr.Photo;
-import com.esgi.cityfinder.Model.Flickr.Photos;
-import com.esgi.cityfinder.Model.Image.ImageResult;
 import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.Network.IServiceResultListener;
 import com.esgi.cityfinder.Network.RetrofitSearchService;
-import com.esgi.cityfinder.Network.RetrofitSession;
 import com.esgi.cityfinder.Network.ServiceResult;
-import com.esgi.cityfinder.Network.Services.IRetrofitSearchService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import retrofit2.Call;
 import shivam.developer.featuredrecyclerview.FeatureLinearLayoutManager;
 import shivam.developer.featuredrecyclerview.FeaturedRecyclerView;
 
@@ -131,14 +122,9 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
                 public void onResult(ServiceResult<List<SearchResult>> result) {
 
                     List<SearchResult> results = result.getData();
-                    List<SearchResult> filteredCityList = new ArrayList<>();
 
-                    for (SearchResult searchResult : results) {
-                        Log.i("SearchActivityCustom", "Map : " + searchResult.toString());
-                        filteredCityList.add(new SearchResult(searchResult.getCityName(), R.drawable.default_image));
-                    }
                     searchResults.clear();
-                    searchResults.addAll(filteredCityList);
+                    searchResults.addAll(results);
                     customCityListAdapter.notifyDataSetChanged();
                 }
             });
