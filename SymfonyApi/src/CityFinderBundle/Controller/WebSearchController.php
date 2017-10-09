@@ -3,6 +3,7 @@
 namespace CityFinderBundle\Controller;
 
 use CityFinderBundle\Entity\Communes;
+use CityFinderBundle\Form\SearchType;
 use CityFinderBundle\Node\Commune;
 use CityFinderBundle\Utils\ServicesControllerTraits;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class WebSearchController extends Controller
 {
     use ServicesControllerTraits;
+    use SearchControllerTraits;
 
     /**
      * @return mixed
@@ -29,9 +31,47 @@ class WebSearchController extends Controller
      *          name="web_commune_search_index",
      *          defaults={"commune" = null, "departement" = null} )
      */
-    public function indexSearchCommuneWeb()
+    public function indexSearchCommuneWeb(Request $request)
     {
-        return $this->render('search/index.html.twig');
+
+        //récupération des paramètres du formulaire
+        $form   = $this->createForm(SearchType::class, []);
+
+        //remplissage du formulaire via la request
+        $form->handleRequest($request);
+
+
+
+        //si le formulaire est invalide, on le retourne
+        if ($form->isValid() && ($form->isSubmitted())) {
+            //création de la requête à partir de notre recherche
+            $queryRaw   = $this->queryBuilder($form->getData());
+dump($queryRaw);
+            //exécution de notre requête
+            $result = $this->getNeo4jClient()->run($queryRaw, []);
+
+            $communes = [];
+
+            foreach ($result->records() as $record) {
+                //récupération du "noeud" commune et de son id
+                $communeNode    = $record->get('c');
+
+                //récupération de ses données et de son id
+                $commune            = $communeNode->values();
+                $commune['id']      = $communeNode->identity();
+
+                //ajout de la commune à notre array de commune
+                $communes[] = $commune;
+            }
+
+            return $this->render('search/search_with_criteria.html.twig', [
+                'communes'  => $communes,
+            ]);
+        }
+
+        return $this->render('search/index.html.twig', [
+            'formulaire_recherche' => $form->createView()
+        ]);
     }
     /**
      * @return Response

@@ -19,8 +19,8 @@ class SearchType extends AbstractType
     const CENTRALES_NEVER_MIND   = 0;
 
     //les valeurs  des informations prise en compte pour les musées
-    const MUSEES_NEEDED      = 1;
-    const MUSEES_NVER_MIND   = 0;
+    const MUSEES_NEEDED       = 1;
+    const MUSEES_NEVER_MIND   = 0;
 
     //les valeurs  des informations prise en compte pour les hotels
     const HOTELS_NEEDED      = 1;
@@ -171,10 +171,11 @@ class SearchType extends AbstractType
     {
         $builder
             ->add('centrales', ChoiceType::class, [
-                'required'  => false,
-                'multiple'  => false,
-                'expanded'  => true,
-                'choices'  => [
+                'required'      => false,
+                'placeholder'   => false,
+                'multiple'      => false,
+                'expanded'      => true,
+                'choices'       => [
                     "Située à plus de 20km"     => self::CENTRALES_MORE_THAN_20,
                     "Située à plus de 30km"     => self::CENTRALES_MORE_THAN_30,
                     "Située à plus de 80km"     => self::CENTRALES_MORE_THAN_80,
@@ -182,32 +183,40 @@ class SearchType extends AbstractType
                 ]
             ])
             ->add('musees', ChoiceType::class, [
-                'required'  => false,
-                'choices'  => [
-                    self::MUSEES_NEEDED,
-                    self::MUSEES_NVER_MIND,
+                'required'      => false,
+                'placeholder'   => false,
+                'multiple'      => false,
+                'expanded'      => true,
+                'choices'       => [
+                    "Avec des musées"   => self::MUSEES_NEEDED,
+                    "Indifférent"       => self::MUSEES_NEVER_MIND,
                 ]
             ])
             ->add('hotels', ChoiceType::class, [
-                'required'  => false,
-                'multiple'  => false,
-                'expanded'  => true,
-                'choices'   => [
-                    self::HOTELS_NEEDED,
-                    self::HOTELS_NEVER_MIND,
+                'required'      => false,
+                'placeholder'   => false,
+                'multiple'      => false,
+                'expanded'      => true,
+                'choices'       => [
+                    "Avec des hotels"   => self::HOTELS_NEEDED,
+                    "Indifférent"       => self::HOTELS_NEVER_MIND,
                 ]
             ])
             ->add('postes', ChoiceType::class, [
-                'required'  => false,
-                'choices'  => [
-                    self::POSTES_NEEDED,
-                    self::POSTES_NEVER_MIND,
+                'required'      => false,
+                'placeholder'   => false,
+                'multiple'      => false,
+                'expanded'      => true,
+                'choices'       => [
+                    "Avec des agences postales"    => self::POSTES_NEEDED,
+                    "Indifférent"                  => self::POSTES_NEVER_MIND,
                 ]
             ])
             //TODO : utiliser un référentiel
             ->add('code_departement', ChoiceType::class, [
-                'required'  => false,
-                'choices'  => [
+                'required'      => false,
+                'placeholder'   => 'Choisissez un département',
+                'choices'       => [
                     "AIN" 						=> self::DEPARTEMENT_AIN,
                     "AISNE" 					=> self::DEPARTEMENT_AISNE,
                     "ALLIER" 					=> self::DEPARTEMENT_ALLIER,
@@ -314,6 +323,7 @@ class SearchType extends AbstractType
             //TODO : utiliser un référentiel
             ->add('code_region', ChoiceType::class, [
                 'required'  => false,
+                'placeholder'   => 'Choisissez une région',
                 'choices'  => [
                     "SAINT_PIERRE_ET_MIQUELON"      => self::REGION_SAINT_PIERRE_ET_MIQUELON,
                     "GUADELOUPE"                    => self::REGION_GUADELOUPE,

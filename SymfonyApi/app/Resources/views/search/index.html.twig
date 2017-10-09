@@ -11,4 +11,42 @@
             <p>City finder vous permet de vous renseigner sur les communes qui vous correspondent</p>
         </div>
     </div>
+    <div class="container">
+
+        <div class="row">
+            {{ form_start(formulaire_recherche) }}
+
+            <div class="col-md-4">
+                {{ form_row(formulaire_recherche.centrales) }}
+            </div>
+
+            <div class="col-md-4">
+
+                {{ form_row(formulaire_recherche.musees) }}
+                {{ form_row(formulaire_recherche.hotels) }}
+                {{ form_row(formulaire_recherche.postes) }}
+            </div>
+
+            <div class="col-md-4">
+                {{ form_row(formulaire_recherche.code_departement) }}
+                {{ form_row(formulaire_recherche.code_region) }}
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+        {{ form_end(formulaire_recherche) }}
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $.fn.bootstrapSwitch.defaults.size = 'small';
+            $("input[type=radio],input[type=checkbox]").bootstrapSwitch();
+        });
+    </script>
 {% endblock %}

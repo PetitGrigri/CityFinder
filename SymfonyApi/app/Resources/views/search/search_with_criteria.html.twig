@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ render(controller('CityFinderBundle:WebSearch:getNavigation')) }}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Résultat</h1>
+            <p>Voici une liste de communes qui pourraient répondre à votre recherche</p>
+        </div>
+    </div>
+    <div class="container">
+
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des alternatives<span class="badge pull-right">{{ communes|length }}</span></h3>
+            </div>
+
+            <div class="panel-body">
+                {% for commune in communes %}
+                    <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="col-md-6 col-lg-4">
+                        {{ commune.name }} ({{ commune.codeDepartement }})
+                    </a>
+
+                {% else %}
+                    Aucune commune ne correspond à votre recherche.
+                {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $("input[type=radio],input[type=checkbox]").bootstrapSwitch();
+        });
+    </script>
+{% endblock %}
