@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import com.esgi.cityfinder.Model.DetailSearch;
 import com.esgi.cityfinder.Model.Flickr.FlickrImage;
 import com.esgi.cityfinder.Model.Flickr.Photos;
-import com.esgi.cityfinder.Model.Image.ImageResult;
+import com.esgi.cityfinder.Model.Image;
 import com.esgi.cityfinder.Model.SearchResult;
 
 import java.util.List;
@@ -40,8 +40,9 @@ public interface IRetrofitSearchService {
     );
 
     @GET
-    Call<FlickrImage> getImageUrl(@Url String url);
+    Call<Image> getImageUrl(
+            @Header("X-Auth-Token") String userToken,
+            @Path("searchId") int searchId
+    );
 
-    @GET
-    Call<ResponseBody> getBitmapImage(@Url String url);
 }

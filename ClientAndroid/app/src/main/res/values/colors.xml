@@ -11,9 +11,11 @@
     <color name="filters_header">#303f9f</color>
     <color name="filters_buttons">#ff4081</color>
     <color name="filters_buttons_selected">#c2185b</color>
-    <color name="filters_chips">#b3e5fc</color>
+    <color name="filters_chips">#007196</color>
 
     <color name="orange">#ff5722</color>
     <color name="brown">#795548</color>
+
+    <color name="login">#008CBA</color>
 
 </resources>

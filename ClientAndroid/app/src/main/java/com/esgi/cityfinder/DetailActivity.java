@@ -91,7 +91,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         if (detailSearch != null) {
                             updateListView(detailSearch);
-                            Toast.makeText(getBaseContext(), "update en cours", Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getBaseContext(), "update en cours", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getBaseContext(), result.getErrorMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -173,7 +173,7 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(getBaseContext(), "Data setted", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getBaseContext(), "Data setted", Toast.LENGTH_SHORT).show();
 
         detailCityList.clear();
         detailCityList.addAll(detailCityListTmp);

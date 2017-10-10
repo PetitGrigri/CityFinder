@@ -40,6 +40,7 @@ public class SearchResult implements Parcelable {
     }
 
     public SearchResult(Integer id, String cityName, int imageId) {
+        this.id = id;
         this.cityName = cityName;
         this.imageId = imageId;
     }

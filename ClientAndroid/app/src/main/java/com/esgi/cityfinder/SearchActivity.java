@@ -14,16 +14,20 @@ import com.allattentionhere.fabulousfilter.AAH_FabulousFragment;
 import com.esgi.cityfinder.Adapter.CustomCityListAdapter;
 import com.esgi.cityfinder.Fragment.SearchFragment;
 import com.esgi.cityfinder.Model.Auth;
+import com.esgi.cityfinder.Model.Image;
 import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.Network.IServiceResultListener;
 import com.esgi.cityfinder.Network.RetrofitSearchService;
+import com.esgi.cityfinder.Network.RetrofitSession;
 import com.esgi.cityfinder.Network.ServiceResult;
+import com.esgi.cityfinder.Network.Services.IRetrofitSearchService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import retrofit2.Call;
 import shivam.developer.featuredrecyclerview.FeatureLinearLayoutManager;
 import shivam.developer.featuredrecyclerview.FeaturedRecyclerView;
 
@@ -76,16 +80,16 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         //source : https://www.abritel.fr/info/guide/idees/vacances-theme/city-break-en-france
 
         List<SearchResult> resultList = new ArrayList<>();
-        /*resultList.add(new SearchResult("Marseille", R.drawable.marseille));
-        resultList.add(new SearchResult("Bordeaux", R.drawable.bordeaux));
-        resultList.add(new SearchResult("Lyon", R.drawable.lyon));
-        resultList.add(new SearchResult("Toulouse", R.drawable.toulouse));
-        resultList.add(new SearchResult("Montpellier", R.drawable.montpellier));
-        resultList.add(new SearchResult("Biarritz", R.drawable.biarritz));
-        resultList.add(new SearchResult("Nice", R.drawable.nice));
-        resultList.add(new SearchResult("Saint Malo", R.drawable.saint_malo));
-        resultList.add(new SearchResult("Annecy", R.drawable.annecy));
-        resultList.add(new SearchResult("Paris", R.drawable.paris));*/
+        resultList.add(new SearchResult(45359,"Marseille", R.drawable.marseille));
+        resultList.add(new SearchResult(73206,"Bordeaux", R.drawable.bordeaux));
+        resultList.add(new SearchResult(38461,"Lyon", R.drawable.lyon));
+        resultList.add(new SearchResult(73204,"Toulouse", R.drawable.toulouse));
+        resultList.add(new SearchResult(44033,"Montpellier", R.drawable.montpellier));
+        resultList.add(new SearchResult(55150,"Biarritz", R.drawable.biarritz));
+        resultList.add(new SearchResult(55562,"Nice", R.drawable.nice));
+        resultList.add(new SearchResult(60079,"Saint Malo", R.drawable.saint_malo));
+        resultList.add(new SearchResult(39235,"Annecy", R.drawable.annecy));
+        resultList.add(new SearchResult(44005,"Paris", R.drawable.paris));
 
         return resultList;
     }
@@ -121,7 +125,33 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
                 @Override
                 public void onResult(ServiceResult<List<SearchResult>> result) {
 
-                    List<SearchResult> results = result.getData();
+                    final List<SearchResult> results = result.getData();
+
+                    /*new Runnable(){
+
+                        @Override
+                        public void run() {
+
+                            for(SearchResult searchResult : results){
+
+                                Integer id = searchResult.getId();
+                                getSearchService().getImageUrl(auth.getToken(), id, new IServiceResultListener<Image>() {
+                                    @Override
+                                    public void onResult(ServiceResult<Image> result) {
+
+                                        Image mImage = result.getData();
+
+                                        if(mImage != null){
+                                            Log.i("SearchActivity", "Url : " + mImage.getUrl());
+                                        }
+
+                                    }
+                                });
+
+                            }
+
+                        }
+                    }.run();*/
 
                     searchResults.clear();
                     searchResults.addAll(results);

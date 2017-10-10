@@ -9,12 +9,12 @@ import com.esgi.cityfinder.Model.DetailSearch;
 import com.esgi.cityfinder.Model.Flickr.FlickrImage;
 import com.esgi.cityfinder.Model.Flickr.Photo;
 import com.esgi.cityfinder.Model.Flickr.Photos;
-import com.esgi.cityfinder.Model.Image.ImageResult;
-import com.esgi.cityfinder.Model.Image.Items;
+import com.esgi.cityfinder.Model.Image;
 import com.esgi.cityfinder.Model.SearchResult;
 import com.esgi.cityfinder.Model.User;
 import com.esgi.cityfinder.Network.Services.IRetrofitSearchService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -105,76 +105,51 @@ public class RetrofitSearchService implements ISearchService {
     }
 
     @Override
-    public void getImageUrl(String url, final IServiceResultListener<Photo> iServiceResultListener) {
+    public void getImageUrl(String userToken, Integer idCity, final IServiceResultListener<Image> iServiceResultListener) {
 
-        getRetrofitSearchService().getImageUrl(url).enqueue(new Callback<FlickrImage>() {
+        ServiceResult<Image> result = new ServiceResult<>();
+
+        try {
+            Image mImage = getRetrofitSearchService().getImageUrl(userToken, idCity).execute().body();
+
+            if(mImage != null){
+                result.setData(mImage);
+            } else {
+                result.setErrorMsg("Error image");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+       /* getRetrofitSearchService().getImageUrl(userToken, idCity).enqueue(new Callback<Image>() {
             @Override
-            public void onResponse(Call<FlickrImage> call, Response<FlickrImage> response) {
+            public void onResponse(Call<Image> call, Response<Image> response) {
 
-                ServiceResult<Photo> result = new ServiceResult<>();
+                ServiceResult<Image> result = new ServiceResult<Image>();
 
-                if (response.isSuccessful()) {
+                if(response.isSuccessful()){
 
-                    Photo mPhoto = response.body().getPhotos().getPhotoList().get(0);
-
-                    if (mPhoto != null) {
-                        result.setData(mPhoto);
-                    } else {
-                        result.setErrorMsg("Error json");
-                    }
-
-                } else {
-                    result.setErrorMsg("Erreur de connexion : " + response.code());
+                    Image image = response.body();
+                    result.setData(image);
+                } else {!
+                    result.setErrorMsg("Connexion error");
                 }
 
-                if (iServiceResultListener != null) {
+
+                if(iServiceResultListener != null){
                     iServiceResultListener.onResult(result);
                 }
+
             }
 
             @Override
-            public void onFailure(Call<FlickrImage> call, Throwable t) {
-                Log.i("getImageUrl", "Response : " + t.getMessage());
-
+            public void onFailure(Call<Image> call, Throwable t) {
                 if (iServiceResultListener != null) {
-                    iServiceResultListener.onResult(new ServiceResult<Photo>(t.getMessage()));
+                    iServiceResultListener.onResult(new ServiceResult<Image>(t.getMessage()));
                 }
-
             }
-        });
-    }
-
-    @Override
-    public void getBitmapImage(String url, final IServiceResultListener<Bitmap> iServiceResultListener) {
-
-        getRetrofitSearchService().getBitmapImage(url).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
-                ServiceResult<Bitmap> result = new ServiceResult<>();
-
-                if (response.isSuccessful()) {
-
-                    Bitmap bitmapImage = null;
-                    try {
-                        bitmapImage = BitmapFactory.decodeStream(response.body().byteStream());
-                        result.setData(bitmapImage);
-                    } catch (Exception e) {
-                        result.setErrorMsg("Error bitmap");
-                    }
-
-                    if (iServiceResultListener != null) {
-                        iServiceResultListener.onResult(result);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-
+        });*/
     }
 }

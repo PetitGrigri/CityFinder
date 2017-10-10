@@ -6,7 +6,7 @@ import com.esgi.cityfinder.Model.DetailSearch;
 import com.esgi.cityfinder.Model.Flickr.FlickrImage;
 import com.esgi.cityfinder.Model.Flickr.Photo;
 import com.esgi.cityfinder.Model.Flickr.Photos;
-import com.esgi.cityfinder.Model.Image.ImageResult;
+import com.esgi.cityfinder.Model.Image;
 import com.esgi.cityfinder.Model.SearchResult;
 
 import java.util.List;
@@ -22,8 +22,6 @@ public interface ISearchService {
 
     void detailSearch(String userToken, Integer idCity, IServiceResultListener<DetailSearch> iServiceResultListener);
 
-    void getImageUrl(String url, IServiceResultListener<Photo> iServiceResultListener);
-
-    void getBitmapImage(String url, IServiceResultListener<Bitmap> iServiceResultListener);
+    void getImageUrl(String userToken, Integer idCity, IServiceResultListener<Image> iServiceResultListener);
 
 }

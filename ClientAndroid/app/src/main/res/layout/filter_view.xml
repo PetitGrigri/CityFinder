@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:background="@color/filtersfab"
+        android:background="#FAFAFA"
         tools:visibility="visible"
         android:id="@+id/rl_content"
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         <android.support.design.widget.TabLayout
             app:tabSelectedTextColor="@android:color/white"
             app:tabTextColor="@color/bg"
-            android:background="@color/filters_header"
+            android:background="#007196"
             android:id="@+id/tabs_types"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -52,7 +52,7 @@
             android:weightSum="2">
 
             <ImageButton
-                android:background="@drawable/states_fab_button"
+                android:background="#007196"
                 android:id="@+id/imgbtn_refresh"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -61,7 +61,7 @@
                 android:tint="@android:color/white" />
 
             <ImageButton
-                android:background="@drawable/states_fab_button"
+                android:background="#007196"
                 android:id="@+id/imgbtn_apply"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
