@@ -53,7 +53,13 @@
                 android:textSize="40sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_detail_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"/>
+
+            <!--TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -72,7 +78,7 @@
                 android:textColor="#979696"
                 android:textSize="15sp" />
 
-            <!--TextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

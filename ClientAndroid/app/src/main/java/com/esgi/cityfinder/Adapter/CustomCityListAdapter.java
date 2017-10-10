@@ -90,7 +90,7 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
                 @Override
                 public void onClick(View view) {
                     SearchResult searchResult = dataList.get(getAdapterPosition());
-                    Log.i("CustomRecyclerView", "City : " + searchResult.getImageId());
+                    Log.i("CustomRecyclerView", "City : " + searchResult.getId());
 
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra("cityObject", searchResult);

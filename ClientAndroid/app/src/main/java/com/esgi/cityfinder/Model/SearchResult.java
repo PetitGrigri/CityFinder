@@ -35,11 +35,11 @@ public class SearchResult implements Parcelable {
 
     private int imageId;
 
-    public SearchResult(){
+    public SearchResult() {
         imageId = R.drawable.default_image;
     }
 
-    public SearchResult(String cityName, int imageId) {
+    public SearchResult(Integer id, String cityName, int imageId) {
         this.cityName = cityName;
         this.imageId = imageId;
     }
@@ -51,6 +51,7 @@ public class SearchResult implements Parcelable {
     }
 
     protected SearchResult(Parcel in) {
+        id = in.readInt();
         departementName = in.readString();
         regionName = in.readString();
         cityName = in.readString();
@@ -130,6 +131,7 @@ public class SearchResult implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
         parcel.writeString(departementName);
         parcel.writeString(regionName);
         parcel.writeString(cityName);

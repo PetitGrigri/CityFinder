@@ -6,7 +6,7 @@ package com.esgi.cityfinder;
 
 public class Const {
 
-    public static String URL = "http://localhost.192.168.43.168.xip.io/";
+    public static String URL = "http://192.168.0.10/";
 
     public final static String CENTRALES = "Centrales";
     public final static String MUSEES = "Musées";

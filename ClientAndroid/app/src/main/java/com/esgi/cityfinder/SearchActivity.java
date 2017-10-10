@@ -76,7 +76,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         //source : https://www.abritel.fr/info/guide/idees/vacances-theme/city-break-en-france
 
         List<SearchResult> resultList = new ArrayList<>();
-        resultList.add(new SearchResult("Marseille", R.drawable.marseille));
+        /*resultList.add(new SearchResult("Marseille", R.drawable.marseille));
         resultList.add(new SearchResult("Bordeaux", R.drawable.bordeaux));
         resultList.add(new SearchResult("Lyon", R.drawable.lyon));
         resultList.add(new SearchResult("Toulouse", R.drawable.toulouse));
@@ -85,7 +85,7 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
         resultList.add(new SearchResult("Nice", R.drawable.nice));
         resultList.add(new SearchResult("Saint Malo", R.drawable.saint_malo));
         resultList.add(new SearchResult("Annecy", R.drawable.annecy));
-        resultList.add(new SearchResult("Paris", R.drawable.paris));
+        resultList.add(new SearchResult("Paris", R.drawable.paris));*/
 
         return resultList;
     }

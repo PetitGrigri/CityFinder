@@ -47,4 +47,59 @@ public class DetailSearch {
     @SerializedName("museesLocatedIn")
     private List<Poste> posteList = null;
 
+    public DetailSearch(List<Centrales80Km> centrales80Km, List<Centrales30Km> centrales30Km,
+                        List<Centrales20Km> centrales20Km, List<HotelsNear> hotelsNearList,
+                        List<HotelLocatedIn> hotelLocatedInList, List<Musees> museesList, List<Poste> posteList) {
+        this.centrales80Km = centrales80Km;
+        this.centrales30Km = centrales30Km;
+        this.centrales20Km = centrales20Km;
+        this.hotelsNearList = hotelsNearList;
+        this.hotelLocatedInList = hotelLocatedInList;
+        this.museesList = museesList;
+        this.posteList = posteList;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public String getDepartementName() {
+        return departementName;
+    }
+
+    public List<Centrales80Km> getCentrales80Km() {
+        return centrales80Km;
+    }
+
+    public List<Centrales30Km> getCentrales30Km() {
+        return centrales30Km;
+    }
+
+    public List<Centrales20Km> getCentrales20Km() {
+        return centrales20Km;
+    }
+
+    public List<HotelsNear> getHotelsNearList() {
+        return hotelsNearList;
+    }
+
+    public List<HotelLocatedIn> getHotelLocatedInList() {
+        return hotelLocatedInList;
+    }
+
+    public List<Musees> getMuseesList() {
+        return museesList;
+    }
+
+    public List<Poste> getPosteList() {
+        return posteList;
+    }
 }
