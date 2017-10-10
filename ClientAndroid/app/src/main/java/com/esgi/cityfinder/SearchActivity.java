@@ -127,32 +127,6 @@ public class SearchActivity extends AppCompatActivity implements AAH_FabulousFra
 
                     final List<SearchResult> results = result.getData();
 
-                    /*new Runnable(){
-
-                        @Override
-                        public void run() {
-
-                            for(SearchResult searchResult : results){
-
-                                Integer id = searchResult.getId();
-                                getSearchService().getImageUrl(auth.getToken(), id, new IServiceResultListener<Image>() {
-                                    @Override
-                                    public void onResult(ServiceResult<Image> result) {
-
-                                        Image mImage = result.getData();
-
-                                        if(mImage != null){
-                                            Log.i("SearchActivity", "Url : " + mImage.getUrl());
-                                        }
-
-                                    }
-                                });
-
-                            }
-
-                        }
-                    }.run();*/
-
                     searchResults.clear();
                     searchResults.addAll(results);
                     customCityListAdapter.notifyDataSetChanged();

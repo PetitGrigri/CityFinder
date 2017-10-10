@@ -48,8 +48,13 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
 
         Log.i("CustomApapter", "Res : " + searchResult.getImageId());
 
-        Picasso.with(context)
-                .load(searchResult.getImageId()).into(holder.ivBackground);
+        if(searchResult.getImageId() != 0) {
+            Picasso.with(context)
+                    .load(searchResult.getImageId()).into(holder.ivBackground);
+        } else {
+            Picasso.with(context)
+                    .load(R.drawable.default_image).into(holder.ivBackground);
+        }
 
         holder.tvHeading.setText(searchResult.getCityName());
         //holder.tvDetail.setText(mCity.getDetail());
@@ -90,7 +95,7 @@ public class CustomCityListAdapter extends FeatureRecyclerViewAdapter<CustomCity
                 @Override
                 public void onClick(View view) {
                     SearchResult searchResult = dataList.get(getAdapterPosition());
-                    Log.i("CustomRecyclerView", "City : " + searchResult.getId());
+                    Log.i("CustomRecyclerView", "City : " + searchResult.getImageId());
 
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra("cityObject", searchResult);

@@ -39,10 +39,10 @@ public interface IRetrofitSearchService {
             @Path("searchId") int searchId
     );
 
-    @GET
+    @GET("/CityFinder/SymfonyApi/web/app_dev.php/search/wikipedia/{cityName}")
     Call<Image> getImageUrl(
             @Header("X-Auth-Token") String userToken,
-            @Path("searchId") int searchId
+            @Path("cityName") String cityName
     );
 
 }

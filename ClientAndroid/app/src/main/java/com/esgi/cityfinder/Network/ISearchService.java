@@ -22,6 +22,6 @@ public interface ISearchService {
 
     void detailSearch(String userToken, Integer idCity, IServiceResultListener<DetailSearch> iServiceResultListener);
 
-    void getImageUrl(String userToken, Integer idCity, IServiceResultListener<Image> iServiceResultListener);
+    void getImageUrl(String userToken,String cityName, IServiceResultListener<Image> iServiceResultListener);
 
 }

@@ -35,8 +35,12 @@ public class SearchResult implements Parcelable {
 
     private int imageId;
 
+    @SerializedName("frWikipedia")
+    private String wikiName;
+
+    //auto called constructer
     public SearchResult() {
-        imageId = R.drawable.default_image;
+        imageId = 0;
     }
 
     public SearchResult(Integer id, String cityName, int imageId) {

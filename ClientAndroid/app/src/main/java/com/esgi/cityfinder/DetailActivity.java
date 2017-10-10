@@ -1,6 +1,7 @@
 package com.esgi.cityfinder;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.esgi.cityfinder.Model.DetailCity;
 import com.esgi.cityfinder.Model.DetailSearch;
 import com.esgi.cityfinder.Model.Hotel.HotelLocatedIn;
 import com.esgi.cityfinder.Model.Hotel.HotelsNear;
+import com.esgi.cityfinder.Model.Image;
 import com.esgi.cityfinder.Model.Musees;
 import com.esgi.cityfinder.Model.Poste;
 import com.esgi.cityfinder.Model.SearchResult;
@@ -25,6 +27,8 @@ import com.esgi.cityfinder.Network.RetrofitSearchService;
 import com.esgi.cityfinder.Network.ServiceResult;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +44,8 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomCityDetailListAdapter adapter;
 
+    private KenBurnsView kenBurnsView;
+
     private List<DetailCity> detailCityList = new ArrayList<>();
 
     @Override
@@ -49,15 +55,7 @@ public class DetailActivity extends AppCompatActivity {
 
         tvCityName = (TextView) findViewById(R.id.tv_city_name);
 
-        KenBurnsView kenBurnsView = (KenBurnsView) findViewById(R.id.detail_image_view);
-
-        /*detailCityList.add(new DetailCity("Centrales > 80 km", true));
-        detailCityList.add(new DetailCity("nucNice", false));
-        detailCityList.add(new DetailCity("nucTest", false));
-        detailCityList.add(new DetailCity("Hotels", true));
-        detailCityList.add(new DetailCity("hotKairad", false));
-        detailCityList.add(new DetailCity("Postes", true));
-        detailCityList.add(new DetailCity("posVille", false));*/
+        kenBurnsView = (KenBurnsView) findViewById(R.id.detail_image_view);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_detail_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -66,11 +64,36 @@ public class DetailActivity extends AppCompatActivity {
 
         if ((intent = getIntent()) != null) {
             searchResult = intent.getParcelableExtra("cityObject");
-            kenBurnsView.setImageResource(searchResult.getImageId());
+
+            if (searchResult.getImageId() != 0) {
+                kenBurnsView.setImageResource(searchResult.getImageId());
+            } else {
+                kenBurnsView.setImageResource(R.drawable.default_image);
+            }
+
             tvCityName.setText(searchResult.getCityName());
             getCityDeatail();
         }
 
+    }
+
+    private void setWikiImage(String cityName){
+
+        String auth = SearchActivity.auth.getToken();
+
+        getRetrofitSearchService().getImageUrl(auth, cityName, new IServiceResultListener<Image>() {
+            @Override
+            public void onResult(ServiceResult<Image> result) {
+
+                String url = result.getData().getUrl();
+
+                if(url != null){
+                    kenBurnsView.setImageURI(Uri.parse(url));
+                    Toast.makeText(getBaseContext(),"Image setted",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     private void getCityDeatail() {
@@ -91,7 +114,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         if (detailSearch != null) {
                             updateListView(detailSearch);
-                           // Toast.makeText(getBaseContext(), "update en cours", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getBaseContext(), "update en cours", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getBaseContext(), result.getErrorMsg(), Toast.LENGTH_SHORT).show();
                         }

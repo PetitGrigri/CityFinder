@@ -82,8 +82,6 @@ public class RetrofitSearchService implements ISearchService {
                 if (response.isSuccessful()) {
                     DetailSearch detailSearch = response.body();
 
-                    Log.i("SearchService","Search : "+detailSearch.toString());
-
                     result.setData(detailSearch);
                 } else {
                     result.setErrorMsg("Erreur connecxion");
@@ -105,25 +103,9 @@ public class RetrofitSearchService implements ISearchService {
     }
 
     @Override
-    public void getImageUrl(String userToken, Integer idCity, final IServiceResultListener<Image> iServiceResultListener) {
+    public void getImageUrl(String userToken, String cityName, final IServiceResultListener<Image> iServiceResultListener) {
 
-        ServiceResult<Image> result = new ServiceResult<>();
-
-        try {
-            Image mImage = getRetrofitSearchService().getImageUrl(userToken, idCity).execute().body();
-
-            if(mImage != null){
-                result.setData(mImage);
-            } else {
-                result.setErrorMsg("Error image");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-       /* getRetrofitSearchService().getImageUrl(userToken, idCity).enqueue(new Callback<Image>() {
+       getRetrofitSearchService().getImageUrl(userToken, cityName).enqueue(new Callback<Image>() {
             @Override
             public void onResponse(Call<Image> call, Response<Image> response) {
 
@@ -133,7 +115,7 @@ public class RetrofitSearchService implements ISearchService {
 
                     Image image = response.body();
                     result.setData(image);
-                } else {!
+                } else {
                     result.setErrorMsg("Connexion error");
                 }
 
@@ -150,6 +132,6 @@ public class RetrofitSearchService implements ISearchService {
                     iServiceResultListener.onResult(new ServiceResult<Image>(t.getMessage()));
                 }
             }
-        });*/
+        });
     }
 }
