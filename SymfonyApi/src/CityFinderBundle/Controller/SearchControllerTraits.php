@@ -11,7 +11,7 @@ trait SearchControllerTraits
      * @param $recherche
      * @return string
      */
-    public function queryBuilder($recherche)
+    protected function queryBuilder($recherche)
     {
         $query = '';
         $queryBegin = 'MATCH (c:Commune) WHERE true ';
@@ -63,5 +63,30 @@ trait SearchControllerTraits
 
         return $queryBegin.$query.$queryEnd;
 
+    }
+
+    protected  function getWikipediaImage ($commune) {
+
+        $commune = str_replace(" ","_", $commune);
+
+        //la requête CURL
+        $ch = curl_init();
+
+        //curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&pithumbsize=500&titles='.$commune);
+        curl_setopt($ch, CURLOPT_URL, 'https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&titles='.$commune.'&pithumbsize=500');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $response = curl_exec($ch);
+
+        //décodage des données
+        $data = json_decode($response);
+
+        if (    isset($data) && isset($data->query)&& isset($data->query->pages)) {
+            $infoImage = reset($data->query->pages);
+            if (isset($infoImage->thumbnail) && isset($infoImage->thumbnail->source))
+                return $infoImage->thumbnail->source;
+            else
+                return null;
+        }
+        return null;
     }
 }

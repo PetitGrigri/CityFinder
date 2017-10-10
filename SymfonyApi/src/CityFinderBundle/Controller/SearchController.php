@@ -8,7 +8,9 @@ use CityFinderBundle\Utils\ServicesControllerTraits;
 use FOS\RestBundle\Controller\Annotations\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
@@ -96,6 +98,23 @@ class SearchController extends Controller
         $commune = $emNeo4j->getRepository(Commune::class)->find($id);
 
         return $commune;
+    }
 
+    /**
+     *
+     * Permet d'obtenir l'url wikipedia
+     *
+     * @Rest\Get("/wikipedia/{commune}", name="wikipedia")
+     * @Rest\View()
+     * @return mixed
+     */
+    public function wikipediaAction($commune)
+    {
+        $image = $this->getWikipediaImage($commune);
+
+        if ($image == null) {
+            throw new NotFoundHttpException("Aucune image trouvée");
+        }
+        return ['url_wikipedia'=>$image];
     }
 }
