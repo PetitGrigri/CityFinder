@@ -77,10 +77,13 @@ public class RetrofitSearchService implements ISearchService {
             @Override
             public void onResponse(Call<DetailSearch> call, Response<DetailSearch> response) {
 
-                ServiceResult<DetailSearch> result = new ServiceResult<DetailSearch>();
+                ServiceResult<DetailSearch> result = new ServiceResult<>();
 
                 if (response.isSuccessful()) {
                     DetailSearch detailSearch = response.body();
+
+                    Log.i("SearchService","Search : "+detailSearch.toString());
+
                     result.setData(detailSearch);
                 } else {
                     result.setErrorMsg("Erreur connecxion");

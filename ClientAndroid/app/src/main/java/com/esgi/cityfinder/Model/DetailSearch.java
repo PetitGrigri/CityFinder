@@ -35,7 +35,7 @@ public class DetailSearch {
     @SerializedName("centralesNear20km")
     private List<Centrales20Km> centrales20Km = null;
 
-    @SerializedName("hotelsLocatedIn")
+    @SerializedName("hotelsNear")
     private List<HotelsNear> hotelsNearList = null;
 
     @SerializedName("hotelsLocatedIn")
@@ -44,7 +44,7 @@ public class DetailSearch {
     @SerializedName("museesLocatedIn")
     private List<Musees> museesList = null;
 
-    @SerializedName("museesLocatedIn")
+    @SerializedName("agencesPostalesLocatedIn")
     private List<Poste> posteList = null;
 
     public DetailSearch(List<Centrales80Km> centrales80Km, List<Centrales30Km> centrales30Km,
@@ -101,5 +101,22 @@ public class DetailSearch {
 
     public List<Poste> getPosteList() {
         return posteList;
+    }
+
+    @Override
+    public String toString() {
+        return "DetailSearch{" +
+                "id=" + id +
+                ", cityName='" + cityName + '\'' +
+                ", regionName='" + regionName + '\'' +
+                ", departementName='" + departementName + '\'' +
+                ", centrales80Km=" + centrales80Km +
+                ", centrales30Km=" + centrales30Km +
+                ", centrales20Km=" + centrales20Km +
+                ", hotelsNearList=" + hotelsNearList +
+                ", hotelLocatedInList=" + hotelLocatedInList +
+                ", museesList=" + museesList +
+                ", posteList=" + posteList +
+                '}';
     }
 }

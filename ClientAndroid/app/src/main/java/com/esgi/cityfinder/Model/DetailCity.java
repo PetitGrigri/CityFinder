@@ -21,4 +21,12 @@ public class DetailCity {
     public boolean isHeader() {
         return isHeader;
     }
+
+    @Override
+    public String toString() {
+        return "DetailCity{" +
+                "title='" + title + '\'' +
+                ", isHeader=" + isHeader +
+                '}';
+    }
 }

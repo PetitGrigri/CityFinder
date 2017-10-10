@@ -28,8 +28,6 @@ import com.flaviofaria.kenburnsview.KenBurnsView;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.barrenechea.widget.recyclerview.decoration.StickyHeaderDecoration;
-
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -39,7 +37,6 @@ public class DetailActivity extends AppCompatActivity {
 
     RetrofitSearchService retrofitSearchService;
 
-    private StickyHeaderDecoration decor;
     private RecyclerView recyclerView;
     private CustomCityDetailListAdapter adapter;
 
@@ -54,8 +51,7 @@ public class DetailActivity extends AppCompatActivity {
 
         KenBurnsView kenBurnsView = (KenBurnsView) findViewById(R.id.detail_image_view);
 
-        /*List<DetailCity> detailCityList = new ArrayList<>();
-        detailCityList.add(new DetailCity("Centrales > 80 km", true));
+        /*detailCityList.add(new DetailCity("Centrales > 80 km", true));
         detailCityList.add(new DetailCity("nucNice", false));
         detailCityList.add(new DetailCity("nucTest", false));
         detailCityList.add(new DetailCity("Hotels", true));
@@ -95,6 +91,7 @@ public class DetailActivity extends AppCompatActivity {
 
                         if (detailSearch != null) {
                             updateListView(detailSearch);
+                            Toast.makeText(getBaseContext(), "update en cours", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getBaseContext(), result.getErrorMsg(), Toast.LENGTH_SHORT).show();
                         }
@@ -106,10 +103,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void updateListView(DetailSearch detailSearch) {
 
+
         List<DetailCity> detailCityListTmp = new ArrayList<>();
 
         List<Centrales80Km> centrales80KmList = detailSearch.getCentrales80Km();
-        if (centrales80KmList != null && centrales80KmList.size() < 0) {
+        if (centrales80KmList != null && centrales80KmList.size() > 0) {
             detailCityListTmp.add(new DetailCity("Centrale > 80 Km", true));
 
             for (Centrales80Km centrales80Km : centrales80KmList) {
@@ -119,7 +117,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         List<Centrales30Km> centrales30KmList = detailSearch.getCentrales30Km();
-        if (centrales30KmList != null && centrales30KmList.size() < 0) {
+        if (centrales30KmList != null && centrales30KmList.size() > 0) {
             detailCityListTmp.add(new DetailCity("Centrale > 30 Km", true));
 
             for (Centrales30Km centrales30Km : centrales30KmList) {
@@ -129,7 +127,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         List<Centrales20Km> centrales20KmList = detailSearch.getCentrales20Km();
-        if (centrales20KmList != null && centrales20KmList.size() < 0) {
+        if (centrales20KmList != null && centrales20KmList.size() > 0) {
             detailCityListTmp.add(new DetailCity("Centrale > 20 Km", true));
 
             for (Centrales20Km centrales20Km : centrales20KmList) {
@@ -139,27 +137,26 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         List<HotelsNear> hotelsNearList = detailSearch.getHotelsNearList();
-        if (hotelsNearList != null && hotelsNearList.size() < 0) {
-            detailCityListTmp.add(new DetailCity("Hotels", true));
+        List<HotelLocatedIn> hotelLocatedIn = detailSearch.getHotelLocatedInList();
 
+        if ((hotelsNearList != null && hotelsNearList.size() > 0) || (hotelLocatedIn != null && hotelLocatedIn.size() > 0)) {
+            detailCityListTmp.add(new DetailCity("Hotels", true));
+        }
+
+        if (hotelsNearList != null && hotelsNearList.size() > 0) {
             for (HotelsNear hotelsNear : hotelsNearList) {
                 detailCityListTmp.add(new DetailCity(hotelsNear.getName(), false));
             }
-
         }
 
-        List<HotelLocatedIn> hotelLocatedIn = detailSearch.getHotelLocatedInList();
-        if (hotelLocatedIn != null && hotelLocatedIn.size() < 0) {
-            detailCityListTmp.add(new DetailCity("Hotels", true));
-
+        if (hotelLocatedIn != null && hotelLocatedIn.size() > 0) {
             for (HotelLocatedIn hotelIn : hotelLocatedIn) {
                 detailCityListTmp.add(new DetailCity(hotelIn.getName(), false));
             }
-
         }
 
         List<Musees> museesList = detailSearch.getMuseesList();
-        if (museesList != null && museesList.size() < 0) {
+        if (museesList != null && museesList.size() > 0) {
             detailCityListTmp.add(new DetailCity("Musées", true));
 
             for (Musees musees : museesList) {
@@ -168,13 +165,15 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         List<Poste> posteList = detailSearch.getPosteList();
-        if (posteList != null && posteList.size() < 0) {
+        if (posteList != null && posteList.size() > 0) {
             detailCityListTmp.add(new DetailCity("Postes", true));
 
             for (Poste poste : posteList) {
                 detailCityListTmp.add(new DetailCity(poste.getName(), false));
             }
         }
+
+        Toast.makeText(getBaseContext(), "Data setted", Toast.LENGTH_SHORT).show();
 
         detailCityList.clear();
         detailCityList.addAll(detailCityListTmp);

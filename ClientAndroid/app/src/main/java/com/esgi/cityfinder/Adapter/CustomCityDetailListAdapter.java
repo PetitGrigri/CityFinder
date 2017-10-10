@@ -43,7 +43,10 @@ public class CustomCityDetailListAdapter extends RecyclerView.Adapter<CustomCity
 
         if(commentList.get(position).isHeader()){
             holder.textViewTitle.setTypeface(null, Typeface.BOLD);
+        } else {
+            holder.textViewTitle.setTypeface(null, Typeface.NORMAL);
         }
+
         holder.textViewTitle.setText(commentList.get(position).getTitle());
 
     }

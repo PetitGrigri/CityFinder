@@ -33,10 +33,10 @@ public interface IRetrofitSearchService {
     );
 
 
-    @GET("/search/detail/{search_id}")
+    @GET("/CityFinder/SymfonyApi/web/app_dev.php/search/detail/{searchId}")
     Call<DetailSearch> detailSearch(
             @Header("X-Auth-Token") String userToken,
-            @Path("search_id") int searchId
+            @Path("searchId") int searchId
     );
 
     @GET
