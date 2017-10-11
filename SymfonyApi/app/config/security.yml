@@ -1,0 +1,36 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        memcached_auth_user_provider:
+            id: memcached_auth_user_provider
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        recherche_web:
+            pattern: ^/search-commune
+            security: false
+
+        creation_utilisateur:
+            pattern: ^/user
+            methods: [POST]
+            security: false
+
+        main:
+            pattern: ^/
+            stateless: true
+            simple_preauth:
+                authenticator: memcached_auth_token_authenticator
+            provider: memcached_auth_user_provider
+            anonymous: ~
+
+    encoders:
+        CityFinderBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12

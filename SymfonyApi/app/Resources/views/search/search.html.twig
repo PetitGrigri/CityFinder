@@ -1,0 +1,208 @@
+{% extends 'base.html.twig' %}
+
+{% block jumbotron_title %}
+    {{ commune.name }}
+{% endblock jumbotron_title %}
+
+{% block jumbotron_description %}
+    <p xmlns="http://www.w3.org/1999/html">Voici les différentes informations relatives à cette commune/ville. </p>
+    <a href="{{ constant('CityFinderBundle\\Controller\\WebSearchController::URL_WIKIPEDIA') }}{{ commune.frWikipedia }}"><i class="glyphicon glyphicon-link"></i> Voir sur wikipedia</a>
+{% endblock jumbotron_description %}
+
+{% block jumbotron_image %}
+    {% if image_url %}
+        <img src="{{ image_url }}" class="img-thumbnail img-responsive center-block" style="vertical-align: middle; margin-top: 30px;"/>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock jumbotron_image %}
+
+{% block body %}
+    <div class="container-fluid">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Centrales à moins de 20 km<span class="badge pull-right">{{ commune.centralesNear20km|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for centrale in commune.centralesNear20km %}
+                            <a class="list-group-item">{{ commune.name }}</a>
+                        {% else %}
+                            <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Centrales à moins de 30 km<span class="badge pull-right">{{ commune.centralesNear30km|length }}</span>
+                    </div>
+                    <ul class="list-group">
+                        {% for centrale in commune.centralesNear30km %}
+                            <a class="list-group-item">{{ centrale.name }}</a>
+                        {% else %}
+                            <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Centrales à moins de 80 km<span class="badge pull-right">{{ commune.centralesNear80km|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for centrale in commune.centralesNear80km %}
+                            <a class="list-group-item">{{ centrale.name }}</a>
+                        {% else %}
+                            <li class="list-group-item">Cette commune n'est pas concernée par cette catégorie</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Musées<span class="badge pull-right">{{ commune.museesLocatedIn|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for musee in commune.museesLocatedIn %}
+                            <a class="list-group-item">{{ musee.name }}</a>
+                        {% else %}
+                            <li class="list-group-item">Aucun musée situé dans cette commune</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Agences Postales<span class="badge pull-right">{{ commune.agencesPostalesLocatedIn|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for agencePostale in commune.agencesPostalesLocatedIn %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ agencePostale.name }}</h5>
+                                <p class="list-group-item-text">{{ agencePostale.caracteristiqueSite }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune agence postale située dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hotels<span class="badge pull-right">{{ commune.hotelsLocatedIn|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for hotel in commune.hotelsLocatedIn %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ hotel.name }}</h5>
+                                <p class="list-group-item-text">{{ hotel.classement }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucun hotel situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hotels Limitrophes<span class="badge pull-right">{{ commune.hotelsNear|length }}</span>
+                    </div>
+
+                    <ul class="list-group">
+                        {% for hotel in commune.hotelsNear %}
+                            <a href="#" class="list-group-item">
+                                <h5 class="list-group-item-heading">{{ hotel.name }}</h5>
+                                <p class="list-group-item-text">{{ hotel.classement }}</p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucun hotel situé dans cette commune</a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 2km<span class="badge pull-right">{{ commune.communesNear2km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear2km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 5km<span class="badge pull-right">{{ commune.communesNear5km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear5km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Communes à moins de 10km<span class="badge pull-right">{{ commune.communesNear2km|length }}</span>
+                    </div>
+
+                    <div class="list-group">
+                        {% for commune in commune.communesNear10km %}
+                            <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="list-group-item">
+
+                                <h5> {{ commune.name }}</h5>
+                                <p>
+                                    <span class="label label-primary">{{ commune.hotelsLocatedIn|length}} Hotel(s)</span>
+                                    <span class="label label-default">{{ commune.museesLocatedIn|length}} musee(s)</span>
+                                    <span class="label label-success">{{ commune.agencesPostalesLocatedIn|length}} agence(s) postale(s)</span>
+                                </p>
+                            </a>
+                        {% else %}
+                            <a class="list-group-item">Aucune commune situé dans cette commune</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+    </div>
+
+
+{% endblock %}

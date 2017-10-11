@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block jumbotron_title %}
+    Alternatives à {{ commune }}
+{% endblock jumbotron_title %}
+
+{% block jumbotron_description %}
+    Voici une liste de communes/villes correspondant à votre recherche
+{% endblock jumbotron_description %}
+
+{% block body %}
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Liste des alternatives <span class="badge pull-right">{{ (propositions|length > 500) ? '500+':propositions|length }}</span></h3>
+                    </div>
+
+                    <div class="panel-body">
+                        {% for proposition in propositions %}
+                            <a href="{{ path('web_commune_search',{'commune':proposition.nom, 'departement':proposition.codeDept }) }}" class="col-md-6 col-lg-4">
+                                {{ proposition.nom }} ({{ proposition.codeDept }})
+                            </a>
+
+                        {% else %}
+                            Cette commune/ville n'existe pas, et aucune alternative n'a été trouvées.
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                {% if (propositions|length > 500) %}
+                    <div class="panel-footer">Votre recherche rapporte plus de 500 résultats, nous vous conseillons d'affiner votre recherche</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

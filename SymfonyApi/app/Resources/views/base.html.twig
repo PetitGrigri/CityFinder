@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/bootstrap-switch.min.css') }}" rel="stylesheet">
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/logo_mini.png') }}" />
+    </head>
+    <body>
+        <div id="wrap">
+
+            {{ render(controller('CityFinderBundle:WebSearch:getNavigation')) }}
+
+            <div class="jumbotron">
+                <div class="container">
+                    <div class="col-md-2 text-center">
+                        {% block jumbotron_image %}
+                            <img src="{{ asset('img/logo.png') }}" class="img-responsive center-block" style="vertical-align: middle;"/>
+                        {% endblock jumbotron_image %}
+                    </div>
+                    <div class="col-md-10">
+                        <h1>{% block jumbotron_title %}{% endblock jumbotron_title %}</h1>
+                        <p class="text-justify">{% block jumbotron_description %}{% endblock jumbotron_description %}</p>
+                    </div>
+                </div>
+            </div>
+
+            {% block body %}{% endblock %}
+            {% block javascripts %}
+                <script src="{{ asset('js/jquery-1.12.4.js') }}" ></script>
+                <script src="{{ asset('js/bootstrap.js') }}" ></script>
+                <script src="{{ asset('js/bootstrap-switch.js') }}" ></script>
+            {% endblock %}
+        </div>
+    </body>
+</html>

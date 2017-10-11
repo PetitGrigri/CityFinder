@@ -1,0 +1,25 @@
+#    city_finder.example:
+#        class: CityFinderBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+services:
+    CityFinderBundle\Controller\AuthentificationController:
+        arguments: ["@app.cache.products"]
+
+    CityFinderBundle\Controller\UserController:
+        arguments: ["@app.cache.products"]
+
+    memcached_auth_user_provider:
+        class:      CityFinderBundle\Security\MemcachedAuthTokenUserProvider
+        arguments:  ["@app.cache.products"]
+        public:     false
+
+    memcached_auth_token_authenticator:
+        class:     CityFinderBundle\Security\MemcachedAuthTokenAuthenticator
+        arguments: ["@security.http_utils"]
+        public:    false
+
+    security.access.owner_voter:
+        class:      CityFinderBundle\Security\Authorization\Voter\OwnerVoter
+        public:     false
+        tags:
+            - { name: security.voter }

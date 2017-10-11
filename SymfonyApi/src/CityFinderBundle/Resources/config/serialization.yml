@@ -1,0 +1,96 @@
+CityFinderBundle\Entity\User:
+    attributes:
+        id:
+            groups: ['user', 'auth-token']
+        firstName:
+            groups: ['user', 'auth-token']
+        lastName:
+            groups: ['user', 'auth-token']
+        email:
+            groups: ['user', 'auth-token']
+
+CityFinderBundle\MemCached\AuthTokens:
+    attributes:
+        userId:
+            groups: ['user', 'auth-token']
+        value:
+            groups: ['user', 'auth-token']
+        createdAt:
+            groups: ['user', 'auth-token']
+
+CityFinderBundle\Node\Commune:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+        nomRegion:
+            groups: ['commune']
+        codeRegion:
+            groups: ['commune']
+        codeDepartement:
+            groups: ['commune']
+        nomDepartement:
+            groups: ['commune']
+        frWikipedia:
+            groups: ['commune']
+        centralesNear80km:
+            groups: ['commune']
+        centralesNear30km:
+            groups: ['commune']
+        centralesNear20km:
+            groups: ['commune']
+        hotelsNear:
+            groups: ['commune']
+        hotelsLocatedIn:
+            groups: ['commune']
+        museesLocatedIn:
+            groups: ['commune']
+        agencesPostalesLocatedIn:
+            groups: ['commune']
+        communesNear2km:
+            groups: ['commune']
+        communesNear5km:
+            groups: ['commune']
+        communesNear10km:
+            groups: ['commune']
+
+
+
+CityFinderBundle\Node\Hotel:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\Musee:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\AgencePostale:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']
+
+CityFinderBundle\Node\Centrale:
+    attributes:
+        id:
+            groups: ['commune']
+        doctrineId:
+            groups: ['commune']
+        name:
+            groups: ['commune']

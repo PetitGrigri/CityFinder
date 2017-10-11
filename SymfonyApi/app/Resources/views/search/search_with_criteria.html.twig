@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block jumbotron_title %}
+    Résultat
+{% endblock jumbotron_title %}
+
+{% block jumbotron_description %}
+    Voici une liste de villes/communes qui pourraient répondre à votre recherche
+{% endblock jumbotron_description %}
+
+{% block body %}
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Liste des alternatives <span class="badge pull-right">{{ (communes|length > 500) ? '500+':communes|length }}</span></h3>
+            </div>
+
+            <div class="panel-body">
+                {% for commune in communes %}
+                    {% if loop.index <= 500 %}
+                        <a href="{{ path('web_commune_search',{'commune':commune.name, 'departement':commune.codeDepartement }) }}" class="col-md-6 col-lg-4">
+                            {{ commune.name }} ({{ commune.codeDepartement }})
+                        </a>
+                    {% endif %}
+                {% else %}
+                    Aucune commune/ville ne correspond à votre recherche.
+                {% endfor %}
+                </ul>
+
+            </div>
+            {% if (communes|length > 500) %}
+                <div class="panel-footer">Votre recherche rapporte plus de 500 résultats, nous vous conseillons d'affiner votre recherche</div>
+            {% endif %}
+        </div>
+
+        <div class="row text-center" style="margin-top:30px; margin-bottom: 30px;">
+            <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-default" onclick="javascript:history.back()">
+                    <i class="glyphicon glyphicon-chevron-left"></i> Retour
+                </button>
+                <a type="submit" class="btn btn-primary" href="{{ path('web_commune_search_index') }}">
+                    <i class="glyphicon glyphicon-search"></i> Nouvelle recherche
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $("input[type=radio],input[type=checkbox]").bootstrapSwitch();
+        });
+    </script>
+{% endblock %}
